@@ -12,5 +12,8 @@ namespace NLibsndfile.Native
 
         [DllImport(DllImports.Libsndfile)]
         internal static extern IntPtr sf_open_fd(int handle, LibsndfileMode mode, ref LibsndfileInfo info, int closeHandle);
+
+        [DllImport(DllImports.Libsndfile)]
+        internal static extern int sf_format_check(ref LibsndfileInfo info);
     }
 }

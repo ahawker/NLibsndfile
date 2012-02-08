@@ -7,5 +7,7 @@ namespace NLibsndfile.Native
         IntPtr Open(string path, LibsndfileMode mode, ref LibsndfileInfo info);
 
         IntPtr OpenFileDescriptor(int handle, LibsndfileMode mode, ref LibsndfileInfo info, int closeHandle);
+
+        int FormatCheck(ref LibsndfileInfo info);
     }
 }
