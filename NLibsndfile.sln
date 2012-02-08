@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLibsndfile", "NLibsndfile\NLibsndfile.csproj", "{24E1D989-472B-4B01-A3CF-E5E5636C1DC5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLibsndfile.Native", "NLibsndfile.Native\NLibsndfile.Native.csproj", "{C0D015CE-3201-4106-9254-12CC9863F7D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLibsndfile.Managed", "NLibsndfile.Managed\NLibsndfile.Managed.csproj", "{24E1D989-472B-4B01-A3CF-E5E5636C1DC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,6 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C0D015CE-3201-4106-9254-12CC9863F7D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0D015CE-3201-4106-9254-12CC9863F7D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0D015CE-3201-4106-9254-12CC9863F7D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0D015CE-3201-4106-9254-12CC9863F7D3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{24E1D989-472B-4B01-A3CF-E5E5636C1DC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{24E1D989-472B-4B01-A3CF-E5E5636C1DC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24E1D989-472B-4B01-A3CF-E5E5636C1DC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
