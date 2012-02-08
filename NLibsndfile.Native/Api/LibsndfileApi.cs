@@ -85,5 +85,19 @@ namespace NLibsndfile.Native
 
             m_Api.WriteSync(sndfile);
         }
+
+        public LibsndfileError SetString(IntPtr sndfile, LibsndfileStringType type, string value)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+            if (string.IsNullOrEmpty(value))
+                throw new ArgumentNullException("value", "Value cannot be null/empty.");
+
+            var retval = m_Api.SetString(sndfile, type, value);
+            if (retval != LibsndfileError.NoError)
+                throw new LibsndfileException(string.Format("SetString returned error code {0}.", retval));
+
+            return retval;
+        }
     }
 }

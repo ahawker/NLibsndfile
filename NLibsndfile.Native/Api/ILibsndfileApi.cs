@@ -15,5 +15,7 @@ namespace NLibsndfile.Native
         long Seek(IntPtr sndfile, long count, int whence);
 
         void WriteSync(IntPtr sndfile);
+
+        LibsndfileError SetString(IntPtr sndfile, LibsndfileStringType type, string value);
     }
 }

@@ -33,5 +33,10 @@ namespace NLibsndfile.Native
         {
             LibsndfileApiNative.sf_write_sync(sndfile);
         }
+
+        public LibsndfileError SetString(IntPtr sndfile, LibsndfileStringType type, string value)
+        {
+            return LibsndfileApiNative.sf_set_string(sndfile, type, value);
+        }
     }
 }
