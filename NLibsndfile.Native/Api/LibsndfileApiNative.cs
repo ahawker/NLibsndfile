@@ -9,5 +9,8 @@ namespace NLibsndfile.Native
     {
         [DllImport(DllImports.Libsndfile)]
         internal static extern IntPtr sf_open(string path, LibsndfileMode mode, ref LibsndfileInfo info);
+
+        [DllImport(DllImports.Libsndfile)]
+        internal static extern IntPtr sf_open_fd(int handle, LibsndfileMode mode, ref LibsndfileInfo info, int closeHandle);
     }
 }
