@@ -9,5 +9,7 @@ namespace NLibsndfile.Native
         IntPtr OpenFileDescriptor(int handle, LibsndfileMode mode, ref LibsndfileInfo info, int closeHandle);
 
         int FormatCheck(ref LibsndfileInfo info);
+
+        long Seek(IntPtr sndfile, long count, int whence);
     }
 }

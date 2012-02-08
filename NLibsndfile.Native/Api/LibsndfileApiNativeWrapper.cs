@@ -18,5 +18,10 @@ namespace NLibsndfile.Native
         {
             return LibsndfileApiNative.sf_format_check(ref info);
         }
+
+        public long Seek(IntPtr sndfile, long count, int whence)
+        {
+            return LibsndfileApiNative.sf_seek(sndfile, count, whence);
+        }
     }
 }

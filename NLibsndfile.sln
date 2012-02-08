@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLibsndfile.Native", "NLibs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLibsndfile.Managed", "NLibsndfile.Managed\NLibsndfile.Managed.csproj", "{24E1D989-472B-4B01-A3CF-E5E5636C1DC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLibsndfile.Native.Tests", "NLibsndfile.Native.Tests\NLibsndfile.Native.Tests.csproj", "{5D7219A5-4859-48CD-9967-6B9C7BD8C1B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLibsndfile.Managed.Tests", "NLibsndfile.Managed.Tests\NLibsndfile.Managed.Tests.csproj", "{B93DF3C1-5491-42FA-9E1C-F56A7AE7EB47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +23,14 @@ Global
 		{24E1D989-472B-4B01-A3CF-E5E5636C1DC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24E1D989-472B-4B01-A3CF-E5E5636C1DC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24E1D989-472B-4B01-A3CF-E5E5636C1DC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D7219A5-4859-48CD-9967-6B9C7BD8C1B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D7219A5-4859-48CD-9967-6B9C7BD8C1B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D7219A5-4859-48CD-9967-6B9C7BD8C1B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D7219A5-4859-48CD-9967-6B9C7BD8C1B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B93DF3C1-5491-42FA-9E1C-F56A7AE7EB47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B93DF3C1-5491-42FA-9E1C-F56A7AE7EB47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B93DF3C1-5491-42FA-9E1C-F56A7AE7EB47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B93DF3C1-5491-42FA-9E1C-F56A7AE7EB47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
