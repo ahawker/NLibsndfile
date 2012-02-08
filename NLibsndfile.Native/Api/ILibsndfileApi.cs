@@ -13,5 +13,7 @@ namespace NLibsndfile.Native
         int FormatCheck(ref LibsndfileInfo info);
 
         long Seek(IntPtr sndfile, long count, int whence);
+
+        void WriteSync(IntPtr sndfile);
     }
 }

@@ -28,5 +28,10 @@ namespace NLibsndfile.Native
         {
             return LibsndfileApiNative.sf_seek(sndfile, count, whence);
         }
+
+        public void WriteSync(IntPtr sndfile)
+        {
+            LibsndfileApiNative.sf_write_sync(sndfile);
+        }
     }
 }

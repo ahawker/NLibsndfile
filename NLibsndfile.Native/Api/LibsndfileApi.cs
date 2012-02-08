@@ -77,5 +77,13 @@ namespace NLibsndfile.Native
 
             return offset;
         }
+
+        public void WriteSync(IntPtr sndfile)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            m_Api.WriteSync(sndfile);
+        }
     }
 }

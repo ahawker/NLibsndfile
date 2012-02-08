@@ -21,5 +21,8 @@ namespace NLibsndfile.Native
 
         [DllImport(DllImports.Libsndfile)]
         internal static extern LibsndfileError sf_close(IntPtr sndfile);
+
+        [DllImport(DllImports.Libsndfile)]
+        internal static extern void sf_write_sync(IntPtr sndfile);
     }
 }
