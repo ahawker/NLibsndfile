@@ -45,6 +45,18 @@ namespace NLibsndfile.Native
             return sndfile;
         }
 
+        public LibsndfileError Close(IntPtr sndfile)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            var retval = m_Api.Close(sndfile);
+            if (retval != LibsndfileError.NoError)
+                throw new LibsndfileException(string.Format("Close returned error code {0}.", retval));
+
+            return retval;
+        }
+
         public int FormatCheck(ref LibsndfileInfo info)
         {
             return m_Api.FormatCheck(ref info);

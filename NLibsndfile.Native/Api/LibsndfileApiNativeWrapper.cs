@@ -14,6 +14,11 @@ namespace NLibsndfile.Native
             return LibsndfileApiNative.sf_open_fd(handle, mode, ref info, closeHandle);
         }
 
+        public LibsndfileError Close(IntPtr sndfile)
+        {
+            return LibsndfileApiNative.sf_close(sndfile);
+        }
+
         public int FormatCheck(ref LibsndfileInfo info)
         {
             return LibsndfileApiNative.sf_format_check(ref info);

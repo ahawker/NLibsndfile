@@ -18,5 +18,8 @@ namespace NLibsndfile.Native
 
         [DllImport(DllImports.Libsndfile)]
         internal static extern long sf_seek(IntPtr sndfile, long count, int whence);
+
+        [DllImport(DllImports.Libsndfile)]
+        internal static extern LibsndfileError sf_close(IntPtr sndfile);
     }
 }
