@@ -40,9 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Api\DllImports.cs" />
+    <Compile Include="Api\ILibsndfileApi.cs" />
+    <Compile Include="Api\LibsndfileApi.cs" />
+    <Compile Include="Api\LibsndfileApiNative.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\LibsndfileFormat.cs" />
+    <Compile Include="Types\LibsndfileInfo.cs" />
+    <Compile Include="Types\LibsndfileMode.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
