@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace NLibsndfile.Native
 {
@@ -37,6 +38,12 @@ namespace NLibsndfile.Native
         public LibsndfileError SetString(IntPtr sndfile, LibsndfileStringType type, string value)
         {
             return LibsndfileApiNative.sf_set_string(sndfile, type, value);
+        }
+
+        public string GetString(IntPtr sndfile, LibsndfileStringType type)
+        {
+            var ptr = LibsndfileApiNative.sf_get_String(sndfile, type);
+            return Marshal.PtrToStringAnsi(ptr) ?? string.Empty;
         }
     }
 }

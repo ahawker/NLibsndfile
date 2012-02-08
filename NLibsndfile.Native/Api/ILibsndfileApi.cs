@@ -17,5 +17,7 @@ namespace NLibsndfile.Native
         void WriteSync(IntPtr sndfile);
 
         LibsndfileError SetString(IntPtr sndfile, LibsndfileStringType type, string value);
+
+        string GetString(IntPtr sndfile, LibsndfileStringType type);
     }
 }

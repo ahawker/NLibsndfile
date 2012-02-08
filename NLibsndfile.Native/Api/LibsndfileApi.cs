@@ -99,5 +99,13 @@ namespace NLibsndfile.Native
 
             return retval;
         }
+
+        public string GetString(IntPtr sndfile, LibsndfileStringType type)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.GetString(sndfile, type);
+        }
     }
 }

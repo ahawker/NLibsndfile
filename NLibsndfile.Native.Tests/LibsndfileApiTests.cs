@@ -204,5 +204,26 @@ namespace NLibsndfile.Native.Tests
             Assert.AreEqual(LibsndfileError.NoError, retval);
         }
 
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetString_ShouldThrowExceptionOnZeroHandle()
+        {
+            var api = new LibsndfileApi();
+            api.GetString(IntPtr.Zero, It.IsAny<LibsndfileStringType>());
+        }
+
+        [Test]
+        public void GetString_ShouldReturnValidString()
+        {
+            const string Tag = "AlbumTag";
+
+            var mock = new Mock<ILibsndfileApi>();
+            mock.Setup(x => x.GetString(It.IsAny<IntPtr>(), It.IsAny<LibsndfileStringType>())).Returns(Tag);
+
+            var api = new LibsndfileApi(mock.Object);
+            var retval = api.GetString(new IntPtr(1), LibsndfileStringType.Album);
+
+            Assert.AreEqual(Tag, retval);
+        }
     }
 }
