@@ -21,5 +21,6 @@ namespace NLibsndfile.Native
         string GetString(IntPtr sndfile, LibsndfileStringType type);
 
         long Read(IntPtr sndfile, short[] buffer, long items);
+        long Read(IntPtr sndfile, int[] buffer, long items);
     }
 }
