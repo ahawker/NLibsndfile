@@ -170,5 +170,19 @@ namespace NLibsndfile.Native
         {
             return LibsndfileApiNative.sf_read_double(sndfile, buffer, items);
         }
+
+        /// <summary>
+        /// Read <paramref name="frames"/> from the <paramref name="sndfile"/> audio file into the audio
+        /// <paramref name="buffer"/>.
+        /// </summary>
+        /// <param name="sndfile">Audio file to read from.</param>
+        /// <param name="buffer">Buffer to fill.</param>
+        /// <param name="frames">Number of frames to put in the <paramref name="buffer"/>.</param>
+        /// <returns>Returns the number of frames read. Should be equal to <paramref name="frames"/> unless
+        /// you've reached EOF.</returns>
+        public long ReadFrames(IntPtr sndfile, short[] buffer, long frames)
+        {
+            return LibsndfileApiNative.sf_readf_short(sndfile, buffer, frames);
+        }
     }
 }
