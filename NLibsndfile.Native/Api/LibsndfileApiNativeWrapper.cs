@@ -55,5 +55,10 @@ namespace NLibsndfile.Native
         {
             return LibsndfileApiNative.sf_read_int(sndfile, buffer, items);
         }
+
+        public long Read(IntPtr sndfile, float[] buffer, long items)
+        {
+            return LibsndfileApiNative.sf_read_float(sndfile, buffer, items);
+        }
     }
 }

@@ -365,5 +365,75 @@ namespace NLibsndfile.Native.Tests
 
             Assert.AreEqual(0, retval);
         }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ReadFloat_ShouldThrowExceptionOnZeroHandle()
+        {
+            var api = new LibsndfileApi();
+            api.Read(IntPtr.Zero, It.IsAny<float[]>(), It.IsAny<long>());
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ReadFloat_ShouldThrowExceptionOnNullBuffer()
+        {
+            var api = new LibsndfileApi();
+            float[] buffer = null;
+            api.Read(new IntPtr(1), buffer, It.IsAny<long>());
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ReadFloat_ShouldThrowExceptionOnEmptyBuffer()
+        {
+            var api = new LibsndfileApi();
+            var buffer = new float[] { };
+            api.Read(new IntPtr(1), buffer, It.IsAny<long>());
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ReadFloat_ShouldThrowExceptionOnLessThanZeroItems()
+        {
+            var api = new LibsndfileApi();
+            api.Read(new IntPtr(1), new float[] { }, -1);
+        }
+
+        [Test]
+        public void ReadFloat_ShouldReturnSameAsItemsRequested()
+        {
+            const long Items = 10;
+
+            var mock = new Mock<ILibsndfileApi>();
+            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<float[]>(), It.IsAny<long>())).Returns(Items);
+
+            var api = new LibsndfileApi(mock.Object);
+            var buffer = new float[1];
+            var retval = api.Read(new IntPtr(1), buffer, Items);
+
+            Assert.AreEqual(Items, retval);
+        }
+
+        [Test]
+        public void ReadFloat_ShouldReturnLessThanItemsRequestedThenZeroOnNextRead()
+        {
+            const long Items = 10;
+            const long PartialItems = 10 - 5;
+
+            var mock = new Mock<ILibsndfileApi>();
+            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<float[]>(), It.IsAny<long>())).Returns(PartialItems);
+
+            var api = new LibsndfileApi(mock.Object);
+            var buffer = new float[1];
+            var retval = api.Read(new IntPtr(1), buffer, Items);
+
+            Assert.AreEqual(PartialItems, retval);
+
+            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<float[]>(), It.IsAny<long>())).Returns(0);
+            retval = api.Read(new IntPtr(1), buffer, Items);
+
+            Assert.AreEqual(0, retval);
+        }
     }
 }
