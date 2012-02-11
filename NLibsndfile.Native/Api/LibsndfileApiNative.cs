@@ -39,5 +39,8 @@ namespace NLibsndfile.Native
 
         [DllImport(DllImports.Libsndfile)]
         internal static extern long sf_read_float(IntPtr sndfile, float[] buffer, long items);
+
+        [DllImport(DllImports.Libsndfile)]
+        internal static extern long sf_read_double(IntPtr sndfile, double[] buffer, long items);
     }
 }

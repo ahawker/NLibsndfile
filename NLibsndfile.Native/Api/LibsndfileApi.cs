@@ -149,5 +149,19 @@ namespace NLibsndfile.Native
 
             return m_Api.Read(sndfile, buffer, items);
         }
+
+        public long Read(IntPtr sndfile, double[] buffer, long items)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+            if (buffer == null)
+                throw new ArgumentNullException("buffer", "Buffer cannot be null.");
+            if (buffer.Length == 0)
+                throw new ArgumentNullException("buffer", "Buffer must be initialized.");
+            if (items < 0)
+                throw new ArgumentOutOfRangeException("items", items, "Items must be positive.");
+
+            return m_Api.Read(sndfile, buffer, items);
+        }
     }
 }

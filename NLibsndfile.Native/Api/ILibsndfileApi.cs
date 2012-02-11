@@ -23,5 +23,6 @@ namespace NLibsndfile.Native
         long Read(IntPtr sndfile, short[] buffer, long items);
         long Read(IntPtr sndfile, int[] buffer, long items);
         long Read(IntPtr sndfile, float[] buffer, long items);
+        long Read(IntPtr sndfile, double[] buffer, long items);
     }
 }

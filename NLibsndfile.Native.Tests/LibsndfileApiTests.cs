@@ -435,5 +435,75 @@ namespace NLibsndfile.Native.Tests
 
             Assert.AreEqual(0, retval);
         }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ReadDouble_ShouldThrowExceptionOnZeroHandle()
+        {
+            var api = new LibsndfileApi();
+            api.Read(IntPtr.Zero, It.IsAny<double[]>(), It.IsAny<long>());
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ReadDouble_ShouldThrowExceptionOnNullBuffer()
+        {
+            var api = new LibsndfileApi();
+            double[] buffer = null;
+            api.Read(new IntPtr(1), buffer, It.IsAny<long>());
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ReadDouble_ShouldThrowExceptionOnEmptyBuffer()
+        {
+            var api = new LibsndfileApi();
+            var buffer = new double[] { };
+            api.Read(new IntPtr(1), buffer, It.IsAny<long>());
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ReadDouble_ShouldThrowExceptionOnLessThanZeroItems()
+        {
+            var api = new LibsndfileApi();
+            api.Read(new IntPtr(1), new double[] { }, -1);
+        }
+
+        [Test]
+        public void ReadDouble_ShouldReturnSameAsItemsRequested()
+        {
+            const long Items = 10;
+
+            var mock = new Mock<ILibsndfileApi>();
+            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<double[]>(), It.IsAny<long>())).Returns(Items);
+
+            var api = new LibsndfileApi(mock.Object);
+            var buffer = new double[1];
+            var retval = api.Read(new IntPtr(1), buffer, Items);
+
+            Assert.AreEqual(Items, retval);
+        }
+
+        [Test]
+        public void ReadDouble_ShouldReturnLessThanItemsRequestedThenZeroOnNextRead()
+        {
+            const long Items = 10;
+            const long PartialItems = 10 - 5;
+
+            var mock = new Mock<ILibsndfileApi>();
+            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<double[]>(), It.IsAny<long>())).Returns(PartialItems);
+
+            var api = new LibsndfileApi(mock.Object);
+            var buffer = new double[1];
+            var retval = api.Read(new IntPtr(1), buffer, Items);
+
+            Assert.AreEqual(PartialItems, retval);
+
+            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<double[]>(), It.IsAny<long>())).Returns(0);
+            retval = api.Read(new IntPtr(1), buffer, Items);
+
+            Assert.AreEqual(0, retval);
+        }
     }
 }
