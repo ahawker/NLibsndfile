@@ -42,7 +42,7 @@ namespace NLibsndfile.Native
 
         public string GetString(IntPtr sndfile, LibsndfileStringType type)
         {
-            var ptr = LibsndfileApiNative.sf_get_String(sndfile, type);
+            var ptr = LibsndfileApiNative.sf_get_string(sndfile, type);
             return Marshal.PtrToStringAnsi(ptr) ?? string.Empty;
         }
     }

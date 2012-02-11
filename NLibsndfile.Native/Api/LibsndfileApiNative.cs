@@ -29,6 +29,6 @@ namespace NLibsndfile.Native
         internal static extern LibsndfileError sf_set_string(IntPtr sndfile, LibsndfileStringType type, string value);
 
         [DllImport(DllImports.Libsndfile)]
-        internal static extern IntPtr sf_get_String(IntPtr sndfile, LibsndfileStringType type);
+        internal static extern IntPtr sf_get_string(IntPtr sndfile, LibsndfileStringType type);
     }
 }

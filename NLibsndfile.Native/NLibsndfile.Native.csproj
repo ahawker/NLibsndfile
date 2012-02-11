@@ -51,6 +51,7 @@
     <Compile Include="Types\LibsndfileFormat.cs" />
     <Compile Include="Types\LibsndfileInfo.cs" />
     <Compile Include="Types\LibsndfileMode.cs" />
+    <Compile Include="Types\LibsndfileStringType.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
