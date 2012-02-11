@@ -10,7 +10,7 @@ namespace NLibsndfile.Native
         /// with <paramref name="mode"/> based file access.
         /// </summary>
         /// <param name="path">Fully qualified path to location of audio file.</param>
-        /// <param name="mode">File access to use when opening this file. Read/Write/ReadWrite.</param>
+        /// <param name="mode">File access to use when opening this file. ReadItems/Write/ReadWrite.</param>
         /// <param name="info"><see cref="LibsndfileInfo"/> structure contains information about the file we are opening.</param>
         /// <returns>Returns pointer to an internal object used by libsndfile that we can interact with.</returns>
         public IntPtr Open(string path, LibsndfileMode mode, ref LibsndfileInfo info)
@@ -23,7 +23,7 @@ namespace NLibsndfile.Native
         /// using <paramref name="mode"/> based file access.
         /// </summary>
         /// <param name="handle">File descriptor handle</param>
-        /// <param name="mode">File access to use when opening this file. Read/Write/ReadWrite</param>
+        /// <param name="mode">File access to use when opening this file. ReadItems/Write/ReadWrite</param>
         /// <param name="info"><see cref="LibsndfileInfo"/> structure contains information about the file we are opening.</param>
         /// <param name="closeHandle">Decide if we want libsndfile to close the file descriptor for us.</param>
         /// <returns>Returns pointer to an internal object used by libsndfile that we can interact with.</returns>
@@ -112,7 +112,7 @@ namespace NLibsndfile.Native
         }
 
         /// <summary>
-        /// Read <paramref name="items"/> from the <paramref name="sndfile"/> audio file into the audio
+        /// ReadItems <paramref name="items"/> from the <paramref name="sndfile"/> audio file into the audio
         /// <paramref name="buffer"/>. Items must be a product of the # of channels for
         /// the <paramref name="sndfile"/>. 
         /// </summary>
@@ -121,13 +121,13 @@ namespace NLibsndfile.Native
         /// <param name="items">Number of items to put in the <paramref name="buffer"/>.</param>
         /// <returns>Returns the number of items read. Should be equal to <paramref name="items"/> unless
         /// you've reached EOF.</returns>
-        public long Read(IntPtr sndfile, short[] buffer, long items)
+        public long ReadItems(IntPtr sndfile, short[] buffer, long items)
         {
             return LibsndfileApiNative.sf_read_short(sndfile, buffer, items);
         }
 
         /// <summary>
-        /// Read <paramref name="items"/> from the <paramref name="sndfile"/> audio file into the audio
+        /// ReadItems <paramref name="items"/> from the <paramref name="sndfile"/> audio file into the audio
         /// <paramref name="buffer"/>. Items must be a product of the # of channels for
         /// the <paramref name="sndfile"/>. 
         /// </summary>
@@ -136,13 +136,13 @@ namespace NLibsndfile.Native
         /// <param name="items">Number of items to put in the <paramref name="buffer"/>.</param>
         /// <returns>Returns the number of items read. Should be equal to <paramref name="items"/> unless
         /// you've reached EOF.</returns>
-        public long Read(IntPtr sndfile, int[] buffer, long items)
+        public long ReadItems(IntPtr sndfile, int[] buffer, long items)
         {
             return LibsndfileApiNative.sf_read_int(sndfile, buffer, items);
         }
 
         /// <summary>
-        /// Read <paramref name="items"/> from the <paramref name="sndfile"/> audio file into the audio
+        /// ReadItems <paramref name="items"/> from the <paramref name="sndfile"/> audio file into the audio
         /// <paramref name="buffer"/>. Items must be a product of the # of channels for
         /// the <paramref name="sndfile"/>. 
         /// </summary>
@@ -151,13 +151,13 @@ namespace NLibsndfile.Native
         /// <param name="items">Number of items to put in the <paramref name="buffer"/>.</param>
         /// <returns>Returns the number of items read. Should be equal to <paramref name="items"/> unless
         /// you've reached EOF.</returns>
-        public long Read(IntPtr sndfile, float[] buffer, long items)
+        public long ReadItems(IntPtr sndfile, float[] buffer, long items)
         {
             return LibsndfileApiNative.sf_read_float(sndfile, buffer, items);
         }
 
         /// <summary>
-        /// Read <paramref name="items"/> from the <paramref name="sndfile"/> audio file into the audio
+        /// ReadItems <paramref name="items"/> from the <paramref name="sndfile"/> audio file into the audio
         /// <paramref name="buffer"/>. Items must be a product of the # of channels for
         /// the <paramref name="sndfile"/>. 
         /// </summary>
@@ -166,13 +166,13 @@ namespace NLibsndfile.Native
         /// <param name="items">Number of items to put in the <paramref name="buffer"/>.</param>
         /// <returns>Returns the number of items read. Should be equal to <paramref name="items"/> unless
         /// you've reached EOF.</returns>
-        public long Read(IntPtr sndfile, double[] buffer, long items)
+        public long ReadItems(IntPtr sndfile, double[] buffer, long items)
         {
             return LibsndfileApiNative.sf_read_double(sndfile, buffer, items);
         }
 
         /// <summary>
-        /// Read <paramref name="frames"/> from the <paramref name="sndfile"/> audio file into the audio
+        /// ReadItems <paramref name="frames"/> from the <paramref name="sndfile"/> audio file into the audio
         /// <paramref name="buffer"/>.
         /// </summary>
         /// <param name="sndfile">Audio file to read from.</param>

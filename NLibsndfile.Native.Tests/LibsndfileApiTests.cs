@@ -228,280 +228,280 @@ namespace NLibsndfile.Native.Tests
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void ReadShort_ShouldThrowExceptionOnZeroHandle()
+        public void ReadShortItems_ShouldThrowExceptionOnZeroHandle()
         {
             var api = new LibsndfileApi();
-            api.Read(IntPtr.Zero, It.IsAny<short[]>(), It.IsAny<long>());
+            api.ReadItems(IntPtr.Zero, It.IsAny<short[]>(), It.IsAny<long>());
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ReadShort_ShouldThrowExceptionOnNullBuffer()
+        public void ReadShortItems_ShouldThrowExceptionOnNullBuffer()
         {
             var api = new LibsndfileApi();
             short[] buffer = null;
-            api.Read(new IntPtr(1), buffer, It.IsAny<long>());
+            api.ReadItems(new IntPtr(1), buffer, It.IsAny<long>());
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ReadShort_ShouldThrowExceptionOnEmptyBuffer()
+        public void ReadShortItems_ShouldThrowExceptionOnEmptyBuffer()
         {
             var api = new LibsndfileApi();
             var buffer = new short[] { };
-            api.Read(new IntPtr(1), buffer, It.IsAny<long>());
+            api.ReadItems(new IntPtr(1), buffer, It.IsAny<long>());
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ReadShort_ShouldThrowExceptionOnLessThanZeroItems()
+        public void ReadShortItems_ShouldThrowExceptionOnLessThanZeroItems()
         {
             var api = new LibsndfileApi();
-            api.Read(new IntPtr(1), new short[] { }, -1); 
+            api.ReadItems(new IntPtr(1), new short[] { }, -1); 
         }
 
         [Test]
-        public void ReadShort_ShouldReturnSameAsItemsRequested()
+        public void ReadShortItems_ShouldReturnSameAsItemsRequested()
         {
             const long Items = 10;
 
             var mock = new Mock<ILibsndfileApi>();
-            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<short[]>(), It.IsAny<long>())).Returns(Items);
+            mock.Setup(x => x.ReadItems(It.IsAny<IntPtr>(), It.IsAny<short[]>(), It.IsAny<long>())).Returns(Items);
 
             var api = new LibsndfileApi(mock.Object);
             var buffer = new short[1];
-            var retval = api.Read(new IntPtr(1), buffer, Items);
+            var retval = api.ReadItems(new IntPtr(1), buffer, Items);
 
             Assert.AreEqual(Items, retval);
         }
 
         [Test]
-        public void ReadShort_ShouldReturnLessThanItemsRequestedThenZeroOnNextRead()
+        public void ReadShortItems_ShouldReturnLessThanItemsRequestedThenZeroOnNextRead()
         {
             const long Items = 10;
             const long PartialItems = 10 - 5;
 
             var mock = new Mock<ILibsndfileApi>();
-            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<short[]>(), It.IsAny<long>())).Returns(PartialItems);
+            mock.Setup(x => x.ReadItems(It.IsAny<IntPtr>(), It.IsAny<short[]>(), It.IsAny<long>())).Returns(PartialItems);
 
             var api = new LibsndfileApi(mock.Object);
             var buffer = new short[1];
-            var retval = api.Read(new IntPtr(1), buffer, Items);
+            var retval = api.ReadItems(new IntPtr(1), buffer, Items);
 
             Assert.AreEqual(PartialItems, retval);
 
-            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<short[]>(), It.IsAny<long>())).Returns(0);
-            retval = api.Read(new IntPtr(1), buffer, Items);
+            mock.Setup(x => x.ReadItems(It.IsAny<IntPtr>(), It.IsAny<short[]>(), It.IsAny<long>())).Returns(0);
+            retval = api.ReadItems(new IntPtr(1), buffer, Items);
 
             Assert.AreEqual(0, retval);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void ReadInt_ShouldThrowExceptionOnZeroHandle()
+        public void ReadIntItems_ShouldThrowExceptionOnZeroHandle()
         {
             var api = new LibsndfileApi();
-            api.Read(IntPtr.Zero, It.IsAny<int[]>(), It.IsAny<long>());
+            api.ReadItems(IntPtr.Zero, It.IsAny<int[]>(), It.IsAny<long>());
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ReadInt_ShouldThrowExceptionOnNullBuffer()
+        public void ReadIntItems_ShouldThrowExceptionOnNullBuffer()
         {
             var api = new LibsndfileApi();
             int[] buffer = null;
-            api.Read(new IntPtr(1), buffer, It.IsAny<long>());
+            api.ReadItems(new IntPtr(1), buffer, It.IsAny<long>());
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ReadInt_ShouldThrowExceptionOnEmptyBuffer()
+        public void ReadIntItems_ShouldThrowExceptionOnEmptyBuffer()
         {
             var api = new LibsndfileApi();
             var buffer = new int[] { };
-            api.Read(new IntPtr(1), buffer, It.IsAny<long>());
+            api.ReadItems(new IntPtr(1), buffer, It.IsAny<long>());
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ReadInt_ShouldThrowExceptionOnLessThanZeroItems()
+        public void ReadIntItems_ShouldThrowExceptionOnLessThanZeroItems()
         {
             var api = new LibsndfileApi();
-            api.Read(new IntPtr(1), new int[] { }, -1);
+            api.ReadItems(new IntPtr(1), new int[] { }, -1);
         }
 
         [Test]
-        public void ReadInt_ShouldReturnSameAsItemsRequested()
+        public void ReadIntItems_ShouldReturnSameAsItemsRequested()
         {
             const long Items = 10;
 
             var mock = new Mock<ILibsndfileApi>();
-            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<int[]>(), It.IsAny<long>())).Returns(Items);
+            mock.Setup(x => x.ReadItems(It.IsAny<IntPtr>(), It.IsAny<int[]>(), It.IsAny<long>())).Returns(Items);
 
             var api = new LibsndfileApi(mock.Object);
             var buffer = new int[1];
-            var retval = api.Read(new IntPtr(1), buffer, Items);
+            var retval = api.ReadItems(new IntPtr(1), buffer, Items);
 
             Assert.AreEqual(Items, retval);
         }
 
         [Test]
-        public void ReadInt_ShouldReturnLessThanItemsRequestedThenZeroOnNextRead()
+        public void ReadIntItems_ShouldReturnLessThanItemsRequestedThenZeroOnNextRead()
         {
             const long Items = 10;
             const long PartialItems = 10 - 5;
 
             var mock = new Mock<ILibsndfileApi>();
-            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<int[]>(), It.IsAny<long>())).Returns(PartialItems);
+            mock.Setup(x => x.ReadItems(It.IsAny<IntPtr>(), It.IsAny<int[]>(), It.IsAny<long>())).Returns(PartialItems);
 
             var api = new LibsndfileApi(mock.Object);
             var buffer = new int[1];
-            var retval = api.Read(new IntPtr(1), buffer, Items);
+            var retval = api.ReadItems(new IntPtr(1), buffer, Items);
 
             Assert.AreEqual(PartialItems, retval);
 
-            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<int[]>(), It.IsAny<long>())).Returns(0);
-            retval = api.Read(new IntPtr(1), buffer, Items);
+            mock.Setup(x => x.ReadItems(It.IsAny<IntPtr>(), It.IsAny<int[]>(), It.IsAny<long>())).Returns(0);
+            retval = api.ReadItems(new IntPtr(1), buffer, Items);
 
             Assert.AreEqual(0, retval);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void ReadFloat_ShouldThrowExceptionOnZeroHandle()
+        public void ReadFloatItems_ShouldThrowExceptionOnZeroHandle()
         {
             var api = new LibsndfileApi();
-            api.Read(IntPtr.Zero, It.IsAny<float[]>(), It.IsAny<long>());
+            api.ReadItems(IntPtr.Zero, It.IsAny<float[]>(), It.IsAny<long>());
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ReadFloat_ShouldThrowExceptionOnNullBuffer()
+        public void ReadFloatItems_ShouldThrowExceptionOnNullBuffer()
         {
             var api = new LibsndfileApi();
             float[] buffer = null;
-            api.Read(new IntPtr(1), buffer, It.IsAny<long>());
+            api.ReadItems(new IntPtr(1), buffer, It.IsAny<long>());
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ReadFloat_ShouldThrowExceptionOnEmptyBuffer()
+        public void ReadFloatItems_ShouldThrowExceptionOnEmptyBuffer()
         {
             var api = new LibsndfileApi();
             var buffer = new float[] { };
-            api.Read(new IntPtr(1), buffer, It.IsAny<long>());
+            api.ReadItems(new IntPtr(1), buffer, It.IsAny<long>());
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ReadFloat_ShouldThrowExceptionOnLessThanZeroItems()
+        public void ReadFloatItems_ShouldThrowExceptionOnLessThanZeroItems()
         {
             var api = new LibsndfileApi();
-            api.Read(new IntPtr(1), new float[] { }, -1);
+            api.ReadItems(new IntPtr(1), new float[] { }, -1);
         }
 
         [Test]
-        public void ReadFloat_ShouldReturnSameAsItemsRequested()
+        public void ReadFloatItems_ShouldReturnSameAsItemsRequested()
         {
             const long Items = 10;
 
             var mock = new Mock<ILibsndfileApi>();
-            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<float[]>(), It.IsAny<long>())).Returns(Items);
+            mock.Setup(x => x.ReadItems(It.IsAny<IntPtr>(), It.IsAny<float[]>(), It.IsAny<long>())).Returns(Items);
 
             var api = new LibsndfileApi(mock.Object);
             var buffer = new float[1];
-            var retval = api.Read(new IntPtr(1), buffer, Items);
+            var retval = api.ReadItems(new IntPtr(1), buffer, Items);
 
             Assert.AreEqual(Items, retval);
         }
 
         [Test]
-        public void ReadFloat_ShouldReturnLessThanItemsRequestedThenZeroOnNextRead()
+        public void ReadFloatItems_ShouldReturnLessThanItemsRequestedThenZeroOnNextRead()
         {
             const long Items = 10;
             const long PartialItems = 10 - 5;
 
             var mock = new Mock<ILibsndfileApi>();
-            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<float[]>(), It.IsAny<long>())).Returns(PartialItems);
+            mock.Setup(x => x.ReadItems(It.IsAny<IntPtr>(), It.IsAny<float[]>(), It.IsAny<long>())).Returns(PartialItems);
 
             var api = new LibsndfileApi(mock.Object);
             var buffer = new float[1];
-            var retval = api.Read(new IntPtr(1), buffer, Items);
+            var retval = api.ReadItems(new IntPtr(1), buffer, Items);
 
             Assert.AreEqual(PartialItems, retval);
 
-            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<float[]>(), It.IsAny<long>())).Returns(0);
-            retval = api.Read(new IntPtr(1), buffer, Items);
+            mock.Setup(x => x.ReadItems(It.IsAny<IntPtr>(), It.IsAny<float[]>(), It.IsAny<long>())).Returns(0);
+            retval = api.ReadItems(new IntPtr(1), buffer, Items);
 
             Assert.AreEqual(0, retval);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void ReadDouble_ShouldThrowExceptionOnZeroHandle()
+        public void ReadDoubleItems_ShouldThrowExceptionOnZeroHandle()
         {
             var api = new LibsndfileApi();
-            api.Read(IntPtr.Zero, It.IsAny<double[]>(), It.IsAny<long>());
+            api.ReadItems(IntPtr.Zero, It.IsAny<double[]>(), It.IsAny<long>());
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ReadDouble_ShouldThrowExceptionOnNullBuffer()
+        public void ReadDoubleItems_ShouldThrowExceptionOnNullBuffer()
         {
             var api = new LibsndfileApi();
             double[] buffer = null;
-            api.Read(new IntPtr(1), buffer, It.IsAny<long>());
+            api.ReadItems(new IntPtr(1), buffer, It.IsAny<long>());
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ReadDouble_ShouldThrowExceptionOnEmptyBuffer()
+        public void ReadDoubleItems_ShouldThrowExceptionOnEmptyBuffer()
         {
             var api = new LibsndfileApi();
             var buffer = new double[] { };
-            api.Read(new IntPtr(1), buffer, It.IsAny<long>());
+            api.ReadItems(new IntPtr(1), buffer, It.IsAny<long>());
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ReadDouble_ShouldThrowExceptionOnLessThanZeroItems()
+        public void ReadDoubleItems_ShouldThrowExceptionOnLessThanZeroItems()
         {
             var api = new LibsndfileApi();
-            api.Read(new IntPtr(1), new double[] { }, -1);
+            api.ReadItems(new IntPtr(1), new double[] { }, -1);
         }
 
         [Test]
-        public void ReadDouble_ShouldReturnSameAsItemsRequested()
+        public void ReadDoubleItems_ShouldReturnSameAsItemsRequested()
         {
             const long Items = 10;
 
             var mock = new Mock<ILibsndfileApi>();
-            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<double[]>(), It.IsAny<long>())).Returns(Items);
+            mock.Setup(x => x.ReadItems(It.IsAny<IntPtr>(), It.IsAny<double[]>(), It.IsAny<long>())).Returns(Items);
 
             var api = new LibsndfileApi(mock.Object);
             var buffer = new double[1];
-            var retval = api.Read(new IntPtr(1), buffer, Items);
+            var retval = api.ReadItems(new IntPtr(1), buffer, Items);
 
             Assert.AreEqual(Items, retval);
         }
 
         [Test]
-        public void ReadDouble_ShouldReturnLessThanItemsRequestedThenZeroOnNextRead()
+        public void ReadDoubleItems_ShouldReturnLessThanItemsRequestedThenZeroOnNextRead()
         {
             const long Items = 10;
             const long PartialItems = 10 - 5;
 
             var mock = new Mock<ILibsndfileApi>();
-            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<double[]>(), It.IsAny<long>())).Returns(PartialItems);
+            mock.Setup(x => x.ReadItems(It.IsAny<IntPtr>(), It.IsAny<double[]>(), It.IsAny<long>())).Returns(PartialItems);
 
             var api = new LibsndfileApi(mock.Object);
             var buffer = new double[1];
-            var retval = api.Read(new IntPtr(1), buffer, Items);
+            var retval = api.ReadItems(new IntPtr(1), buffer, Items);
 
             Assert.AreEqual(PartialItems, retval);
 
-            mock.Setup(x => x.Read(It.IsAny<IntPtr>(), It.IsAny<double[]>(), It.IsAny<long>())).Returns(0);
-            retval = api.Read(new IntPtr(1), buffer, Items);
+            mock.Setup(x => x.ReadItems(It.IsAny<IntPtr>(), It.IsAny<double[]>(), It.IsAny<long>())).Returns(0);
+            retval = api.ReadItems(new IntPtr(1), buffer, Items);
 
             Assert.AreEqual(0, retval);
         }
