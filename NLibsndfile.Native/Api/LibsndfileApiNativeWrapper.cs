@@ -45,5 +45,10 @@ namespace NLibsndfile.Native
             var ptr = LibsndfileApiNative.sf_get_string(sndfile, type);
             return Marshal.PtrToStringAnsi(ptr) ?? string.Empty;
         }
+
+        public long Read(IntPtr sndfile, short[] buffer, long items)
+        {
+            return LibsndfileApiNative.sf_read_short(sndfile, buffer, items);
+        }
     }
 }

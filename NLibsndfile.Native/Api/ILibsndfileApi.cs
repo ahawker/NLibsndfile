@@ -19,5 +19,7 @@ namespace NLibsndfile.Native
         LibsndfileError SetString(IntPtr sndfile, LibsndfileStringType type, string value);
 
         string GetString(IntPtr sndfile, LibsndfileStringType type);
+
+        long Read(IntPtr sndfile, short[] buffer, long items);
     }
 }
