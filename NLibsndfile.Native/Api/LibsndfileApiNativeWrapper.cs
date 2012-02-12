@@ -3,6 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace NLibsndfile.Native
 {
+    /// <summary>
+    /// Provides native API access and marshalling by forwarding calls to P/Invoke LibsndfileApiNative static class.
+    /// </summary>
     public class LibsndfileApiNativeWrapper : ILibsndfileApi
     {
         /// <summary>
