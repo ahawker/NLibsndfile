@@ -50,6 +50,7 @@
     <Compile Include="LibsndfileApiReadFramesTests.cs" />
     <Compile Include="LibsndfileApiReadItemsTests.cs" />
     <Compile Include="LibsndfileApiTests.cs" />
+    <Compile Include="LibsndfileApiWriteItemsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

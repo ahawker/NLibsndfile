@@ -226,5 +226,18 @@ namespace NLibsndfile.Native
         {
             return LibsndfileApiNative.sf_readf_double(sndfile, buffer, frames);
         }
+
+        /// <summary>
+        /// Write <paramref name="items"/> from the <paramref name="buffer"/> into the audio <paramref name="sndfile"/>.
+        /// </summary>
+        /// <param name="sndfile">Audio file to write to.</param>
+        /// <param name="buffer">Buffer to write from.</param>
+        /// <param name="items">Number of items to read from the <paramref name="buffer"/>.</param>
+        /// <returns>Returns the number of items written. Should be equal to <paramref name="items"/> unless
+        /// you've reached EOF.</returns>
+        public long WriteItems(IntPtr sndfile, short[] buffer, long items)
+        {
+            return LibsndfileApiNative.sf_write_short(sndfile, buffer, items);
+        }
     }
 }

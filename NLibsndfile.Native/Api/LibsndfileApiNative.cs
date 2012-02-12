@@ -201,5 +201,16 @@ namespace NLibsndfile.Native
         /// you've reached EOF.</returns>
         [DllImport(DllImports.Libsndfile)]
         internal static extern long sf_readf_double(IntPtr sndfile, double[] buffer, long frames);
+
+        /// <summary>
+        /// Write <paramref name="items"/> from the <paramref name="buffer"/> into the audio <paramref name="sndfile"/>.
+        /// </summary>
+        /// <param name="sndfile">Audio file to write to.</param>
+        /// <param name="buffer">Buffer to write from.</param>
+        /// <param name="items">Number of items to read from the <paramref name="buffer"/>.</param>
+        /// <returns>Returns the number of items written. Should be equal to <paramref name="items"/> unless
+        /// you've reached EOF.</returns>
+        [DllImport(DllImports.Libsndfile)]
+        internal static extern long sf_write_short(IntPtr sndfile, short[] buffer, long items);
     }
 }
