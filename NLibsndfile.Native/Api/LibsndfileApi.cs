@@ -549,5 +549,28 @@ namespace NLibsndfile.Native
 
             return m_Api.WriteFrames(sndfile, buffer, frames);
         }
+
+        /// <summary>
+        /// Reads <paramref name="bytes"/> amount of raw audio data from 
+        /// <paramref name="sndfile"/> into <paramref name="buffer"/>.
+        /// </summary>
+        /// <param name="sndfile">Audio file to read from.</param>
+        /// <param name="buffer">Buffer to fill.</param>
+        /// <param name="bytes">Number of bytes to read from <paramref name="sndfile"/>.</param>
+        /// <returns>Returns the number of frames written. Should be equal to <paramref name="bytes"/> unless
+        /// you've reached EOF.</returns>
+        public long ReadRaw(IntPtr sndfile, byte[] buffer, long bytes)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+            if (buffer == null)
+                throw new ArgumentNullException("buffer", "Buffer cannot be null.");
+            if (buffer.Length == 0)
+                throw new ArgumentNullException("buffer", "Buffer must be initialized.");
+            if (bytes < 0)
+                throw new ArgumentOutOfRangeException("bytes", bytes, "Bytes must be positive.");
+
+            return m_Api.ReadRaw(sndfile, buffer, bytes);
+        }
     }
 }
