@@ -35,7 +35,7 @@ namespace NLibsndfile.Native.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void WriteShortItems_ShouldThrowExceptionOnLessThanZeroItems()
         {
             var api = new LibsndfileApi();
@@ -49,7 +49,7 @@ namespace NLibsndfile.Native.Tests
             const long Items = 10;
 
             var mock = new Mock<ILibsndfileApi>();
-            mock.Setup(x => x.ReadItems(It.IsAny<IntPtr>(), It.IsAny<short[]>(), It.IsAny<long>())).Returns(Items);
+            mock.Setup(x => x.WriteItems(It.IsAny<IntPtr>(), It.IsAny<short[]>(), It.IsAny<long>())).Returns(Items);
 
             var api = new LibsndfileApi(mock.Object);
             var buffer = new short[1];
