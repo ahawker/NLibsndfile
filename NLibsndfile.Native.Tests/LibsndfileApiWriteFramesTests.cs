@@ -157,5 +157,55 @@ namespace NLibsndfile.Native.Tests
 
             Assert.AreEqual(Frames, retval);
         }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void WriteDoubleFrames_ShouldThrowExceptionOnZeroHandle()
+        {
+            var api = new LibsndfileApi();
+            api.WriteFrames(IntPtr.Zero, It.IsAny<double[]>(), It.IsAny<long>());
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void WriteDoubleFrames_ShouldThrowExceptionOnNullBuffer()
+        {
+            var api = new LibsndfileApi();
+            double[] buffer = null;
+            api.WriteFrames(new IntPtr(1), buffer, It.IsAny<long>());
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void WriteDoubleFrames_ShouldThrowExceptionOnEmptyBuffer()
+        {
+            var api = new LibsndfileApi();
+            var buffer = new double[] { };
+            api.WriteFrames(new IntPtr(1), buffer, It.IsAny<long>());
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void WriteDoubleFrames_ShouldThrowExceptionOnLessThanZeroItems()
+        {
+            var api = new LibsndfileApi();
+            var buffer = new double[1];
+            api.WriteFrames(new IntPtr(1), buffer, -1);
+        }
+
+        [Test]
+        public void WriteDoubleFrames_ShouldReturnSameAsItemsRequested()
+        {
+            const long Frames = 10;
+
+            var mock = new Mock<ILibsndfileApi>();
+            mock.Setup(x => x.WriteFrames(It.IsAny<IntPtr>(), It.IsAny<double[]>(), It.IsAny<long>())).Returns(Frames);
+
+            var api = new LibsndfileApi(mock.Object);
+            var buffer = new double[1];
+            var retval = api.WriteFrames(new IntPtr(1), buffer, Frames);
+
+            Assert.AreEqual(Frames, retval);
+        }
     }
 }
