@@ -45,8 +45,10 @@
     <Compile Include="Api\LibsndfileApi.cs" />
     <Compile Include="Api\LibsndfileApiNative.cs" />
     <Compile Include="Api\LibsndfileApiNativeWrapper.cs" />
+    <Compile Include="Command\LibsndfileCommandUtilities.cs" />
     <Compile Include="LibsndfileException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\LibsndfileCommand.cs" />
     <Compile Include="Types\LibsndfileError.cs" />
     <Compile Include="Types\LibsndfileFormat.cs" />
     <Compile Include="Types\LibsndfileInfo.cs" />
