@@ -216,5 +216,15 @@ namespace NLibsndfile.Native
         /// <returns>Returns the number of items written. Should be equal to <paramref name="items"/> unless
         /// you've reached EOF.</returns>
         long WriteItems(IntPtr sndfile, double[] buffer, long items);
+
+        /// <summary>
+        /// Write <paramref name="frames"/> from the <paramref name="buffer"/> into the audio <paramref name="sndfile"/>.
+        /// </summary>
+        /// <param name="sndfile">Audio file to write to.</param>
+        /// <param name="buffer">Buffer to write from.</param>
+        /// <param name="frames">Number of frames to read from the <paramref name="buffer"/>.</param>
+        /// <returns>Returns the number of frames written. Should be equal to <paramref name="frames"/> unless
+        /// you've reached EOF.</returns>
+        long WriteFrames(IntPtr sndfile, short[] buffer, long frames);
     }
 }
