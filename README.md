@@ -4,7 +4,7 @@
 
 NLibsndfile's API was designed to fit two main goals.
 
-* Easy of use for existing Libsndfile developers by providing direct API access.
-* Easy of use for existing .NET developers by providing a Stream based API compliant with .NET BCL standards.
+* Ease of use for existing Libsndfile developers by providing direct API access.
+* Ease of use for existing .NET developers by providing a Stream based API compliant with .NET BCL standards.
 
  
