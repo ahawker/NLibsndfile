@@ -505,5 +505,27 @@ namespace NLibsndfile.Native
 
             return m_Api.WriteFrames(sndfile, buffer, frames);
         }
+
+        /// <summary>
+        /// Write <paramref name="frames"/> from the <paramref name="buffer"/> into the audio <paramref name="sndfile"/>.
+        /// </summary>
+        /// <param name="sndfile">Audio file to write to.</param>
+        /// <param name="buffer">Buffer to write from.</param>
+        /// <param name="frames">Number of frames to read from the <paramref name="buffer"/>.</param>
+        /// <returns>Returns the number of frames written. Should be equal to <paramref name="frames"/> unless
+        /// you've reached EOF.</returns>
+        public long WriteFrames(IntPtr sndfile, float[] buffer, long frames)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+            if (buffer == null)
+                throw new ArgumentNullException("buffer", "Buffer cannot be null.");
+            if (buffer.Length == 0)
+                throw new ArgumentNullException("buffer", "Buffer must be initialized.");
+            if (frames < 0)
+                throw new ArgumentOutOfRangeException("frames", frames, "Frames must be positive.");
+
+            return m_Api.WriteFrames(sndfile, buffer, frames);
+        }
     }
 }
