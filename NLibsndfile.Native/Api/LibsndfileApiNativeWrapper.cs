@@ -347,5 +347,19 @@ namespace NLibsndfile.Native
         {
             return LibsndfileApiNative.sf_read_raw(sndfile, buffer, bytes);
         }
+
+        /// <summary>
+        /// Writes <paramref name="bytes"/> amount of raw audio data from
+        /// <paramref name="buffer"/> into <paramref name="sndfile"/>.
+        /// </summary>
+        /// <param name="sndfile">Audio file to write to.</param>
+        /// <param name="buffer">Buffer to write from.</param>
+        /// <param name="bytes">Number of bytes to read from <paramref name="sndfile"/>.</param>
+        /// <returns>Returns the number of frames written. Should be equal to <paramref name="bytes"/> unless
+        /// you've reached EOF.</returns>
+        public long WriteRaw(IntPtr sndfile, byte[] buffer, long bytes)
+        {
+            return LibsndfileApiNative.sf_write_raw(sndfile, buffer, bytes);
+        }
     }
 }
