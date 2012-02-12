@@ -35,11 +35,12 @@ namespace NLibsndfile.Native.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ReadShortFrames_ShouldThrowExceptionOnLessThanZeroItems()
         {
             var api = new LibsndfileApi();
-            api.ReadFrames(new IntPtr(1), new short[] { }, -1);
+            var buffer = new short[1];
+            api.ReadFrames(new IntPtr(1), buffer, -1);
         }
 
         [Test]
@@ -105,11 +106,12 @@ namespace NLibsndfile.Native.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ReadIntFrames_ShouldThrowExceptionOnLessThanZeroItems()
         {
             var api = new LibsndfileApi();
-            api.ReadFrames(new IntPtr(1), new int[] { }, -1);
+            var buffer = new int[1];
+            api.ReadFrames(new IntPtr(1), buffer, -1);
         }
 
         [Test]
@@ -175,11 +177,12 @@ namespace NLibsndfile.Native.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ReadFloatFrames_ShouldThrowExceptionOnLessThanZeroItems()
         {
             var api = new LibsndfileApi();
-            api.ReadFrames(new IntPtr(1), new float[] { }, -1);
+            var buffer = new float[1];
+            api.ReadFrames(new IntPtr(1), buffer, -1);
         }
 
         [Test]
@@ -245,11 +248,12 @@ namespace NLibsndfile.Native.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ReadDoubleFrames_ShouldThrowExceptionOnLessThanZeroItems()
         {
             var api = new LibsndfileApi();
-            api.ReadFrames(new IntPtr(1), new double[] { }, -1);
+            var buffer = new double[1];
+            api.ReadFrames(new IntPtr(1), buffer, -1);
         }
 
         [Test]
