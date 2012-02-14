@@ -698,6 +698,10 @@ namespace NLibsndfile.Native
         {
             if (sndfile == IntPtr.Zero && !LibsndfileCommandUtilities.IsStaticCommand(command))
                 throw new ArgumentException("File handle is invalid/closed.");
+            if (data == null)
+                throw new ArgumentNullException("data", "Data cannot be null.");
+            if (data.Length == 0)
+                throw new ArgumentNullException("data", "Data must be initialized.");
 
             var retval = m_Api.Command(sndfile, command, data, size);
             if (!LibsndfileCommandUtilities.IsValidResult(sndfile, command, retval))
