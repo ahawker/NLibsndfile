@@ -155,6 +155,17 @@ namespace NLibsndfile.Native
         }
 
         /// <summary>
+        /// Returns a pointer the string representation of the current error for the <paramref name="sndfile"/> audio file.
+        /// </summary>
+        /// <param name="sndfile">Audio file we want to check for errors.</param>
+        /// <returns>Pointer to a string containing the description of the current error.</returns>
+        public string ErrorString(IntPtr sndfile)
+        {
+            var ptr = LibsndfileApiNative.sf_strerror(sndfile);
+            return Marshal.PtrToStringAnsi(ptr);
+        }
+
+        /// <summary>
         /// Closes the <paramref name="sndfile"/> audio file.
         /// </summary>
         /// <param name="sndfile">Audio file we want to close.</param>

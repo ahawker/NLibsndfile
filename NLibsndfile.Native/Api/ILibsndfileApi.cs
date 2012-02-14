@@ -121,6 +121,13 @@ namespace NLibsndfile.Native
         LibsndfileError Error(IntPtr sndfile);
 
         /// <summary>
+        /// Returns the string representation of the current error for the <paramref name="sndfile"/> audio file.
+        /// </summary>
+        /// <param name="sndfile">Audio file we want to check for errors.</param>
+        /// <returns>String containing the description of the current error.</returns>
+        string ErrorString(IntPtr sndfile);
+
+        /// <summary>
         /// Closes the <paramref name="sndfile"/> audio file.
         /// </summary>
         /// <param name="sndfile">Audio file we want to close.</param>
