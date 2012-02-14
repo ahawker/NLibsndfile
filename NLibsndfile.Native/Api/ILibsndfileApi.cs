@@ -128,6 +128,13 @@ namespace NLibsndfile.Native
         string ErrorString(IntPtr sndfile);
 
         /// <summary>
+        /// Returns the string representation of the int value backing <see cref="LibsndfileError"/>.
+        /// </summary>
+        /// <param name="error"><see cref="LibsndfileError"/> error code.</param>
+        /// <returns>Description of the given error code.</returns>
+        string ErrorNumber(int error);
+
+        /// <summary>
         /// Closes the <paramref name="sndfile"/> audio file.
         /// </summary>
         /// <param name="sndfile">Audio file we want to close.</param>

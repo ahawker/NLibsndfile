@@ -87,5 +87,49 @@ namespace NLibsndfile.Native.Tests
 
             Assert.AreEqual(ErrorString, retval);
         }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ErrorNumber_ShouldThrowExceptionOnNegativeErrorCode()
+        {
+            var api = new LibsndfileApi();
+            api.ErrorNumber(-1);
+        }
+
+        [Test]
+        [ExpectedException(typeof(LibsndfileException))]
+        public void ErrorNumber_ShouldThrowExceptionOnNullStringReturned()
+        {
+            var mock = new Mock<ILibsndfileApi>();
+            mock.Setup(x => x.ErrorNumber(It.IsAny<int>())).Returns((string)null);
+
+            var api = new LibsndfileApi(mock.Object);
+            api.ErrorNumber(1);
+        }
+
+        [Test]
+        [ExpectedException(typeof(LibsndfileException))]
+        public void ErrorNumber_ShouldThrowExceptionOnEmptyStringReturned()
+        {
+            var mock = new Mock<ILibsndfileApi>();
+            mock.Setup(x => x.ErrorNumber(It.IsAny<int>())).Returns(string.Empty);
+
+            var api = new LibsndfileApi(mock.Object);
+            api.ErrorNumber(1);
+        }
+
+        [Test]
+        public void ErrorNumber_ShouldReturnValidErrorString()
+        {
+            const string ErrorString = "Libsndfile encountered no errors.";
+
+            var mock = new Mock<ILibsndfileApi>();
+            mock.Setup(x => x.ErrorNumber(It.IsAny<int>())).Returns(ErrorString);
+
+            var api = new LibsndfileApi(mock.Object);
+            var retval = api.ErrorNumber(1);
+
+            Assert.AreEqual(ErrorString, retval);
+        }
     }
 }

@@ -259,7 +259,24 @@ namespace NLibsndfile.Native
 
             var retval = m_Api.ErrorString(sndfile);
             if (string.IsNullOrEmpty(retval))
-                throw new LibsndfileException("ErrorString return an invalid result.");
+                throw new LibsndfileException("ErrorString returned an invalid result.");
+
+            return retval;
+        }
+
+        /// <summary>
+        /// Returns the string representation of the int value backing <see cref="LibsndfileError"/>.
+        /// </summary>
+        /// <param name="error"><see cref="LibsndfileError"/> error code.</param>
+        /// <returns>Description of the given error code.</returns>
+        public string ErrorNumber(int error)
+        {
+            if (error < 0)
+                throw new ArgumentOutOfRangeException("error", error, "Error must be positive.");
+
+            var retval = m_Api.ErrorNumber(error);
+            if (string.IsNullOrEmpty(retval))
+                throw new LibsndfileException("ErrorNumber returned an invalid result.");
 
             return retval;
         }

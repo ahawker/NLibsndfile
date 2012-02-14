@@ -166,6 +166,17 @@ namespace NLibsndfile.Native
         }
 
         /// <summary>
+        /// Returns the string representation of the int value backing <see cref="LibsndfileError"/>.
+        /// </summary>
+        /// <param name="error"><see cref="LibsndfileError"/> error code.</param>
+        /// <returns>Description of the given error code.</returns>
+        public string ErrorNumber(int error)
+        {
+            var ptr = LibsndfileApiNative.sf_error_number(error);
+            return Marshal.PtrToStringAnsi(ptr);
+        }
+
+        /// <summary>
         /// Closes the <paramref name="sndfile"/> audio file.
         /// </summary>
         /// <param name="sndfile">Audio file we want to close.</param>
