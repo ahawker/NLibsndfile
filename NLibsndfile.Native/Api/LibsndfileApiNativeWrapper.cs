@@ -36,16 +36,6 @@ namespace NLibsndfile.Native
         }
 
         /// <summary>
-        /// Closes the <paramref name="sndfile"/> audio file.
-        /// </summary>
-        /// <param name="sndfile">Audio file we want to close.</param>
-        /// <returns><see cref="LibsndfileError"/> error code.</returns>
-        public LibsndfileError Close(IntPtr sndfile)
-        {
-            return LibsndfileApiNative.sf_close(sndfile);
-        }
-
-        /// <summary>
         /// Check to see if the parameters in the <paramref name="info"/> struct are
         /// valid and supported by libsndfile.
         /// </summary>
@@ -80,6 +70,101 @@ namespace NLibsndfile.Native
         }
 
         /// <summary>
+        /// Attempts to execute the <paramref name="command"/> against the <paramref name="sndfile"/> audio 
+        /// file while either passing or receiving data through the <paramref name="data"/> buffer.
+        /// </summary>
+        /// <param name="sndfile">Audio file we run this command against.
+        /// Use NULL if you wish to run a static command against the library.</param>
+        /// <param name="command"><see cref="NLibsndfile.Native.LibsndfileCommand"/> to run against the given audio file.</param>
+        /// <param name="data">IntPtr(Void*) buffer for passing or receiving data based on the <paramref name="command"/> specifications.</param>
+        /// <param name="size">Length in bytes of the data being passed through the <paramref name="data"/> buffer.</param>
+        /// <returns>Returns a specific value based on the <paramref name="command"/>.</returns>
+        public int Command(IntPtr sndfile, LibsndfileCommand command, IntPtr data, int size)
+        {
+            return LibsndfileApiNative.sf_command(sndfile, command, data, size);
+        }
+
+        /// <summary>
+        /// Attempts to execute the <paramref name="command"/> against the <paramref name="sndfile"/> audio 
+        /// file while either passing or receiving data through the <paramref name="data"/> buffer.
+        /// </summary>
+        /// <param name="sndfile">Audio file we run this command against.
+        /// Use NULL if you wish to run a static command against the library.</param>
+        /// <param name="command"><see cref="NLibsndfile.Native.LibsndfileCommand"/> to run against the given audio file.</param>
+        /// <param name="data">Ref int(int*) buffer for passing or receiving data based on <paramref name="command"/> specifications.</param>
+        /// <param name="size">Size, in bytes, of a int.</param>
+        /// <returns>Returns a specific value based on the <paramref name="command"/>.</returns>
+        public int Command(IntPtr sndfile, LibsndfileCommand command, ref int data, int size)
+        {
+            return LibsndfileApiNative.sf_command(sndfile, command, ref data, size);
+        }
+
+        /// <summary>
+        /// Attempts to execute the <paramref name="command"/> against the <paramref name="sndfile"/> audio 
+        /// file while either passing or receiving data through the <paramref name="data"/> buffer.
+        /// </summary>
+        /// <param name="sndfile">Audio file we run this command against.
+        /// Use NULL if you wish to run a static command against the library.</param>
+        /// <param name="command"><see cref="NLibsndfile.Native.LibsndfileCommand"/> to run against the given audio file.</param>
+        /// <param name="data">Ref double(double*) buffer for passing or receiving data based on <paramref name="command"/> specifications.</param>
+        /// <param name="size">Size, in bytes, of a double.</param>
+        /// <returns>Returns a specific value based on the <paramref name="command"/>.</returns>
+        public int Command(IntPtr sndfile, LibsndfileCommand command, ref double data, int size)
+        {
+            return LibsndfileApiNative.sf_command(sndfile, command, ref data, size);
+        }
+
+        /// <summary>
+        /// Attempts to execute the <paramref name="command"/> against the <paramref name="sndfile"/> audio 
+        /// file while either passing or receiving data through the <paramref name="data"/> buffer.
+        /// </summary>
+        /// <param name="sndfile">Audio file we run this command against.
+        /// Use NULL if you wish to run a static command against the library.</param>
+        /// <param name="command"><see cref="NLibsndfile.Native.LibsndfileCommand"/> to run against the given audio file.</param>
+        /// <param name="data">Ref long(long*) buffer passing or receiving data based on <paramref name="command"/> specifications.</param>
+        /// <param name="size">Size, in bytes, of a long.</param>
+        /// <returns>Returns a specific value based on the <paramref name="command"/>.</returns>
+        public int Command(IntPtr sndfile, LibsndfileCommand command, ref long data, int size)
+        {
+            return LibsndfileApiNative.sf_command(sndfile, command, ref data, size);
+        }
+
+        /// <summary>
+        /// Attempts to execute the <paramref name="command"/> against the <paramref name="sndfile"/> audio 
+        /// file while either passing or receiving data through the <paramref name="data"/> buffer.
+        /// </summary>
+        /// <param name="sndfile">Audio file we run this command against.
+        /// Use NULL if you wish to run a static command against the library.</param>
+        /// <param name="command"><see cref="NLibsndfile.Native.LibsndfileCommand"/> to execute</param>
+        /// <param name="data">Double[](double*) buffer passing or receiving data based on <paramref name="command"/> specifications.</param>
+        /// <param name="size">Size, in bytes, of (double * buffer length)</param>
+        /// <returns>Returns a specific value based on the <paramref name="command"/>.</returns>
+        public int Command(IntPtr sndfile, LibsndfileCommand command, double[] data, int size)
+        {
+            return LibsndfileApiNative.sf_command(sndfile, command, data, size);
+        }
+
+        /// <summary>
+        /// Returns the current error number for the given <paramref name="sndfile"/> audio file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to check for errors.</param>
+        /// <returns><see cref="LibsndfileError"/>error code.</returns>
+        public LibsndfileError Error(IntPtr sndfile)
+        {
+            return LibsndfileApiNative.sf_error(sndfile);
+        }
+
+        /// <summary>
+        /// Closes the <paramref name="sndfile"/> audio file.
+        /// </summary>
+        /// <param name="sndfile">Audio file we want to close.</param>
+        /// <returns><see cref="LibsndfileError"/> error code.</returns>
+        public LibsndfileError Close(IntPtr sndfile)
+        {
+            return LibsndfileApiNative.sf_close(sndfile);
+        }
+
+        /// <summary>
         /// Forces operating system to write buffers to disk. Only works if <paramref name="sndfile"/> is
         /// opened in <see cref="LibsndfileMode"/> SFM_WRITE or SFM_RDWR.
         /// </summary>
@@ -87,31 +172,6 @@ namespace NLibsndfile.Native
         public void WriteSync(IntPtr sndfile)
         {
             LibsndfileApiNative.sf_write_sync(sndfile);
-        }
-
-        /// <summary>
-        /// Writes the <paramref name="value"/> to the ID3 tag of <paramref name="type"/> 
-        /// in the <paramref name="sndfile"/> audio file.
-        /// </summary>
-        /// <param name="sndfile">Audio file to write tags to.</param>
-        /// <param name="type"><see cref="LibsndfileStringType"/> tag to change.</param>
-        /// <param name="value">New value of <see cref="LibsndfileStringType"/> tag.</param>
-        /// <returns>Returns an <see cref="LibsndfileError"/> error code.</returns>
-        public LibsndfileError SetString(IntPtr sndfile, LibsndfileStringType type, string value)
-        {
-            return LibsndfileApiNative.sf_set_string(sndfile, type, value);
-        }
-
-        /// <summary>
-        /// Reads the <paramref name="type"/> tag from the <paramref name="sndfile"/> audio file.
-        /// </summary>
-        /// <param name="sndfile">Audio file to read tags from.</param>
-        /// <param name="type"><see cref="LibsndfileStringType"/> tag to read.</param>
-        /// <returns>Returns the value of the <paramref name="type"/> tag.</returns>
-        public string GetString(IntPtr sndfile, LibsndfileStringType type)
-        {
-            var ptr = LibsndfileApiNative.sf_get_string(sndfile, type);
-            return Marshal.PtrToStringAnsi(ptr) ?? string.Empty;
         }
 
         /// <summary>
@@ -363,88 +423,28 @@ namespace NLibsndfile.Native
         }
 
         /// <summary>
-        /// Attempts to execute the <paramref name="command"/> against the <paramref name="sndfile"/> audio 
-        /// file while either passing or receiving data through the <paramref name="data"/> buffer.
+        /// Reads the <paramref name="type"/> tag from the <paramref name="sndfile"/> audio file.
         /// </summary>
-        /// <param name="sndfile">Audio file we run this command against.
-        /// Use NULL if you wish to run a static command against the library.</param>
-        /// <param name="command"><see cref="NLibsndfile.Native.LibsndfileCommand"/> to run against the given audio file.</param>
-        /// <param name="data">IntPtr(Void*) buffer for passing or receiving data based on the <paramref name="command"/> specifications.</param>
-        /// <param name="size">Length in bytes of the data being passed through the <paramref name="data"/> buffer.</param>
-        /// <returns>Returns a specific value based on the <paramref name="command"/>.</returns>
-        public int Command(IntPtr sndfile, LibsndfileCommand command, IntPtr data, int size)
+        /// <param name="sndfile">Audio file to read tags from.</param>
+        /// <param name="type"><see cref="LibsndfileStringType"/> tag to read.</param>
+        /// <returns>Returns the value of the <paramref name="type"/> tag.</returns>
+        public string GetString(IntPtr sndfile, LibsndfileStringType type)
         {
-            return LibsndfileApiNative.sf_command(sndfile, command, data, size);
+            var ptr = LibsndfileApiNative.sf_get_string(sndfile, type);
+            return Marshal.PtrToStringAnsi(ptr) ?? string.Empty;
         }
 
         /// <summary>
-        /// Attempts to execute the <paramref name="command"/> against the <paramref name="sndfile"/> audio 
-        /// file while either passing or receiving data through the <paramref name="data"/> buffer.
+        /// Writes the <paramref name="value"/> to the ID3 tag of <paramref name="type"/> 
+        /// in the <paramref name="sndfile"/> audio file.
         /// </summary>
-        /// <param name="sndfile">Audio file we run this command against.
-        /// Use NULL if you wish to run a static command against the library.</param>
-        /// <param name="command"><see cref="NLibsndfile.Native.LibsndfileCommand"/> to run against the given audio file.</param>
-        /// <param name="data">Ref int(int*) buffer for passing or receiving data based on <paramref name="command"/> specifications.</param>
-        /// <param name="size">Size, in bytes, of a int.</param>
-        /// <returns>Returns a specific value based on the <paramref name="command"/>.</returns>
-        public int Command(IntPtr sndfile, LibsndfileCommand command, ref int data, int size)
+        /// <param name="sndfile">Audio file to write tags to.</param>
+        /// <param name="type"><see cref="LibsndfileStringType"/> tag to change.</param>
+        /// <param name="value">New value of <see cref="LibsndfileStringType"/> tag.</param>
+        /// <returns>Returns an <see cref="LibsndfileError"/> error code.</returns>
+        public LibsndfileError SetString(IntPtr sndfile, LibsndfileStringType type, string value)
         {
-            return LibsndfileApiNative.sf_command(sndfile, command, ref data, size);
-        }
-
-        /// <summary>
-        /// Attempts to execute the <paramref name="command"/> against the <paramref name="sndfile"/> audio 
-        /// file while either passing or receiving data through the <paramref name="data"/> buffer.
-        /// </summary>
-        /// <param name="sndfile">Audio file we run this command against.
-        /// Use NULL if you wish to run a static command against the library.</param>
-        /// <param name="command"><see cref="NLibsndfile.Native.LibsndfileCommand"/> to run against the given audio file.</param>
-        /// <param name="data">Ref double(double*) buffer for passing or receiving data based on <paramref name="command"/> specifications.</param>
-        /// <param name="size">Size, in bytes, of a double.</param>
-        /// <returns>Returns a specific value based on the <paramref name="command"/>.</returns>
-        public int Command(IntPtr sndfile, LibsndfileCommand command, ref double data, int size)
-        {
-            return LibsndfileApiNative.sf_command(sndfile, command, ref data, size);
-        }
-
-        /// <summary>
-        /// Attempts to execute the <paramref name="command"/> against the <paramref name="sndfile"/> audio 
-        /// file while either passing or receiving data through the <paramref name="data"/> buffer.
-        /// </summary>
-        /// <param name="sndfile">Audio file we run this command against.
-        /// Use NULL if you wish to run a static command against the library.</param>
-        /// <param name="command"><see cref="NLibsndfile.Native.LibsndfileCommand"/> to run against the given audio file.</param>
-        /// <param name="data">Ref long(long*) buffer passing or receiving data based on <paramref name="command"/> specifications.</param>
-        /// <param name="size">Size, in bytes, of a long.</param>
-        /// <returns>Returns a specific value based on the <paramref name="command"/>.</returns>
-        public int Command(IntPtr sndfile, LibsndfileCommand command, ref long data, int size)
-        {
-            return LibsndfileApiNative.sf_command(sndfile, command, ref data, size);
-        }
-
-        /// <summary>
-        /// Attempts to execute the <paramref name="command"/> against the <paramref name="sndfile"/> audio 
-        /// file while either passing or receiving data through the <paramref name="data"/> buffer.
-        /// </summary>
-        /// <param name="sndfile">Audio file we run this command against.
-        /// Use NULL if you wish to run a static command against the library.</param>
-        /// <param name="command"><see cref="NLibsndfile.Native.LibsndfileCommand"/> to execute</param>
-        /// <param name="data">Double[](double*) buffer passing or receiving data based on <paramref name="command"/> specifications.</param>
-        /// <param name="size">Size, in bytes, of (double * buffer length)</param>
-        /// <returns>Returns a specific value based on the <paramref name="command"/>.</returns>
-        public int Command(IntPtr sndfile, LibsndfileCommand command, double[] data, int size)
-        {
-            return LibsndfileApiNative.sf_command(sndfile, command, data, size);
-        }
-
-        /// <summary>
-        /// Returns the current error number for the given <paramref name="sndfile"/> audio file.
-        /// </summary>
-        /// <param name="sndfile">Audio file to check for errors.</param>
-        /// <returns><see cref="LibsndfileError"/>error code.</returns>
-        public LibsndfileError Error(IntPtr sndfile)
-        {
-            return LibsndfileApiNative.sf_error(sndfile);
+            return LibsndfileApiNative.sf_set_string(sndfile, type, value);
         }
     }
 }

@@ -156,26 +156,6 @@ namespace NLibsndfile.Native
         internal static extern void sf_write_sync(IntPtr sndfile);
 
         /// <summary>
-        /// Writes the <paramref name="value"/> to the ID3 tag of <paramref name="type"/> 
-        /// in the <paramref name="sndfile"/> audio file.
-        /// </summary>
-        /// <param name="sndfile">Audio file to write tags to.</param>
-        /// <param name="type"><see cref="LibsndfileStringType"/> tag to change.</param>
-        /// <param name="value">New value of <see cref="LibsndfileStringType"/> tag.</param>
-        /// <returns>Returns an <see cref="LibsndfileError"/> error code.</returns>
-        [DllImport(DllImports.Libsndfile)]
-        internal static extern LibsndfileError sf_set_string(IntPtr sndfile, LibsndfileStringType type, string value);
-
-        /// <summary>
-        /// Reads the <paramref name="type"/> tag from the <paramref name="sndfile"/> audio file.
-        /// </summary>
-        /// <param name="sndfile">Audio file to read tags from.</param>
-        /// <param name="type"><see cref="LibsndfileStringType"/> tag to read.</param>
-        /// <returns>Returns the value of the <paramref name="type"/> tag.</returns>
-        [DllImport(DllImports.Libsndfile)]
-        internal static extern IntPtr sf_get_string(IntPtr sndfile, LibsndfileStringType type);
-
-        /// <summary>
         /// ReadItems <paramref name="items"/> from the <paramref name="sndfile"/> audio file into the audio
         /// <paramref name="buffer"/>. Items must be a product of the # of channels for
         /// the <paramref name="sndfile"/>. 
@@ -386,5 +366,25 @@ namespace NLibsndfile.Native
         /// you've reached EOF.</returns>
         [DllImport(DllImports.Libsndfile)]
         internal static extern long sf_write_raw(IntPtr sndfile, byte[] buffer, long bytes);
+
+        /// <summary>
+        /// Reads the <paramref name="type"/> tag from the <paramref name="sndfile"/> audio file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to read tags from.</param>
+        /// <param name="type"><see cref="LibsndfileStringType"/> tag to read.</param>
+        /// <returns>Returns the value of the <paramref name="type"/> tag.</returns>
+        [DllImport(DllImports.Libsndfile)]
+        internal static extern IntPtr sf_get_string(IntPtr sndfile, LibsndfileStringType type);
+
+        /// <summary>
+        /// Writes the <paramref name="value"/> to the ID3 tag of <paramref name="type"/> 
+        /// in the <paramref name="sndfile"/> audio file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to write tags to.</param>
+        /// <param name="type"><see cref="LibsndfileStringType"/> tag to change.</param>
+        /// <param name="value">New value of <see cref="LibsndfileStringType"/> tag.</param>
+        /// <returns>Returns an <see cref="LibsndfileError"/> error code.</returns>
+        [DllImport(DllImports.Libsndfile)]
+        internal static extern LibsndfileError sf_set_string(IntPtr sndfile, LibsndfileStringType type, string value);
     }
 }
