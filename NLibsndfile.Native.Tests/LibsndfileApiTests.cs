@@ -146,6 +146,35 @@ namespace NLibsndfile.Native.Tests
         }
 
         [Test]
+        public void GetString_ShouldReturnNullStringIfTagNotAvailable()
+        {
+            const string Tag = null;
+
+            var mock = new Mock<ILibsndfileApi>();
+            mock.Setup(x => x.GetString(It.IsAny<IntPtr>(), It.IsAny<LibsndfileStringType>())).Returns(Tag);
+
+            var api = new LibsndfileApi(mock.Object);
+            var retval = api.GetString(new IntPtr(1), It.IsAny<LibsndfileStringType>());
+
+            Assert.AreEqual(Tag, retval);
+        }
+
+        [Test]
+        public void GetString_ShouldReturnEmptyStringIfTagUnset()
+        {
+            const string Tag = "";
+
+            var mock = new Mock<ILibsndfileApi>();
+            mock.Setup(x => x.GetString(It.IsAny<IntPtr>(), It.IsAny<LibsndfileStringType>())).Returns(Tag);
+
+            var api = new LibsndfileApi(mock.Object);
+            var retval = api.GetString(new IntPtr(1), It.IsAny<LibsndfileStringType>());
+
+            Assert.AreEqual(Tag, string.Empty);
+
+        }
+
+        [Test]
         public void GetString_ShouldReturnValidString()
         {
             const string Tag = "AlbumTag";
@@ -154,7 +183,7 @@ namespace NLibsndfile.Native.Tests
             mock.Setup(x => x.GetString(It.IsAny<IntPtr>(), It.IsAny<LibsndfileStringType>())).Returns(Tag);
 
             var api = new LibsndfileApi(mock.Object);
-            var retval = api.GetString(new IntPtr(1), LibsndfileStringType.Album);
+            var retval = api.GetString(new IntPtr(1), It.IsAny<LibsndfileStringType>());
 
             Assert.AreEqual(Tag, retval);
         }
