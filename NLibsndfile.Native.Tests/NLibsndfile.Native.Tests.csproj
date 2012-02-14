@@ -46,7 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LibsndfileApiCommandTests.cs" />
+    <Compile Include="LibsndfileApiErrorTests.cs" />
+    <Compile Include="LibsndfileApiOpenTests.cs" />
+    <Compile Include="LibsndfileApiReadFramesTests.cs" />
+    <Compile Include="LibsndfileApiReadItemsTests.cs" />
+    <Compile Include="LibsndfileApiReadRawTests.cs" />
     <Compile Include="LibsndfileApiTests.cs" />
+    <Compile Include="LibsndfileApiWriteFramesTests.cs" />
+    <Compile Include="LibsndfileApiWriteItemsTests.cs" />
+    <Compile Include="LibsndfileApiWriteRawTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
