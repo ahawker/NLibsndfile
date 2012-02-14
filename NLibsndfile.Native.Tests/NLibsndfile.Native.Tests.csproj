@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LibsndfileApiCommandTests.cs" />
     <Compile Include="LibsndfileApiOpenTests.cs" />
     <Compile Include="LibsndfileApiReadFramesTests.cs" />
     <Compile Include="LibsndfileApiReadItemsTests.cs" />
