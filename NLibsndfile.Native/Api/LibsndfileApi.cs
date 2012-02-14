@@ -709,5 +709,18 @@ namespace NLibsndfile.Native
 
             return retval;
         }
+
+        /// <summary>
+        /// Returns the current error number for the given <paramref name="sndfile"/> audio file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to check for errors.</param>
+        /// <returns><see cref="LibsndfileError"/>error code.</returns>
+        public LibsndfileError Error(IntPtr sndfile)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.Error(sndfile);
+        }
     }
 }

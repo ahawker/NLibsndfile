@@ -132,6 +132,14 @@ namespace NLibsndfile.Native
         internal static extern int sf_command(IntPtr sndfile, LibsndfileCommand command, double[] data, int size);
 
         /// <summary>
+        /// Returns the current error number for the given <paramref name="sndfile"/> audio file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to check for errors.</param>
+        /// <returns><see cref="LibsndfileError"/>error code.</returns>
+        [DllImport(DllImports.Libsndfile)]
+        internal static extern LibsndfileError sf_error(IntPtr sndfile);
+
+        /// <summary>
         /// Closes the <paramref name="sndfile"/> audio file.
         /// </summary>
         /// <param name="sndfile">Audio file we want to close.</param>

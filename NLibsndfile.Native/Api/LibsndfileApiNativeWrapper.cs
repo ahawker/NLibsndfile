@@ -436,5 +436,15 @@ namespace NLibsndfile.Native
         {
             return LibsndfileApiNative.sf_command(sndfile, command, data, size);
         }
+
+        /// <summary>
+        /// Returns the current error number for the given <paramref name="sndfile"/> audio file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to check for errors.</param>
+        /// <returns><see cref="LibsndfileError"/>error code.</returns>
+        public LibsndfileError Error(IntPtr sndfile)
+        {
+            return LibsndfileApiNative.sf_error(sndfile);
+        }
     }
 }

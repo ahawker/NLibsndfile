@@ -338,5 +338,12 @@ namespace NLibsndfile.Native
         /// <param name="size">Size, in bytes, of (double * buffer length)</param>
         /// <returns>Returns a specific value based on the <paramref name="command"/>.</returns>
         int Command(IntPtr sndfile, LibsndfileCommand command, double[] data, int size);
+
+        /// <summary>
+        /// Returns the current error number for the given <paramref name="sndfile"/> audio file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to check for errors.</param>
+        /// <returns><see cref="LibsndfileError"/>error code.</returns>
+        LibsndfileError Error(IntPtr sndfile);
     }
 }
