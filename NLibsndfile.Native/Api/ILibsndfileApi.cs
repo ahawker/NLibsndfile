@@ -2,8 +2,16 @@
 
 namespace NLibsndfile.Native
 {
+    /// <summary>
+    /// Interface to public Libsndfile API.
+    /// </summary>
     public interface ILibsndfileApi
     {
+        /// <summary>
+        /// Interface to Libsndfile command methods.
+        /// </summary>
+        ILibsndfileCommandApi Commands { get; }
+
         /// <summary>
         /// Attempts to open an audio file at the <paramref name="path"/> location 
         /// with <paramref name="mode"/> based file access.

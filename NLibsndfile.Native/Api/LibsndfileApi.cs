@@ -10,6 +10,11 @@ namespace NLibsndfile.Native
         private readonly ILibsndfileApi m_Api;
 
         /// <summary>
+        /// Interface to Libsndfile command methods.
+        /// </summary>
+        public ILibsndfileCommandApi Commands { get; private set; }
+
+        /// <summary>
         /// Initializes a new instance of <c>LibsndfileApi</c> with the default native implementation.
         /// </summary>
         public LibsndfileApi()
@@ -30,6 +35,7 @@ namespace NLibsndfile.Native
                 throw new ArgumentNullException("api");
 
             m_Api = api;
+            Commands = new LibsndfileCommandApi(api.Commands);
         }
 
         /// <summary>
