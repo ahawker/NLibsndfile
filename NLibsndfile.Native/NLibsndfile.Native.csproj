@@ -48,6 +48,7 @@
     <Compile Include="Command\ILibsndfileCommandApi.cs" />
     <Compile Include="Command\LibsndfileCommandApi.cs" />
     <Compile Include="Command\LibsndfileCommandApiNativeWrapper.cs" />
+    <Compile Include="Command\LibsndfileCommandMarshaller.cs" />
     <Compile Include="Command\LibsndfileCommandUtilities.cs" />
     <Compile Include="LibsndfileException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

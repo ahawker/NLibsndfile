@@ -3,21 +3,31 @@
 namespace NLibsndfile.Native
 {
     /// <summary>
-    /// Provides access to all Libsndfile commands.
+    /// Returns the version of the Libsndfile library.
     /// </summary>
+    /// <returns></returns>
     public class LibsndfileCommandApi : ILibsndfileCommandApi
     {
-        private readonly ILibsndfileCommandApi m_CommandApi;
+        private readonly ILibsndfileCommandApi m_Api;
 
         /// <summary>
-        /// Initializes a new instance of LibsndfileCommandApi with the <paramref name="commandApi"/> command implementation.
+        /// Initializes a new instance of LibsndfileCommandApi with the <paramref name="api"/> command implementation.
         /// </summary>
-        internal LibsndfileCommandApi(ILibsndfileCommandApi commandApi)
+        internal LibsndfileCommandApi(ILibsndfileCommandApi api)
         {
-            if (commandApi == null)
-                throw new ArgumentNullException("commandApi");
+            if (api == null)
+                throw new ArgumentNullException("api");
 
-            m_CommandApi = commandApi;
+            m_Api = api;
+        }
+
+        /// <summary>
+        /// Returns the version of the Libsndfile library.
+        /// </summary>
+        /// <returns>Libsndfile library version.</returns>
+        public string GetLibVersion()
+        {
+            return m_Api.GetLibVersion();
         }
     }
 }

@@ -14,29 +14,6 @@ namespace NLibsndfile.Native
         public ILibsndfileCommandApi Commands { get; private set; }
 
         /// <summary>
-        /// Initialize a new instance of LibsndfileApiNativeWrapper with the default command implementation.
-        /// </summary>
-        public LibsndfileApiNativeWrapper()
-            : this(new LibsndfileCommandApiNativeWrapper())
-        {
-        }
-
-        /// <summary>
-        /// Initialize a new instance of LibsndfileApiNativeWrapper with the <paramref name="commandApi"/> command implementation.
-        /// </summary>
-        /// <param name="commandApi">LibsndfileCommandApi implementation to use.</param>
-        /// <remarks>
-        /// This constructor should only be used for testing when simulating the actual libsndfile library.
-        /// </remarks>
-        internal LibsndfileApiNativeWrapper(ILibsndfileCommandApi commandApi)
-        {
-            if (commandApi == null)
-                throw new ArgumentNullException("commandApi");
-
-            Commands = commandApi;
-        }
-
-        /// <summary>
         /// Attempts to open an audio file at the <paramref name="path"/> location 
         /// with <paramref name="mode"/> based file access.
         /// </summary>

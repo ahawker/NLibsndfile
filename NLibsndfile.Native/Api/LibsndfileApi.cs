@@ -7,7 +7,7 @@ namespace NLibsndfile.Native
     /// </summary>
     public class LibsndfileApi : ILibsndfileApi
     {
-        private readonly ILibsndfileApi m_Api;
+        private ILibsndfileApi m_Api;
 
         /// <summary>
         /// Interface to Libsndfile command methods.
@@ -15,10 +15,26 @@ namespace NLibsndfile.Native
         public ILibsndfileCommandApi Commands { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of <c>LibsndfileApi</c> with the default native implementation.
+        /// Initializes a new instance of <see cref="LibsndfileApi"/> with the default native implementations.
         /// </summary>
         public LibsndfileApi()
-            : this(new LibsndfileApiNativeWrapper())
+        {
+            var api = new LibsndfileApiNativeWrapper();
+            var commandApi = new LibsndfileCommandApiNativeWrapper(api);
+
+            Initialize(api, commandApi);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="LibsndfileApi"/> with the given <paramref name="api"/> implementation
+        /// and default native <see cref="LibsndfileCommandApi"/> implementation.
+        /// </summary>
+        /// <param name="api">LibsndfileApi implementation to use.</param>
+        /// <remarks>
+        /// This constructor should only be used for testing when simulating the actual libsndfile library.
+        /// </remarks>
+        internal LibsndfileApi(ILibsndfileApi api)
+            : this(api, new LibsndfileCommandApiNativeWrapper(api))
         {
         }
 
@@ -26,16 +42,24 @@ namespace NLibsndfile.Native
         /// Initializes a new instance of <c>LibsndfileApi</c> with the <paramref name="api"/> implementation.
         /// </summary>
         /// <param name="api">LibsndfileApi implementation to use.</param>
+        /// <param name="commandApi">LibsndfileCommandApi implementation to use.</param>
         /// <remarks>
         /// This constructor should only be used for testing when simulating the actual libsndfile library.
         /// </remarks>
-        internal LibsndfileApi(ILibsndfileApi api)
+        internal LibsndfileApi(ILibsndfileApi api, ILibsndfileCommandApi commandApi)
+        {
+            Initialize(api, commandApi);
+        }
+
+        private void Initialize(ILibsndfileApi api, ILibsndfileCommandApi commandApi)
         {
             if (api == null)
                 throw new ArgumentNullException("api");
+            if (commandApi == null)
+                throw new ArgumentNullException("commandApi");
 
             m_Api = api;
-            Commands = new LibsndfileCommandApi(api.Commands);
+            Commands = commandApi;
         }
 
         /// <summary>
