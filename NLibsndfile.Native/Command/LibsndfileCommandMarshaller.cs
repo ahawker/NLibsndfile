@@ -4,16 +4,16 @@ using System.Runtime.InteropServices;
 namespace NLibsndfile.Native
 {
     /// <summary>
-    /// Static utilities class to provides easy to use helper functions for marshalling command methods.
+    /// Class to provides easy to use helper functions for marshalling command methods.
     /// </summary>
-    internal static class LibsndfileCommandMarshaller
+    internal class LibsndfileCommandMarshaller : ILibsndfileCommandMarshaller
     {
         /// <summary>
         /// Create a new <see cref="UnmanagedMemoryHandle"/> allocated for <paramref name="size"/> bytes.
         /// </summary>
         /// <param name="size">Number of bytes of unmanaged memory requested.</param>
         /// <returns><see cref="UnmanagedMemoryHandle"/> with a chuck of memory allocated.</returns>
-        internal static UnmanagedMemoryHandle Allocate(int size)
+        public UnmanagedMemoryHandle Allocate(int size)
         {
             return new UnmanagedMemoryHandle(size);
         }
@@ -22,7 +22,7 @@ namespace NLibsndfile.Native
         /// Explicitly disposes of the <paramref name="memory"/> object and deallocates its unmanaged memory.
         /// </summary>
         /// <param name="memory">UnmanagedMemoryHandle to deallocate.</param>
-        internal static void Deallocate(UnmanagedMemoryHandle memory)
+        public void Deallocate(UnmanagedMemoryHandle memory)
         {
             if (memory == null)
                 return;
@@ -35,7 +35,7 @@ namespace NLibsndfile.Native
         /// </summary>
         /// <param name="memory">Refernce to UnmanagedMemoryHandle.</param>
         /// <returns>ANSI string conversion from unmanaged memory.</returns>
-        internal static string MemoryHandleToString(UnmanagedMemoryHandle memory)
+        public string MemoryHandleToString(UnmanagedMemoryHandle memory)
         {
             return Marshal.PtrToStringAnsi(memory.Handle);
         }
