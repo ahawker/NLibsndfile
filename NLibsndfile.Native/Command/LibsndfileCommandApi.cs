@@ -3,7 +3,7 @@
 namespace NLibsndfile.Native
 {
     /// <summary>
-    /// Returns the version of the Libsndfile library.
+    /// Provides access to all libsndfile commands.
     /// </summary>
     /// <returns></returns>
     public class LibsndfileCommandApi : ILibsndfileCommandApi

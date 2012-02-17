@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace NLibsndfile.Native
 {
     /// <summary>
-    /// Class to provides easy to use helper functions for marshalling command methods.
+    /// Class to provide easy to use helper functions for marshalling command methods.
     /// </summary>
     internal class LibsndfileCommandMarshaller : ILibsndfileCommandMarshaller
     {
@@ -12,7 +12,7 @@ namespace NLibsndfile.Native
         /// Create a new <see cref="UnmanagedMemoryHandle"/> allocated for <paramref name="size"/> bytes.
         /// </summary>
         /// <param name="size">Number of bytes of unmanaged memory requested.</param>
-        /// <returns><see cref="UnmanagedMemoryHandle"/> with a chuck of memory allocated.</returns>
+        /// <returns><see cref="UnmanagedMemoryHandle"/> with a chunk of memory allocated.</returns>
         public UnmanagedMemoryHandle Allocate(int size)
         {
             return new UnmanagedMemoryHandle(size);
@@ -42,7 +42,7 @@ namespace NLibsndfile.Native
     }
 
     /// <summary>
-    /// Internal container class that holds a pointer to an allocated chuck of unmanaged memory.
+    /// Internal container class that holds a pointer to an allocated chunk of unmanaged memory.
     /// </summary>
     /// <remarks>
     /// Use of this class enables allocation/deallocation of unmanaged memory within the scope of a 'using' statement.
