@@ -27,7 +27,11 @@ namespace NLibsndfile.Native
         /// <returns>Libsndfile library version.</returns>
         public string GetLibVersion()
         {
-            return m_Api.GetLibVersion();
+            var version = m_Api.GetLibVersion();
+            if (string.IsNullOrEmpty(version))
+                throw new LibsndfileException("Unable to retrieve Libsndfile library version.");
+
+            return version;
         }
     }
 }
