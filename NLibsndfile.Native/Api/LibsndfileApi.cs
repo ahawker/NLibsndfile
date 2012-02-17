@@ -51,6 +51,11 @@ namespace NLibsndfile.Native
             Initialize(api, commandApi);
         }
 
+        /// <summary>
+        /// Initialize local LibsndfileApi and LibsndfileCommandApi instances. 
+        /// </summary>
+        /// <param name="api"></param>
+        /// <param name="commandApi"></param>
         private void Initialize(ILibsndfileApi api, ILibsndfileCommandApi commandApi)
         {
             if (api == null)
@@ -59,7 +64,7 @@ namespace NLibsndfile.Native
                 throw new ArgumentNullException("commandApi");
 
             m_Api = api;
-            Commands = commandApi;
+            Commands = new LibsndfileCommandApi(commandApi);
         }
 
         /// <summary>
