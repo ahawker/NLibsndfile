@@ -52,15 +52,34 @@ namespace NLibsndfile.Native
         private bool m_IsDisposed;
 
         internal IntPtr Handle { get; private set; }
-        internal int Size { get; private set; }
+
+        /// <summary>
+        /// Initializes a new instances of <see cref="UnmanagedMemoryHandle"/> on top of an empty pointer.
+        /// </summary>
+        /// <remarks>
+        /// The default parameterless c'tor is here so we can mock the object.
+        /// Defining an interface wouldn't work because we can have implicit operators on the interface.
+        /// </remarks>
+        internal UnmanagedMemoryHandle()
+            : this(IntPtr.Zero)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="UnmanagedMemoryHandle"/> on top of the given pointer.
+        /// </summary>
+        /// <param name="handle">IntPtr to unmanaged memory location.</param>
+        internal UnmanagedMemoryHandle(IntPtr handle)
+        {
+            Handle = handle;
+        }
 
         /// <summary>
         /// Initializes a new instance of <see cref="UnmanagedMemoryHandle"/>.
         /// </summary>
-        /// <param name="size"></param>
+        /// <param name="size">Size of unmanaged memory in bytes to allocate.</param>
         internal UnmanagedMemoryHandle(int size)
         {
-            Size = size;
             Handle = Marshal.AllocHGlobal(size);
         }
 
@@ -72,6 +91,16 @@ namespace NLibsndfile.Native
         public static implicit operator IntPtr(UnmanagedMemoryHandle memory)
         {
             return memory.Handle;
+        }
+
+        /// <summary>
+        /// Implicitly convert an IntPtr to a <see cref="UnmanagedMemoryHandle"/>.
+        /// </summary>
+        /// <param name="handle">Reference to an IntPtr object.</param>
+        /// <returns><see cref="UnmanagedMemoryHandle"/> which wraps the given IntPtr handle.</returns>
+        public static implicit operator UnmanagedMemoryHandle(IntPtr handle)
+        {
+            return new UnmanagedMemoryHandle(handle);
         }
 
         /// <summary>
