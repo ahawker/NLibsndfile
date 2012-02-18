@@ -105,7 +105,7 @@ namespace NLibsndfile.Native
             var sndfile = m_Api.OpenFileDescriptor(handle, mode, ref info, closeHandle);
 
             if (sndfile == IntPtr.Zero)
-                throw new LibsndfileException(string.Format("Unable to open file descriptor {0} in mode {1}", handle, mode));
+                throw new LibsndfileException(string.Format("Unable to open file descriptor {0} in mode {1}.", handle, mode));
 
             return sndfile;
         }
