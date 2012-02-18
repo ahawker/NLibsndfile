@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 namespace NLibsndfile.Native
 {
@@ -78,13 +77,30 @@ namespace NLibsndfile.Native
         /// <returns>Maximum signal value.</returns>
         public double CalcSignalMax(IntPtr sndfile)
         {
-            using (var memory = m_Marshaller.AllocateDouble())
+            using (var memory = m_Marshaller.Allocate<double>())
             {
                 var retval = m_Api.Command(sndfile, LibsndfileCommand.CalcSignalMax, memory, memory.Size);
                 if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.CalcSignalMax, retval))
                     throw new LibsndfileException("Unable to calculate signal max for the given file.");
 
-                return m_Marshaller.MemoryHandleToDouble(memory);
+                return m_Marshaller.MemoryHandleTo<double>(memory);
+            }
+        }
+
+        /// <summary>
+        /// Scan <paramref name="sndfile"/> file and return normalized maximum calculated signal value.
+        /// </summary>
+        /// <param name="sndfile">Audio file we want to scan.</param>
+        /// <returns>Normalized maximum signal value.</returns>
+        public double CalcNormSignalMax(IntPtr sndfile)
+        {
+            using (var memory = m_Marshaller.Allocate<double>())
+            {
+                var retval = m_Api.Command(sndfile, LibsndfileCommand.CalcNormSignalMax, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.CalcNormSignalMax, retval))
+                    throw new LibsndfileException("Unable to calculate normalized signal max for the given file.");
+
+                return m_Marshaller.MemoryHandleTo<double>(memory);
             }
         }
     }

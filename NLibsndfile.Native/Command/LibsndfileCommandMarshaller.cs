@@ -19,36 +19,19 @@ namespace NLibsndfile.Native
         }
 
         /// <summary>
-        /// Create a new <see cref="UnmanagedMemoryHandle"/> allocated for the size of a single Int32.
+        /// Create a new <see cref="UnmanagedMemoryHandle"/> allocated for the size of a single <typeparamref name="T"/> structure.
         /// </summary>
         /// <returns><see cref="UnmanagedMemoryHandle"/> with a chunk of memory allocated.</returns>
-        public UnmanagedMemoryHandle AllocateInt()
+        public UnmanagedMemoryHandle Allocate<T>()
+            where T : struct
         {
-            return new UnmanagedMemoryHandle(Marshal.SizeOf(typeof(int)));
-        }
-
-        /// <summary>
-        /// Create a new <see cref="UnmanagedMemoryHandle"/> allocated for the size of a single Double.
-        /// </summary>
-        /// <returns><see cref="UnmanagedMemoryHandle"/> with a chunk of memory allocated.</returns>
-        public UnmanagedMemoryHandle AllocateDouble()
-        {
-            return new UnmanagedMemoryHandle(Marshal.SizeOf(typeof(double)));
-        }
-
-        /// <summary>
-        /// Create a new <see cref="UnmanagedMemoryHandle"/> allocated for the size of a single Int64.
-        /// </summary>
-        /// <returns><see cref="UnmanagedMemoryHandle"/> with a chunk of memory allocated.</returns>
-        public UnmanagedMemoryHandle AllocateLong()
-        {
-            return new UnmanagedMemoryHandle(Marshal.SizeOf(typeof(long)));
+            return new UnmanagedMemoryHandle(Marshal.SizeOf(typeof(T)));
         }
 
         /// <summary>
         /// Explicitly disposes of the <paramref name="memory"/> object and deallocates its unmanaged memory.
         /// </summary>
-        /// <param name="memory">UnmanagedMemoryHandle to deallocate.</param>
+        /// <param name="memory"><see cref="UnmanagedMemoryHandle"/> to deallocate.</param>
         public void Deallocate(UnmanagedMemoryHandle memory)
         {
             if (memory == null)
@@ -60,7 +43,7 @@ namespace NLibsndfile.Native
         /// <summary>
         /// Marshal a <see cref="UnmanagedMemoryHandle"/> object to an ANSI string.
         /// </summary>
-        /// <param name="memory">Refernce to UnmanagedMemoryHandle.</param>
+        /// <param name="memory">Reference to <see cref="UnmanagedMemoryHandle"/>.</param>
         /// <returns>ANSI string conversion from unmanaged memory.</returns>
         public string MemoryHandleToString(UnmanagedMemoryHandle memory)
         {
@@ -68,33 +51,15 @@ namespace NLibsndfile.Native
         }
 
         /// <summary>
-        /// Marshal a <see cref="UnmanagedMemoryHandle"/> object to an Int32.
+        /// Marshal an <see cref="UnmanagedMemoryHandle"/> object to a <typeparamref name="T"/> structure.
         /// </summary>
-        /// <param name="memory">Reference to UnmanagedMemoryHandle.</param>
-        /// <returns>Int32 conversion from unmanaged memory.</returns>
-        public int MemoryHandleToInt(UnmanagedMemoryHandle memory)
+        /// <typeparam name="T">Type of structure to marshal from unmanaged memory.</typeparam>
+        /// <param name="memory">Reference to <see cref="UnmanagedMemoryHandle"/>.</param>
+        /// <returns>Marshalled structure stored in managed memory.</returns>
+        public T MemoryHandleTo<T>(UnmanagedMemoryHandle memory)
+            where T : struct
         {
-            return (int)Marshal.PtrToStructure(memory, typeof(int));
-        }
-
-        /// <summary>
-        /// Marshal a <see cref="UnmanagedMemoryHandle"/> object to an Double.
-        /// </summary>
-        /// <param name="memory">Reference to UnmanagedMemoryHandle.</param>
-        /// <returns>Double conversion from unmanaged memory.</returns>
-        public double MemoryHandleToDouble(UnmanagedMemoryHandle memory)
-        {
-            return (double)Marshal.PtrToStructure(memory, typeof(double));
-        }
-
-        /// <summary>
-        /// Marshal a <see cref="UnmanagedMemoryHandle"/> object to an Int64.
-        /// </summary>
-        /// <param name="memory">Reference to UnmanagedMemoryHandle.</param>
-        /// <returns>Int64 conversion from unmanaged memory.</returns>
-        public long MemoryHandleToLong(UnmanagedMemoryHandle memory)
-        {
-            return (long)Marshal.PtrToStructure(memory, typeof(long));
+            return (T)Marshal.PtrToStructure(memory, typeof(T));
         }
     }
 
