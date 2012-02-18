@@ -33,5 +33,22 @@ namespace NLibsndfile.Native
 
             return version;
         }
+
+        /// <summary>
+        /// Returns the internal Libsndfile log generated when loading a file.
+        /// </summary>
+        /// <param name="sndfile">Audio file we want the log for.</param>
+        /// <returns>Libsndfile log info.</returns>
+        public string GetLogInfo(IntPtr sndfile)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            var log = m_Api.GetLogInfo(sndfile);
+            if (string.IsNullOrEmpty(log))
+                throw new LibsndfileException("Unable to retrieve Libsndfile log info for the given file.");
+
+            return log;
+        }
     }
 }

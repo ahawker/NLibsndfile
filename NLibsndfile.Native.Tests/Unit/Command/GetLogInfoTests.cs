@@ -6,51 +6,47 @@ namespace NLibsndfile.Native.Tests
 {
     [TestFixture]
     [Category("NLibsndfileApi.Native.UnitTests.CommandApi")]
-    public class GetLibVersionTests
+    public class GetLogInfoTests
     {
         [Test]
-        public void GetLibVersion_ShouldReturnValidString()
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetLogInfo_ShouldThrowExceptionOnZeroHandle()
         {
-            const string Version = "1.0";
-
             var mock = new Mock<ILibsndfileCommandApi>();
-            mock.Setup(x => x.GetLibVersion()).Returns(Version);
 
             var api = new LibsndfileCommandApi(mock.Object);
-            var retval = api.GetLibVersion();
-
-            Assert.AreEqual(Version, retval);
+            api.GetLogInfo(IntPtr.Zero);
         }
 
         [Test]
         [ExpectedException(typeof(LibsndfileException))]
-        public void GetLibVersion_ShouldThrowExceptionOnNullStringReturned()
+        public void GetLogInfo_ShouldThrowExceptionOnNullStringReturned()
         {
-            const string Version = null;
+            const string Log = null;
 
             var mock = new Mock<ILibsndfileCommandApi>();
-            mock.Setup(x => x.GetLibVersion()).Returns(Version);
+            mock.Setup(x => x.GetLogInfo(It.IsAny<IntPtr>())).Returns(Log);
 
             var api = new LibsndfileCommandApi(mock.Object);
-            api.GetLibVersion();
+            api.GetLogInfo(new IntPtr(1));
         }
 
         [Test]
         [ExpectedException(typeof(LibsndfileException))]
-        public void GetLibVersion_ShouldThrowExceptionOnEmptyStringReturned()
+        public void GetLogInfo_ShouldThrowExceptionOnEmptyStringReturned()
         {
-            const string Version = "";
+            const string Log = "";
 
             var mock = new Mock<ILibsndfileCommandApi>();
-            mock.Setup(x => x.GetLibVersion()).Returns(Version);
+            mock.Setup(x => x.GetLogInfo(It.IsAny<IntPtr>())).Returns(Log);
 
             var api = new LibsndfileCommandApi(mock.Object);
-            api.GetLibVersion();
+            api.GetLogInfo(new IntPtr(1));
         }
 
         [Test]
         [ExpectedException(typeof(LibsndfileException))]
-        public void GetLibVersion_ShouldThrowExceptionOnNegativeResult()
+        public void GetLogInfo_ShouldThrowExceptionOnNegativeResult()
         {
             var marshallerMock = new Mock<ILibsndfileCommandMarshaller>();
             marshallerMock.Setup(x => x.Allocate(It.IsAny<int>())).Returns(It.IsAny<IntPtr>());
@@ -59,12 +55,12 @@ namespace NLibsndfile.Native.Tests
             mock.Setup(x => x.Command(It.IsAny<IntPtr>(), It.IsAny<LibsndfileCommand>(), It.IsAny<IntPtr>(), It.IsAny<int>())).Returns(-1);
 
             var api = new LibsndfileCommandApiNativeWrapper(mock.Object, marshallerMock.Object);
-            api.GetLibVersion();
+            api.GetLogInfo(new IntPtr(1));
         }
 
         [Test]
         [ExpectedException(typeof(LibsndfileException))]
-        public void GetLibVersion_ShouldThrowExceptionOnZeroResult()
+        public void GetLogInfo_ShouldThrowExceptionOnZeroResult()
         {
             var marshallerMock = new Mock<ILibsndfileCommandMarshaller>();
             marshallerMock.Setup(x => x.Allocate(It.IsAny<int>())).Returns(It.IsAny<IntPtr>());
@@ -73,19 +69,19 @@ namespace NLibsndfile.Native.Tests
             mock.Setup(x => x.Command(It.IsAny<IntPtr>(), It.IsAny<LibsndfileCommand>(), It.IsAny<IntPtr>(), It.IsAny<int>())).Returns(0);
 
             var api = new LibsndfileCommandApiNativeWrapper(mock.Object, marshallerMock.Object);
-            api.GetLibVersion();
+            api.GetLogInfo(new IntPtr(1));
         }
 
         [Test]
-        public void GetLibVersion_ShouldPassOnValidResult()
+        public void GetLogInfo_ShouldPassOnValidResult()
         {
-            const string Version = "1.0";
+            const string Log = "Hello World. I am log.";
 
             var memoryMock = new Mock<UnmanagedMemoryHandle>();
 
             var marshallerMock = new Mock<ILibsndfileCommandMarshaller>();
             marshallerMock.Setup(x => x.Allocate(It.IsAny<int>())).Returns(memoryMock.Object);
-            marshallerMock.Setup(x => x.MemoryHandleToString(It.IsAny<UnmanagedMemoryHandle>())).Returns(Version);
+            marshallerMock.Setup(x => x.MemoryHandleToString(It.IsAny<UnmanagedMemoryHandle>())).Returns(Log);
 
             var mock = new Mock<ILibsndfileApi>();
             mock.Setup(x => x.Command(It.IsAny<IntPtr>(), It.IsAny<LibsndfileCommand>(), It.IsAny<IntPtr>(), It.IsAny<int>())).Returns(1);
@@ -93,7 +89,7 @@ namespace NLibsndfile.Native.Tests
             var api = new LibsndfileCommandApiNativeWrapper(mock.Object, marshallerMock.Object);
             var retval = api.GetLibVersion();
 
-            Assert.AreEqual(Version, retval);
+            Assert.AreEqual(Log, retval);
         }
     }
 }

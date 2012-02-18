@@ -1,4 +1,6 @@
-﻿namespace NLibsndfile.Native
+﻿using System;
+
+namespace NLibsndfile.Native
 {
     /// <summary>
     /// Interface to public Libsndfile Command API.
@@ -10,5 +12,12 @@
         /// </summary>
         /// <returns>Libsndfile library version.</returns>
         string GetLibVersion();
+
+        /// <summary>
+        /// Returns the internal Libsndfile log generated when loading a file.
+        /// </summary>
+        /// <param name="sndfile">Audio file we want the log for.</param>
+        /// <returns>Libsndfile log info.</returns>
+        string GetLogInfo(IntPtr sndfile);
     }
 }

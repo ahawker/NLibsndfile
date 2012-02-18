@@ -51,5 +51,23 @@ namespace NLibsndfile.Native
                 return m_Marshaller.MemoryHandleToString(memory);
             }
         }
+
+        /// <summary>
+        /// Returns the internal Libsndfile log generated when loading a file.
+        /// </summary>
+        /// <param name="sndfile">Audio file we want the log for.</param>
+        /// <returns>Libsndfile log info.</returns>
+        public string GetLogInfo(IntPtr sndfile)
+        {
+            const int MaxLogSize = 2048;
+            using (var memory = m_Marshaller.Allocate(MaxLogSize))
+            {
+                var retval = m_Api.Command(sndfile, LibsndfileCommand.GetLogInfo, memory, MaxLogSize);
+                if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.GetLogInfo, retval))
+                    throw new LibsndfileException("Unable to retrieve Libsndfile log info for the given file.");
+
+                return m_Marshaller.MemoryHandleToString(memory);
+            }
+        }
     }
 }
