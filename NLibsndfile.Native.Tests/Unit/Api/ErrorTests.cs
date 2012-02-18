@@ -5,8 +5,8 @@ using NUnit.Framework;
 namespace NLibsndfile.Native.Tests
 {
     [TestFixture]
-    [Category("NLibsndfileApi.Native.Tests.Error")]
-    public class LibsndfileApiErrorTests
+    [Category("NLibsndfileApi.Native.UnitTests.Api")]
+    public class ErrorTests
     {
         [Test]
         [ExpectedException(typeof(ArgumentException))]

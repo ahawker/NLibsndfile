@@ -5,91 +5,9 @@ using NUnit.Framework;
 namespace NLibsndfile.Native.Tests
 {
     [TestFixture]
-    public class LibsndfileApiTests
+    [Category("NLibsndfileApi.Native.UnitTests.Api")]
+    public class StringTests
     {
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Seek_ShouldThrowExceptionOnZeroHandle()
-        {
-            var api = new LibsndfileApi();
-            api.Seek(IntPtr.Zero, 0, 0);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void Seek_ShouldThrowExceptionOnZeroCount()
-        {
-            var api = new LibsndfileApi();
-            api.Seek(new IntPtr(1), 0, 0);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void Seek_ShouldThrowExceptionOnNegativeWhence()
-        {
-            var api = new LibsndfileApi();
-            api.Seek(new IntPtr(1), 1, -1);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void Seek_ShouldThrowExceptionOnHigherThanTwoWhence()
-        {
-            var api = new LibsndfileApi();
-            api.Seek(new IntPtr(1), 1, 3);
-        }
-
-        [Test]
-        [ExpectedException(typeof(LibsndfileException))]
-        public void Seek_ShouldThrowExceptionOnNegativeOffset()
-        {
-
-            var mock = new Mock<ILibsndfileApi>();
-            mock.Setup(x => x.Seek(It.IsAny<IntPtr>(), It.IsAny<long>(), It.IsAny<int>())).Returns(-1);
-
-            var api = new LibsndfileApi(mock.Object);
-            api.Seek(new IntPtr(1), 1, 1);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Close_ShouldThrowExceptionOnZeroHandle()
-        {
-            var api = new LibsndfileApi();
-            api.Close(IntPtr.Zero);
-        }
-
-        [Test]
-        [ExpectedException(typeof(LibsndfileException))]
-        public void Close_ShouldThrowExceptionOnErrorResult()
-        {
-            var mock = new Mock<ILibsndfileApi>();
-            mock.Setup(x => x.Close(It.IsAny<IntPtr>())).Returns(LibsndfileError.MalformedFile);
-
-            var api = new LibsndfileApi(mock.Object);
-            api.Close(new IntPtr(1));
-        }
-
-        [Test]
-        public void Close_ShouldPassOnNoErrorResult()
-        {
-            var mock = new Mock<ILibsndfileApi>();
-            mock.Setup(x => x.Close(It.IsAny<IntPtr>())).Returns(LibsndfileError.NoError);
-
-            var api = new LibsndfileApi(mock.Object);
-            var retval = api.Close(new IntPtr(1));
-
-            Assert.AreEqual(LibsndfileError.NoError, retval);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void WriteSync_ShouldThrowExceptionOnZeroHandle()
-        {
-            var api = new LibsndfileApi();
-            api.WriteSync(IntPtr.Zero);
-        }
-
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void SetString_ShouldThrowExceptionOnZeroHandle()

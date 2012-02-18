@@ -5,7 +5,8 @@ using NUnit.Framework;
 namespace NLibsndfile.Native.Tests
 {
     [TestFixture]
-    public class LibsndfileCommandApiTests
+    [Category("NLibsndfileApi.Native.UnitTests.CommandApi")]
+    public class GetLibVersionTests
     {
         private Mock<ILibsndfileApi> m_ApiMock;
         private Mock<UnmanagedMemoryHandle> m_MemoryMock;
