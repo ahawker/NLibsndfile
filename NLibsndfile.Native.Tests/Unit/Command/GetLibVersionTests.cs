@@ -8,18 +8,6 @@ namespace NLibsndfile.Native.Tests
     [Category("NLibsndfileApi.Native.UnitTests.CommandApi")]
     public class GetLibVersionTests
     {
-        private Mock<ILibsndfileApi> m_ApiMock;
-        private Mock<UnmanagedMemoryHandle> m_MemoryMock;
-
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
-        {
-            m_MemoryMock = new Mock<UnmanagedMemoryHandle>();
-
-            m_ApiMock = new Mock<ILibsndfileApi>();
-            m_ApiMock.Setup(x => x.Command(It.IsAny<IntPtr>(), It.IsAny<LibsndfileCommand>(), It.IsAny<IntPtr>(), It.IsAny<int>())).Returns(1);
-        }
-
         [Test]
         public void GetLibVersion_ShouldReturnValidString()
         {
