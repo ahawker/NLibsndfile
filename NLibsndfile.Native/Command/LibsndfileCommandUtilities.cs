@@ -44,7 +44,7 @@ namespace NLibsndfile.Native
                     return result > 0;
 
                 case LibsndfileCommand.GetLogInfo:
-                    return sndfile == IntPtr.Zero ? result > 0 : result == 0;
+                    return sndfile != IntPtr.Zero ? result > 0 : result == 0;
 
                 case LibsndfileCommand.CalcSignalMax:
                 case LibsndfileCommand.CalcNormSignalMax:
