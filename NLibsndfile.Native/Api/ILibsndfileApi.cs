@@ -2,8 +2,16 @@
 
 namespace NLibsndfile.Native
 {
+    /// <summary>
+    /// Interface to public Libsndfile API.
+    /// </summary>
     public interface ILibsndfileApi
     {
+        /// <summary>
+        /// Interface to Libsndfile command methods.
+        /// </summary>
+        ILibsndfileCommandApi Commands { get; }
+
         /// <summary>
         /// Attempts to open an audio file at the <paramref name="path"/> location 
         /// with <paramref name="mode"/> based file access.
@@ -119,6 +127,20 @@ namespace NLibsndfile.Native
         /// <param name="sndfile">Audio file to check for errors.</param>
         /// <returns><see cref="LibsndfileError"/>error code.</returns>
         LibsndfileError Error(IntPtr sndfile);
+
+        /// <summary>
+        /// Returns the string representation of the current error for the <paramref name="sndfile"/> audio file.
+        /// </summary>
+        /// <param name="sndfile">Audio file we want to check for errors.</param>
+        /// <returns>String containing the description of the current error.</returns>
+        string ErrorString(IntPtr sndfile);
+
+        /// <summary>
+        /// Returns the string representation of the int value backing <see cref="LibsndfileError"/>.
+        /// </summary>
+        /// <param name="error"><see cref="LibsndfileError"/> error code.</param>
+        /// <returns>Description of the given error code.</returns>
+        string ErrorNumber(int error);
 
         /// <summary>
         /// Closes the <paramref name="sndfile"/> audio file.

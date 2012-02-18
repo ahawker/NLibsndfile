@@ -9,6 +9,11 @@ namespace NLibsndfile.Native
     public class LibsndfileApiNativeWrapper : ILibsndfileApi
     {
         /// <summary>
+        /// Interface to Libsndfile command methods.
+        /// </summary>
+        public ILibsndfileCommandApi Commands { get; private set; }
+
+        /// <summary>
         /// Attempts to open an audio file at the <paramref name="path"/> location 
         /// with <paramref name="mode"/> based file access.
         /// </summary>
@@ -152,6 +157,28 @@ namespace NLibsndfile.Native
         public LibsndfileError Error(IntPtr sndfile)
         {
             return LibsndfileApiNative.sf_error(sndfile);
+        }
+
+        /// <summary>
+        /// Returns a pointer the string representation of the current error for the <paramref name="sndfile"/> audio file.
+        /// </summary>
+        /// <param name="sndfile">Audio file we want to check for errors.</param>
+        /// <returns>Pointer to a string containing the description of the current error.</returns>
+        public string ErrorString(IntPtr sndfile)
+        {
+            var ptr = LibsndfileApiNative.sf_strerror(sndfile);
+            return Marshal.PtrToStringAnsi(ptr);
+        }
+
+        /// <summary>
+        /// Returns the string representation of the int value backing <see cref="LibsndfileError"/>.
+        /// </summary>
+        /// <param name="error"><see cref="LibsndfileError"/> error code.</param>
+        /// <returns>Description of the given error code.</returns>
+        public string ErrorNumber(int error)
+        {
+            var ptr = LibsndfileApiNative.sf_error_number(error);
+            return Marshal.PtrToStringAnsi(ptr);
         }
 
         /// <summary>
@@ -431,7 +458,7 @@ namespace NLibsndfile.Native
         public string GetString(IntPtr sndfile, LibsndfileStringType type)
         {
             var ptr = LibsndfileApiNative.sf_get_string(sndfile, type);
-            return Marshal.PtrToStringAnsi(ptr) ?? string.Empty;
+            return Marshal.PtrToStringAnsi(ptr);
         }
 
         /// <summary>

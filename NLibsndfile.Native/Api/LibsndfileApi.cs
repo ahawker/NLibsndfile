@@ -7,13 +7,34 @@ namespace NLibsndfile.Native
     /// </summary>
     public class LibsndfileApi : ILibsndfileApi
     {
-        private readonly ILibsndfileApi m_Api;
+        private ILibsndfileApi m_Api;
 
         /// <summary>
-        /// Initializes a new instance of <c>LibsndfileApi</c> with the default native implementation.
+        /// Interface to Libsndfile command methods.
+        /// </summary>
+        public ILibsndfileCommandApi Commands { get; private set; }
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="LibsndfileApi"/> with the default native implementations.
         /// </summary>
         public LibsndfileApi()
-            : this(new LibsndfileApiNativeWrapper())
+        {
+            var api = new LibsndfileApiNativeWrapper();
+            var commandApi = new LibsndfileCommandApiNativeWrapper(api);
+
+            Initialize(api, commandApi);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="LibsndfileApi"/> with the given <paramref name="api"/> implementation
+        /// and default native <see cref="LibsndfileCommandApi"/> implementation.
+        /// </summary>
+        /// <param name="api">LibsndfileApi implementation to use.</param>
+        /// <remarks>
+        /// This constructor should only be used for testing when simulating the actual libsndfile library.
+        /// </remarks>
+        internal LibsndfileApi(ILibsndfileApi api)
+            : this(api, new LibsndfileCommandApiNativeWrapper(api))
         {
         }
 
@@ -21,15 +42,29 @@ namespace NLibsndfile.Native
         /// Initializes a new instance of <c>LibsndfileApi</c> with the <paramref name="api"/> implementation.
         /// </summary>
         /// <param name="api">LibsndfileApi implementation to use.</param>
+        /// <param name="commandApi">LibsndfileCommandApi implementation to use.</param>
         /// <remarks>
         /// This constructor should only be used for testing when simulating the actual libsndfile library.
         /// </remarks>
-        internal LibsndfileApi(ILibsndfileApi api)
+        internal LibsndfileApi(ILibsndfileApi api, ILibsndfileCommandApi commandApi)
+        {
+            Initialize(api, commandApi);
+        }
+
+        /// <summary>
+        /// Initialize local LibsndfileApi and LibsndfileCommandApi instances. 
+        /// </summary>
+        /// <param name="api"></param>
+        /// <param name="commandApi"></param>
+        private void Initialize(ILibsndfileApi api, ILibsndfileCommandApi commandApi)
         {
             if (api == null)
                 throw new ArgumentNullException("api");
+            if (commandApi == null)
+                throw new ArgumentNullException("commandApi");
 
             m_Api = api;
+            Commands = new LibsndfileCommandApi(commandApi);
         }
 
         /// <summary>
@@ -70,7 +105,7 @@ namespace NLibsndfile.Native
             var sndfile = m_Api.OpenFileDescriptor(handle, mode, ref info, closeHandle);
 
             if (sndfile == IntPtr.Zero)
-                throw new LibsndfileException(string.Format("Unable to open file descriptor {0} in mode {1}", handle, mode));
+                throw new LibsndfileException(string.Format("Unable to open file descriptor {0} in mode {1}.", handle, mode));
 
             return sndfile;
         }
@@ -245,6 +280,40 @@ namespace NLibsndfile.Native
                 throw new ArgumentException("File handle is invalid/closed.");
 
             return m_Api.Error(sndfile);
+        }
+
+        /// <summary>
+        /// Returns the string representation of the current error for the <paramref name="sndfile"/> audio file.
+        /// </summary>
+        /// <param name="sndfile">Audio file we want to check for errors.</param>
+        /// <returns>String containing the description of the current error.</returns>
+        public string ErrorString(IntPtr sndfile)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            var retval = m_Api.ErrorString(sndfile);
+            if (string.IsNullOrEmpty(retval))
+                throw new LibsndfileException("ErrorString returned an invalid result.");
+
+            return retval;
+        }
+
+        /// <summary>
+        /// Returns the string representation of the int value backing <see cref="LibsndfileError"/>.
+        /// </summary>
+        /// <param name="error"><see cref="LibsndfileError"/> error code.</param>
+        /// <returns>Description of the given error code.</returns>
+        public string ErrorNumber(int error)
+        {
+            if (error < 0)
+                throw new ArgumentOutOfRangeException("error", error, "Error must be positive.");
+
+            var retval = m_Api.ErrorNumber(error);
+            if (string.IsNullOrEmpty(retval))
+                throw new LibsndfileException("ErrorNumber returned an invalid result.");
+
+            return retval;
         }
 
         /// <summary>

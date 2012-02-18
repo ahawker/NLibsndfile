@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace NLibsndfile.Native
 {
+    [Serializable]
     public class LibsndfileException : Exception
     {
         public LibsndfileException() { }
