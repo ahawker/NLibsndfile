@@ -50,5 +50,18 @@ namespace NLibsndfile.Native
 
             return log;
         }
+
+        /// <summary>
+        /// Scan <paramref name="sndfile"/> file and return maximum calculated signal value. 
+        /// </summary>
+        /// <param name="sndfile">Audio file we want to scan.</param>
+        /// <returns>Maximum signal value.</returns>
+        public double CalcSignalMax(IntPtr sndfile)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+            
+            return m_Api.CalcSignalMax(sndfile);
+        }
     }
 }

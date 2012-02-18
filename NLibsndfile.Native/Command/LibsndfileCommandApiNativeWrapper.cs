@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace NLibsndfile.Native
 {
@@ -67,6 +68,23 @@ namespace NLibsndfile.Native
                     throw new LibsndfileException("Unable to retrieve Libsndfile log info for the given file.");
 
                 return m_Marshaller.MemoryHandleToString(memory);
+            }
+        }
+
+        /// <summary>
+        /// Scan <paramref name="sndfile"/> file and return maximum calculated signal value. 
+        /// </summary>
+        /// <param name="sndfile">Audio file we want to scan.</param>
+        /// <returns>Maximum signal value.</returns>
+        public double CalcSignalMax(IntPtr sndfile)
+        {
+            using (var memory = m_Marshaller.AllocateDouble())
+            {
+                var retval = m_Api.Command(sndfile, LibsndfileCommand.CalcSignalMax, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.CalcSignalMax, retval))
+                    throw new LibsndfileException("Unable to calculate signal max for the given file.");
+
+                return m_Marshaller.MemoryHandleToDouble(memory);
             }
         }
     }

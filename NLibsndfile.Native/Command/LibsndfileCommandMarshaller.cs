@@ -19,6 +19,33 @@ namespace NLibsndfile.Native
         }
 
         /// <summary>
+        /// Create a new <see cref="UnmanagedMemoryHandle"/> allocated for the size of a single Int32.
+        /// </summary>
+        /// <returns><see cref="UnmanagedMemoryHandle"/> with a chunk of memory allocated.</returns>
+        public UnmanagedMemoryHandle AllocateInt()
+        {
+            return new UnmanagedMemoryHandle(Marshal.SizeOf(typeof(int)));
+        }
+
+        /// <summary>
+        /// Create a new <see cref="UnmanagedMemoryHandle"/> allocated for the size of a single Double.
+        /// </summary>
+        /// <returns><see cref="UnmanagedMemoryHandle"/> with a chunk of memory allocated.</returns>
+        public UnmanagedMemoryHandle AllocateDouble()
+        {
+            return new UnmanagedMemoryHandle(Marshal.SizeOf(typeof(double)));
+        }
+
+        /// <summary>
+        /// Create a new <see cref="UnmanagedMemoryHandle"/> allocated for the size of a single Int64.
+        /// </summary>
+        /// <returns><see cref="UnmanagedMemoryHandle"/> with a chunk of memory allocated.</returns>
+        public UnmanagedMemoryHandle AllocateLong()
+        {
+            return new UnmanagedMemoryHandle(Marshal.SizeOf(typeof(long)));
+        }
+
+        /// <summary>
         /// Explicitly disposes of the <paramref name="memory"/> object and deallocates its unmanaged memory.
         /// </summary>
         /// <param name="memory">UnmanagedMemoryHandle to deallocate.</param>
@@ -39,6 +66,36 @@ namespace NLibsndfile.Native
         {
             return Marshal.PtrToStringAnsi(memory.Handle);
         }
+
+        /// <summary>
+        /// Marshal a <see cref="UnmanagedMemoryHandle"/> object to an Int32.
+        /// </summary>
+        /// <param name="memory">Reference to UnmanagedMemoryHandle.</param>
+        /// <returns>Int32 conversion from unmanaged memory.</returns>
+        public int MemoryHandleToInt(UnmanagedMemoryHandle memory)
+        {
+            return (int)Marshal.PtrToStructure(memory, typeof(int));
+        }
+
+        /// <summary>
+        /// Marshal a <see cref="UnmanagedMemoryHandle"/> object to an Double.
+        /// </summary>
+        /// <param name="memory">Reference to UnmanagedMemoryHandle.</param>
+        /// <returns>Double conversion from unmanaged memory.</returns>
+        public double MemoryHandleToDouble(UnmanagedMemoryHandle memory)
+        {
+            return (double)Marshal.PtrToStructure(memory, typeof(double));
+        }
+
+        /// <summary>
+        /// Marshal a <see cref="UnmanagedMemoryHandle"/> object to an Int64.
+        /// </summary>
+        /// <param name="memory">Reference to UnmanagedMemoryHandle.</param>
+        /// <returns>Int64 conversion from unmanaged memory.</returns>
+        public long MemoryHandleToLong(UnmanagedMemoryHandle memory)
+        {
+            return (long)Marshal.PtrToStructure(memory, typeof(long));
+        }
     }
 
     /// <summary>
@@ -52,6 +109,7 @@ namespace NLibsndfile.Native
         private bool m_IsDisposed;
 
         internal IntPtr Handle { get; private set; }
+        internal int Size { get; private set; }
 
         /// <summary>
         /// Initializes a new instances of <see cref="UnmanagedMemoryHandle"/> on top of an empty pointer.
@@ -80,6 +138,7 @@ namespace NLibsndfile.Native
         /// <param name="size">Size of unmanaged memory in bytes to allocate.</param>
         internal UnmanagedMemoryHandle(int size)
         {
+            Size = size;
             Handle = Marshal.AllocHGlobal(size);
         }
 
