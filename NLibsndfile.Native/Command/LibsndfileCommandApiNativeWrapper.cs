@@ -218,5 +218,19 @@ namespace NLibsndfile.Native
 
             return Convert.ToBoolean(retval);
         }
+
+        /// <summary>
+        /// Gets double normalization for read and write functions on the <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to retrieve double normalization for.</param>
+        /// <returns>Current double normalization state.</returns>
+        public bool GetNormDouble(IntPtr sndfile)
+        {
+            var retval = m_Api.Command(sndfile, LibsndfileCommand.GetNormDouble, IntPtr.Zero, 0);
+            if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.GetNormDouble, retval))
+                throw new LibsndfileException("Unable to retrieve double normalization for the given file.");
+
+            return Convert.ToBoolean(retval);
+        }
     }
 }
