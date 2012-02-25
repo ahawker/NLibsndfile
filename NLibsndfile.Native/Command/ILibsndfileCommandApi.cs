@@ -80,5 +80,12 @@ namespace NLibsndfile.Native
         /// <param name="normalize">Flag to enable or disable double normalization.</param>
         /// <returns>Previous double normalization state.</returns>
         bool SetNormDouble(IntPtr sndfile, bool normalize);
+
+        /// <summary>
+        /// Gets float normalization for read and write functions on the <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to retrieve float normalization for.</param>
+        /// <returns>Current float normalization state.</returns>
+        bool GetNormFloat(IntPtr sndfile);
     }
 }

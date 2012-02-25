@@ -68,6 +68,7 @@
     <Compile Include="Unit\Command\GetLogInfoTests.cs" />
     <Compile Include="Unit\Command\CalcMaxAllChannelsTests.cs" />
     <Compile Include="Unit\Command\GetMaxAllChannelsTests.cs" />
+    <Compile Include="Unit\Command\GetNormFloatTests.cs" />
     <Compile Include="Unit\Command\GetSignalMaxTests.cs" />
     <Compile Include="Unit\Command\SetNormDoubleTests.cs" />
     <Compile Include="Unit\Command\SetNormFloatTests.cs" />

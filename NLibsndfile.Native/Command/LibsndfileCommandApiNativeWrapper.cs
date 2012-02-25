@@ -204,5 +204,19 @@ namespace NLibsndfile.Native
 
             return Convert.ToBoolean(retval);
         }
+
+        /// <summary>
+        /// Gets float normalization for read and write functions on the <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to retrieve float normalization for.</param>
+        /// <returns>Current float normalization state.</returns>
+        public bool GetNormFloat(IntPtr sndfile)
+        {
+            var retval = m_Api.Command(sndfile, LibsndfileCommand.GetNormFloat, IntPtr.Zero, 0);
+            if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.GetNormFloat, retval))
+                throw new LibsndfileException("Unable to retrieve float normalization for the given file.");
+
+            return Convert.ToBoolean(retval);
+        }
     }
 }

@@ -177,5 +177,18 @@ namespace NLibsndfile.Native
 
             return m_Api.SetNormDouble(sndfile, normalize);
         }
+
+        /// <summary>
+        /// Gets float normalization for read and write functions on the <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to retrieve float normalization for.</param>
+        /// <returns>Current float normalization state.</returns>
+        public bool GetNormFloat(IntPtr sndfile)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.GetNormFloat(sndfile);
+        }
     }
 }
