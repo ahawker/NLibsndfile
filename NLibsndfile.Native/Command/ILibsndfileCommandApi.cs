@@ -64,5 +64,13 @@ namespace NLibsndfile.Native
         /// <param name="channels">Number of audio channels in the audio file.</param>
         /// <returns>Peak values for each channel from file header.</returns>
         double[] GetMaxAllChannels(IntPtr sndfile, int channels);
+
+        /// <summary>
+        /// Sets float normalization for read and write functions on the <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set float normalization on.</param>
+        /// <param name="normalize">Flag to enable or disable float normalization.</param>
+        /// <returns>Previous float normalization state.</returns>
+        bool SetNormFloat(IntPtr sndfile, bool normalize);
     }
 }

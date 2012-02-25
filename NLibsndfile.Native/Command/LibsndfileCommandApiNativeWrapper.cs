@@ -174,5 +174,20 @@ namespace NLibsndfile.Native
                 return m_Marshaller.MemoryHandleToArray<double>(memory);
             }
         }
+
+        /// <summary>
+        /// Sets float normalization for read and write functions on the <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set float normalization on.</param>
+        /// <param name="normalize">Flag to enable or disable float normalization.</param>
+        /// <returns>Previous float normalization state.</returns>
+        public bool SetNormFloat(IntPtr sndfile, bool normalize)
+        {
+            var retval = m_Api.Command(sndfile, LibsndfileCommand.SetNormFloat, IntPtr.Zero, Convert.ToInt32(normalize));
+            if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.SetNormFloat, retval))
+                throw new LibsndfileException("Unable to set float normalization for the given file.");
+
+            return Convert.ToBoolean(retval);
+        }
     }
 }

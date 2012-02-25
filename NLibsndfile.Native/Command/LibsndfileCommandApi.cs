@@ -149,5 +149,19 @@ namespace NLibsndfile.Native
 
             return max;
         }
+
+        /// <summary>
+        /// Sets float normalization for read and write functions on the <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set float normalization on.</param>
+        /// <param name="normalize">Flag to enable or disable float normalization.</param>
+        /// <returns>Previous float normalization state.</returns>
+        public bool SetNormFloat(IntPtr sndfile, bool normalize)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.SetNormFloat(sndfile, normalize);
+        }
     }
 }

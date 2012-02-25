@@ -69,6 +69,7 @@
     <Compile Include="Unit\Command\CalcMaxAllChannelsTests.cs" />
     <Compile Include="Unit\Command\GetMaxAllChannelsTests.cs" />
     <Compile Include="Unit\Command\GetSignalMaxTests.cs" />
+    <Compile Include="Unit\Command\SetNormFloatTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NLibsndfile.Native\NLibsndfile.Native.csproj">
