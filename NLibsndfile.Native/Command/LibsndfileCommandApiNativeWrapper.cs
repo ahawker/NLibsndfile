@@ -350,5 +350,21 @@ namespace NLibsndfile.Native
                 return m_Marshaller.MemoryHandleTo<LibsndfileFormatInfo>(memory);
             }
         }
+
+        /// <summary>
+        /// Returns the number of available subformats.
+        /// </summary>
+        /// <returns>Number of subtype formats supported.</returns>
+        public int GetFormatSubtypeCount()
+        {
+            using (var memory = m_Marshaller.Allocate<int>())
+            {
+                var retval = m_Api.Command(IntPtr.Zero, LibsndfileCommand.GetFormatSubtypeCount, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(IntPtr.Zero, LibsndfileCommand.GetFormatSubtypeCount, retval))
+                    throw new LibsndfileException("Unable to retrieve number of supported subtype formats.");
+
+                return m_Marshaller.MemoryHandleTo<int>(memory);
+            }
+        }
     }
 }

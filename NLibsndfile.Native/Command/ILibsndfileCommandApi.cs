@@ -145,5 +145,11 @@ namespace NLibsndfile.Native
         /// <param name="format">Major format to retrieve information about.</param>
         /// <returns><see cref="LibsndfileFormatInfo"/> object containing format information.</returns>
         LibsndfileFormatInfo GetFormatMajor(LibsndfileFormat format);
+
+        /// <summary>
+        /// Returns the number of available subformats.
+        /// </summary>
+        /// <returns>Number of subtype formats supported.</returns>
+        int GetFormatSubtypeCount();
     }
 }

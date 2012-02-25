@@ -296,5 +296,14 @@ namespace NLibsndfile.Native
 
             return m_Api.GetFormatMajor(format);
         }
+
+        /// <summary>
+        /// Returns the number of available subformats.
+        /// </summary>
+        /// <returns>Number of subtype formats supported.</returns>
+        public int GetFormatSubtypeCount()
+        {
+            return m_Api.GetFormatSubtypeCount();
+        }
     }
 }
