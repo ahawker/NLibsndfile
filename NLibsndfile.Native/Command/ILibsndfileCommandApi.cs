@@ -175,5 +175,13 @@ namespace NLibsndfile.Native
         /// </summary>
         /// <param name="sndfile">Audio file to update file header of.</param>
         void UpdateHeaderNow(IntPtr sndfile);
+
+        /// <summary>
+        /// Sets file header auto update for <paramref name="sndfile"/> after every subsequent write call.
+        /// </summary>
+        /// <param name="sndfile">Audio file to enable automatic file header updating.</param>
+        /// <param name="enable">Flag to enable or file header auto-update.</param>
+        /// <returns>Current file header auto-update state.</returns>
+        bool SetUpdateHeaderAuto(IntPtr sndfile, bool enable);
     }
 }

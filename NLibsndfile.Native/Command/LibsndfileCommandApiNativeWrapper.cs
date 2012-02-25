@@ -413,5 +413,20 @@ namespace NLibsndfile.Native
             if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.UpdateHeaderNow, retval))
                 throw new LibsndfileException("Unable to update header for the given file.");
         }
+
+        /// <summary>
+        /// Sets file header auto update for <paramref name="sndfile"/> after every subsequent write call.
+        /// </summary>
+        /// <param name="sndfile">Audio file to enable automatic file header updating.</param>
+        /// <param name="enable">Flag to enable or file header auto-update.</param>
+        /// <returns>Current file header auto-update state.</returns>
+        public bool SetUpdateHeaderAuto(IntPtr sndfile, bool enable)
+        {
+            var retval = m_Api.Command(sndfile, LibsndfileCommand.SetUpdateHeaderAuto, IntPtr.Zero, Convert.ToInt32(enable));
+            if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.SetUpdateHeaderAuto, retval))
+                throw new LibsndfileException("Unable to set header auto-update for the given file.");
+
+            return Convert.ToBoolean(retval);
+        }
     }
 }

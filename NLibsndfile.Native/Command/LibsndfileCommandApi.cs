@@ -349,5 +349,19 @@ namespace NLibsndfile.Native
 
             m_Api.UpdateHeaderNow(sndfile);
         }
+
+        /// <summary>
+        /// Sets file header auto update for <paramref name="sndfile"/> after every subsequent write call.
+        /// </summary>
+        /// <param name="sndfile">Audio file to enable automatic file header updating.</param>
+        /// <param name="enable">Flag to enable or file header auto-update.</param>
+        /// <returns>Current file header auto-update state.</returns>
+        public bool SetUpdateHeaderAuto(IntPtr sndfile, bool enable)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.SetUpdateHeaderAuto(sndfile, enable);
+        }
     }
 }
