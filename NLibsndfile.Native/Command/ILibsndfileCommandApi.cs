@@ -94,5 +94,14 @@ namespace NLibsndfile.Native
         /// <param name="sndfile">Audio file to retrieve double normalization for.</param>
         /// <returns>Current double normalization state.</returns>
         bool GetNormDouble(IntPtr sndfile);
+
+        /// <summary>
+        /// Sets the scale factor for when integer data is read from the <paramref name="sndfile"/>
+        /// which contains floating point data.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set int to float scaling.</param>
+        /// <param name="enable">Flag to enable or disable int to float scaling.</param>
+        /// <returns>Previous scaling state.</returns>
+        bool SetScaleFloatIntRead(IntPtr sndfile, bool enable);
     }
 }

@@ -203,5 +203,20 @@ namespace NLibsndfile.Native
 
             return m_Api.GetNormDouble(sndfile);
         }
+
+        /// <summary>
+        /// Sets the scale factor for when integer data is read from the <paramref name="sndfile"/>
+        /// which contains floating point data.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set int to float scaling.</param>
+        /// <param name="enable">Flag to enable or disable int to float scaling.</param>
+        /// <returns>Previous scaling state.</returns>
+        public bool SetScaleFloatIntRead(IntPtr sndfile, bool enable)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.SetScaleFloatIntRead(sndfile, enable);
+        }
     }
 }
