@@ -305,5 +305,20 @@ namespace NLibsndfile.Native
         {
             return m_Api.GetFormatSubtypeCount();
         }
+
+        /// <summary>
+        /// Retrieves information about the given <paramref name="format"/> subtype.
+        /// </summary>
+        /// <param name="format">Subtype format to retrieve information about.</param>
+        /// <returns><see cref="LibsndfileFormatInfo"/> object containing format information.</returns>
+        public LibsndfileFormatInfo GetFormatSubtype(LibsndfileFormat format)
+        {
+            if (format == LibsndfileFormat.Submask ||
+                format == LibsndfileFormat.Typemask ||
+                format == LibsndfileFormat.Endmask)
+                throw new ArgumentException("Format must be set.");
+
+            return m_Api.GetFormatSubtype(format);
+        }
     }
 }

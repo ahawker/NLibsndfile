@@ -68,6 +68,7 @@
     <Compile Include="Unit\Command\GetFormatMajorCountTests.cs" />
     <Compile Include="Unit\Command\GetFormatMajorTests.cs" />
     <Compile Include="Unit\Command\GetFormatSubtypeCountTests.cs" />
+    <Compile Include="Unit\Command\GetFormatSubtypeTests.cs" />
     <Compile Include="Unit\Command\GetLibVersionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unit\Command\GetLogInfoTests.cs" />

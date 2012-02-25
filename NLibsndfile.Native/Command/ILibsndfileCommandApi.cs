@@ -151,5 +151,12 @@ namespace NLibsndfile.Native
         /// </summary>
         /// <returns>Number of subtype formats supported.</returns>
         int GetFormatSubtypeCount();
+
+        /// <summary>
+        /// Retrieves information about the given <paramref name="format"/> subtype.
+        /// </summary>
+        /// <param name="format">Subtype format to retrieve information about.</param>
+        /// <returns><see cref="LibsndfileFormatInfo"/> object containing format information.</returns>
+        LibsndfileFormatInfo GetFormatSubtype(LibsndfileFormat format);
     }
 }
