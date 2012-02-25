@@ -6,7 +6,7 @@ namespace NLibsndfile.Native.Tests
 {
     [TestFixture]
     [Category("NLibsndfileApi.Native.UnitTests.CommandApi")]
-    public class CalcMaxAllChannels
+    public class CalcMaxAllChannelsTests
     {
         [Test]
         [ExpectedException(typeof(ArgumentException))]
