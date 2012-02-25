@@ -476,5 +476,19 @@ namespace NLibsndfile.Native
 
             return Convert.ToBoolean(retval);
         }
+
+        /// <summary>
+        /// Retrieves floating point to int conversion clipping state for the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to get clipping state of.</param>
+        /// <returns>Current clipping state.</returns>
+        public bool GetClipping(IntPtr sndfile)
+        {
+            var retval = m_Api.Command(sndfile, LibsndfileCommand.GetClipping, IntPtr.Zero, 0);
+            if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.GetClipping, retval))
+                throw new LibsndfileException("Unable to get clipping for the given file.");
+
+            return Convert.ToBoolean(retval);
+        }
     }
 }

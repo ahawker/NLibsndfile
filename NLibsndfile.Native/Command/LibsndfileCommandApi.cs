@@ -408,5 +408,18 @@ namespace NLibsndfile.Native
 
             return m_Api.SetClipping(sndfile, enable);
         }
+
+        /// <summary>
+        /// Retrieves floating point to int conversion clipping state for the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to get clipping state of.</param>
+        /// <returns>Current clipping state.</returns>
+        public bool GetClipping(IntPtr sndfile)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.GetClipping(sndfile);
+        }
     }
 }

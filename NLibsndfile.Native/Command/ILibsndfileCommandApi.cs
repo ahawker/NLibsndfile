@@ -206,5 +206,12 @@ namespace NLibsndfile.Native
         /// <param name="enable">Flag to enable or disable clipping.</param>
         /// <returns>Current clipping state.</returns>
         bool SetClipping(IntPtr sndfile, bool enable);
+
+        /// <summary>
+        /// Retrieves floating point to int conversion clipping state for the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to get clipping state of.</param>
+        /// <returns>Current clipping state.</returns>
+        bool GetClipping(IntPtr sndfile);
     }
 }
