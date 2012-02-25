@@ -8,13 +8,13 @@ namespace NLibsndfile.Native
     public class LibsndfileCommandApiNativeWrapper : ILibsndfileCommandApi
     {
         private readonly ILibsndfileApi m_Api;
-        private readonly ILibsndfileCommandMarshaller m_Marshaller;
+        private readonly ILibsndfileMarshaller m_Marshaller;
 
         /// <summary>
         /// Initialize a new instance of LibsndfileCommandApiNativeWrapper with the <paramref name="api"/> api implementation.
         /// </summary>
         internal LibsndfileCommandApiNativeWrapper(ILibsndfileApi api)
-            : this(api, new LibsndfileCommandMarshaller())
+            : this(api, new LibsndfileMarshaller())
         {
         }
 
@@ -23,8 +23,8 @@ namespace NLibsndfile.Native
         /// and <paramref name="marshaller"/> implementations.
         /// </summary>
         /// <param name="api">LibsndfileApi implementation to use.</param>
-        /// <param name="marshaller">LibsndfileCommandMarshaller implementation to use.</param>
-        internal LibsndfileCommandApiNativeWrapper(ILibsndfileApi api, ILibsndfileCommandMarshaller marshaller)
+        /// <param name="marshaller">LibsndfileMarshaller implementation to use.</param>
+        internal LibsndfileCommandApiNativeWrapper(ILibsndfileApi api, ILibsndfileMarshaller marshaller)
         {
             if (api == null)
                 throw new ArgumentNullException("api");
@@ -101,6 +101,24 @@ namespace NLibsndfile.Native
                     throw new LibsndfileException("Unable to calculate normalized signal max for the given file.");
 
                 return m_Marshaller.MemoryHandleTo<double>(memory);
+            }
+        }
+
+        /// <summary>
+        /// Scan <paramref name="sndfile"/> file and return single peak value for each channel.
+        /// </summary>
+        /// <param name="sndfile">Audio file we want to scan.</param>
+        /// <param name="channels">Number of audio channels in the audio file.</param>
+        /// <returns>Peak values for each channel.</returns>
+        public double[] CalcMaxAllChannels(IntPtr sndfile, int channels)
+        {
+            using (var memory = m_Marshaller.AllocateArray<double>(channels))
+            {
+                var retval = m_Api.Command(sndfile, LibsndfileCommand.CalcMaxAllChannels, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.CalcMaxAllChannels, retval))
+                    throw new LibsndfileException("Unable to calculate signal max of all channels for the given file.");
+
+                return m_Marshaller.MemoryHandleToArray<double>(memory);
             }
         }
     }
