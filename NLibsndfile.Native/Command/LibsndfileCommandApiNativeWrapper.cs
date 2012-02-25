@@ -384,5 +384,23 @@ namespace NLibsndfile.Native
                 return m_Marshaller.MemoryHandleTo<LibsndfileFormatInfo>(memory);
             }
         }
+
+        /// <summary>
+        /// Sets PEAK chunk in <paramref name="sndfile"/> file which contains floating point data.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set PEAK chunk.</param>
+        /// <param name="enable">Flag to enable or disable PEAK chunk.</param>
+        /// <returns>True/False on whether the PEAK chunk will be written on the next write call.</returns>
+        /// <remarks>
+        /// This call must be made before any data is written to the file.
+        /// </remarks>
+        public bool SetAddPeakChunk(IntPtr sndfile, bool enable)
+        {
+            var retval = m_Api.Command(sndfile, LibsndfileCommand.SetAddPeakChunk, IntPtr.Zero, Convert.ToInt32(enable));
+            if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.SetAddPeakChunk, retval))
+                throw new LibsndfileException("Unable to set PEAK chunk for the given file.");
+
+            return Convert.ToBoolean(retval);
+        }
     }
 }

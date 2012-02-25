@@ -320,5 +320,22 @@ namespace NLibsndfile.Native
 
             return m_Api.GetFormatSubtype(format);
         }
+
+        /// <summary>
+        /// Sets PEAK chunk in <paramref name="sndfile"/> file which contains floating point data.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set PEAK chunk.</param>
+        /// <param name="enable">Flag to enable or disable PEAK chunk.</param>
+        /// <returns>True/False on whether the PEAK chunk will be written on the next write call.</returns>
+        /// <remarks>
+        /// This call must be made before any data is written to the file.
+        /// </remarks>
+        public bool SetAddPeakChunk(IntPtr sndfile, bool enable)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.SetAddPeakChunk(sndfile, enable);
+        }
     }
 }
