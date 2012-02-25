@@ -1,68 +1,8 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 
 namespace NLibsndfile.Native
 {
-    /// <summary>
-    /// Class to provide easy to use helper functions for marshalling command methods.
-    /// </summary>
-    internal class LibsndfileCommandMarshaller : ILibsndfileCommandMarshaller
-    {
-        /// <summary>
-        /// Create a new <see cref="UnmanagedMemoryHandle"/> allocated for <paramref name="size"/> bytes.
-        /// </summary>
-        /// <param name="size">Number of bytes of unmanaged memory requested.</param>
-        /// <returns><see cref="UnmanagedMemoryHandle"/> with a chunk of memory allocated.</returns>
-        public UnmanagedMemoryHandle Allocate(int size)
-        {
-            return new UnmanagedMemoryHandle(size);
-        }
-
-        /// <summary>
-        /// Create a new <see cref="UnmanagedMemoryHandle"/> allocated for the size of a single <typeparamref name="T"/> structure.
-        /// </summary>
-        /// <returns><see cref="UnmanagedMemoryHandle"/> with a chunk of memory allocated.</returns>
-        public UnmanagedMemoryHandle Allocate<T>()
-            where T : struct
-        {
-            return new UnmanagedMemoryHandle(Marshal.SizeOf(typeof(T)));
-        }
-
-        /// <summary>
-        /// Explicitly disposes of the <paramref name="memory"/> object and deallocates its unmanaged memory.
-        /// </summary>
-        /// <param name="memory"><see cref="UnmanagedMemoryHandle"/> to deallocate.</param>
-        public void Deallocate(UnmanagedMemoryHandle memory)
-        {
-            if (memory == null)
-                return;
-
-            memory.Dispose();
-        }
-
-        /// <summary>
-        /// Marshal a <see cref="UnmanagedMemoryHandle"/> object to an ANSI string.
-        /// </summary>
-        /// <param name="memory">Reference to <see cref="UnmanagedMemoryHandle"/>.</param>
-        /// <returns>ANSI string conversion from unmanaged memory.</returns>
-        public string MemoryHandleToString(UnmanagedMemoryHandle memory)
-        {
-            return Marshal.PtrToStringAnsi(memory.Handle);
-        }
-
-        /// <summary>
-        /// Marshal an <see cref="UnmanagedMemoryHandle"/> object to a <typeparamref name="T"/> structure.
-        /// </summary>
-        /// <typeparam name="T">Type of structure to marshal from unmanaged memory.</typeparam>
-        /// <param name="memory">Reference to <see cref="UnmanagedMemoryHandle"/>.</param>
-        /// <returns>Marshalled structure stored in managed memory.</returns>
-        public T MemoryHandleTo<T>(UnmanagedMemoryHandle memory)
-            where T : struct
-        {
-            return (T)Marshal.PtrToStructure(memory, typeof(T));
-        }
-    }
-
     /// <summary>
     /// Internal container class that holds a pointer to an allocated chunk of unmanaged memory.
     /// </summary>
@@ -73,7 +13,17 @@ namespace NLibsndfile.Native
     {
         private bool m_IsDisposed;
 
+        /// <summary>
+        /// Pointer to native memory location we have allocated.
+        /// </summary>
         internal IntPtr Handle { get; private set; }
+
+        /// <summary>
+        /// Size of chunk of unmanaged memory which we allocated.
+        /// </summary>
+        /// <remarks>
+        /// This is not known when this <see cref="UnmanagedMemoryHandle"/> on top of an existing handle.
+        /// </remarks>
         internal int Size { get; private set; }
 
         /// <summary>
