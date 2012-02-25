@@ -51,5 +51,19 @@ namespace NLibsndfile.Native.Tests
             var api = new LibsndfileApi(mock.Object);
             api.Seek(new IntPtr(1), 1, 1);
         }
+
+        [Test]
+        public void Seek_ShouldPassOnCorrectOffsetFromBeginning()
+        {
+            const int Result = 42;
+
+            var mock = new Mock<ILibsndfileApi>();
+            mock.Setup(x => x.Seek(It.IsAny<IntPtr>(), It.IsAny<long>(), It.IsAny<int>())).Returns(Result);
+
+            var api = new LibsndfileApi(mock.Object);
+            var retval = api.Seek(new IntPtr(1), 42, 1);
+
+            Assert.AreEqual(Result, retval);
+        }
     }
 }
