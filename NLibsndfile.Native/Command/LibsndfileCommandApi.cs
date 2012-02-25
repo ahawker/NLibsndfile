@@ -258,5 +258,21 @@ namespace NLibsndfile.Native
 
             return m_Api.GetSimpleFormat(format);
         }
+
+        /// <summary>
+        /// Retrieve information about the given <paramref name="format"/> major/subtype format.
+        /// </summary>
+        /// <param name="format">Major or subtype format to retrieve information about.</param>
+        /// <returns><see cref="LibsndfileFormatInfo"/> object containing format information.</returns>
+        public LibsndfileFormatInfo GetFormatInfo(LibsndfileFormat format)
+        {
+            if (format == 0 ||
+                format == LibsndfileFormat.Submask ||
+                format == LibsndfileFormat.Typemask ||
+                format == LibsndfileFormat.Endmask)
+                throw new ArgumentException("Format must be set.");
+
+            return m_Api.GetFormatInfo(format);
+        }
     }
 }

@@ -125,5 +125,12 @@ namespace NLibsndfile.Native
         /// <param name="format">Format to retrieve information about.</param>
         /// <returns><see cref="LibsndfileFormatInfo"/> object containing format information.</returns>
         LibsndfileFormatInfo GetSimpleFormat(LibsndfileFormat format);
+
+        /// <summary>
+        /// Retrieve information about the given <paramref name="format"/> major/subtype format.
+        /// </summary>
+        /// <param name="format">Major or subtype format to retrieve information about.</param>
+        /// <returns><see cref="LibsndfileFormatInfo"/> object containing format information.</returns>
+        LibsndfileFormatInfo GetFormatInfo(LibsndfileFormat format);
     }
 }

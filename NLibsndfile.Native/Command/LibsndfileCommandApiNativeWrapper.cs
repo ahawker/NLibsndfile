@@ -298,5 +298,23 @@ namespace NLibsndfile.Native
                 return m_Marshaller.MemoryHandleTo<LibsndfileFormatInfo>(memory);
             }
         }
+
+        /// <summary>
+        /// Retrieve information about the given <paramref name="format"/> major/subtype format.
+        /// </summary>
+        /// <param name="format">Major or subtype format to retrieve information about.</param>
+        /// <returns><see cref="LibsndfileFormatInfo"/> object containing format information.</returns>
+        public LibsndfileFormatInfo GetFormatInfo(LibsndfileFormat format)
+        {
+            var formatInfo = new LibsndfileFormatInfo { Format = format };
+            using (var memory = m_Marshaller.Allocate(formatInfo))
+            {
+                var retval = m_Api.Command(IntPtr.Zero, LibsndfileCommand.GetFormatInfo, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(IntPtr.Zero, LibsndfileCommand.GetFormatInfo, retval))
+                    throw new LibsndfileException(string.Format("Unable to retrieve format info for {0}.", format));
+
+                return m_Marshaller.MemoryHandleTo<LibsndfileFormatInfo>(memory);
+            }
+        }
     }
 }
