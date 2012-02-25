@@ -81,6 +81,7 @@
     <Compile Include="Unit\Command\GetSimpleFormatCountTests.cs" />
     <Compile Include="Unit\Command\GetSimpleFormatTests.cs" />
     <Compile Include="Unit\Command\SetAddPeakChunkTests.cs" />
+    <Compile Include="Unit\Command\SetClippingTests.cs" />
     <Compile Include="Unit\Command\SetNormDoubleTests.cs" />
     <Compile Include="Unit\Command\SetNormFloatTests.cs" />
     <Compile Include="Unit\Command\SetRawStartOffsetTests.cs" />

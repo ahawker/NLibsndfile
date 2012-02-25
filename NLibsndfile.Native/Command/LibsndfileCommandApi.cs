@@ -394,5 +394,19 @@ namespace NLibsndfile.Native
 
             m_Api.SetRawStartOffset(sndfile, offset);
         }
+
+        /// <summary>
+        /// Set clipping for when performing floating point to int conversions.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set clipping on.</param>
+        /// <param name="enable">Flag to enable or disable clipping.</param>
+        /// <returns>Current clipping state.</returns>
+        public bool SetClipping(IntPtr sndfile, bool enable)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.SetClipping(sndfile, enable);
+        }
     }
 }

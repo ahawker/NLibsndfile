@@ -198,5 +198,13 @@ namespace NLibsndfile.Native
         /// <param name="sndfile">Audio file to change start offset for.</param>
         /// <param name="offset">Number of bytes offset from the beginning of the file.</param>
         void SetRawStartOffset(IntPtr sndfile, long offset);
+
+        /// <summary>
+        /// Set clipping for when performing floating point to int conversions.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set clipping on.</param>
+        /// <param name="enable">Flag to enable or disable clipping.</param>
+        /// <returns>Current clipping state.</returns>
+        bool SetClipping(IntPtr sndfile, bool enable);
     }
 }

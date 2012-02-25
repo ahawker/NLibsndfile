@@ -461,5 +461,20 @@ namespace NLibsndfile.Native
                     throw new LibsndfileException("Unable to set offset for the given file.");
             }
         }
+
+        /// <summary>
+        /// Set clipping for when performing floating point to int conversions.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set clipping on.</param>
+        /// <param name="enable">Flag to enable or disable clipping.</param>
+        /// <returns>Current clipping state.</returns>
+        public bool SetClipping(IntPtr sndfile, bool enable)
+        {
+            var retval = m_Api.Command(sndfile, LibsndfileCommand.SetClipping, IntPtr.Zero, Convert.ToInt32(enable));
+            if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.SetClipping, retval))
+                throw new LibsndfileException("Unable to set clipping for the given file.");
+
+            return Convert.ToBoolean(retval);
+        }
     }
 }
