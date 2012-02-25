@@ -421,5 +421,18 @@ namespace NLibsndfile.Native
 
             return m_Api.GetClipping(sndfile);
         }
+
+        /// <summary>
+        /// Get the file offset and file length of a file enbedded within another larger file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to scan for embedded files.</param>
+        /// <returns></returns>
+        public LibsndfileEmbedFileInfo GetEmbedFileInfo(IntPtr sndfile)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.GetEmbedFileInfo(sndfile);
+        }
     }
 }

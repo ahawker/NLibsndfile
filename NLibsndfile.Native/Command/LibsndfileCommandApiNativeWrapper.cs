@@ -490,5 +490,23 @@ namespace NLibsndfile.Native
 
             return Convert.ToBoolean(retval);
         }
+
+        /// <summary>
+        /// Get the file offset and file length of a file enbedded within another larger file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to scan for embedded files.</param>
+        /// <returns></returns>
+        public LibsndfileEmbedFileInfo GetEmbedFileInfo(IntPtr sndfile)
+        {
+            var fileInfo = new LibsndfileEmbedFileInfo();
+            using (var memory = m_Marshaller.Allocate(fileInfo))
+            {
+                var retval = m_Api.Command(sndfile, LibsndfileCommand.GetEmbedFileInfo, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.GetEmbedFileInfo, retval))
+                    throw new LibsndfileException("Unable to get embedded file info for the given file.");
+
+                return m_Marshaller.MemoryHandleTo<LibsndfileEmbedFileInfo>(memory);
+            }
+        }
     }
 }

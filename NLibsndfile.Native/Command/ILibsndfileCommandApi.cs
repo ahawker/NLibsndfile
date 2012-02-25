@@ -213,5 +213,12 @@ namespace NLibsndfile.Native
         /// <param name="sndfile">Audio file to get clipping state of.</param>
         /// <returns>Current clipping state.</returns>
         bool GetClipping(IntPtr sndfile);
+
+        /// <summary>
+        /// Get the file offset and file length of a file enbedded within another larger file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to scan for embedded files.</param>
+        /// <returns></returns>
+        LibsndfileEmbedFileInfo GetEmbedFileInfo(IntPtr sndfile);
     }
 }
