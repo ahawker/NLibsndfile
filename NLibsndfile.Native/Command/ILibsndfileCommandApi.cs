@@ -183,5 +183,13 @@ namespace NLibsndfile.Native
         /// <param name="enable">Flag to enable or file header auto-update.</param>
         /// <returns>Current file header auto-update state.</returns>
         bool SetUpdateHeaderAuto(IntPtr sndfile, bool enable);
+
+        /// <summary>
+        /// Truncate a file opened for write or read/write.
+        /// </summary>
+        /// <param name="sndfile">Audio file to truncate.</param>
+        /// <param name="length">Number of frames remaining after truncation.</param>
+        /// <returns>Success of file truncation.</returns>
+        bool FileTruncate(IntPtr sndfile, long length);
     }
 }

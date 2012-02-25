@@ -363,5 +363,21 @@ namespace NLibsndfile.Native
 
             return m_Api.SetUpdateHeaderAuto(sndfile, enable);
         }
+
+        /// <summary>
+        /// Truncate a file opened for write or read/write.
+        /// </summary>
+        /// <param name="sndfile">Audio file to truncate.</param>
+        /// <param name="length">Number of frames remaining after truncation.</param>
+        /// <returns>Success of file truncation.</returns>
+        public bool FileTruncate(IntPtr sndfile, long length)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+            if (length <= 0)
+                throw new ArgumentOutOfRangeException("length", length, "Length must be positive.");
+
+            return m_Api.FileTruncate(sndfile, length);
+        }
     }
 }

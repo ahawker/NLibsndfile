@@ -428,5 +428,23 @@ namespace NLibsndfile.Native
 
             return Convert.ToBoolean(retval);
         }
+
+        /// <summary>
+        /// Truncate a file opened for write or read/write.
+        /// </summary>
+        /// <param name="sndfile">Audio file to truncate.</param>
+        /// <param name="length">Number of frames remaining after truncation.</param>
+        /// <returns>Success of file truncation.</returns>
+        public bool FileTruncate(IntPtr sndfile, long length)
+        {
+            using (var memory = m_Marshaller.Allocate(length))
+            {
+                var retval = m_Api.Command(sndfile, LibsndfileCommand.FileTruncate, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.FileTruncate, retval))
+                    throw new LibsndfileException("Unable to truncate the given file.");
+
+                return Convert.ToBoolean(retval);
+            }
+        }
     }
 }

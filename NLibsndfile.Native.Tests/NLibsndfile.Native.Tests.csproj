@@ -64,6 +64,7 @@
     <Compile Include="Unit\Command\CalcNormMaxAllChannelsTests.cs" />
     <Compile Include="Unit\Command\CalcNormSignalMaxTests.cs" />
     <Compile Include="Unit\Command\CalcSignalMaxTests.cs" />
+    <Compile Include="Unit\Command\FileTruncateTests.cs" />
     <Compile Include="Unit\Command\GetFormatInfoTests.cs" />
     <Compile Include="Unit\Command\GetFormatMajorCountTests.cs" />
     <Compile Include="Unit\Command\GetFormatMajorTests.cs" />
