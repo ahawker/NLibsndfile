@@ -8,6 +8,26 @@ namespace NLibsndfile.Native
     /// </summary>
     public class LibsndfileApiNativeWrapper : ILibsndfileApi
     {
+        private ILibsndfileMarshaller m_Marshaller;
+
+        internal LibsndfileApiNativeWrapper()
+            : this(new LibsndfileMarshaller())
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new <see cref="LibsndfileApiNativeWrapper"/> with 
+        /// the given <paramref name="marshaller"/> implementation.
+        /// </summary>
+        /// <param name="marshaller">ILibsndfileMarshaller implementation to use.</param>
+        internal LibsndfileApiNativeWrapper(ILibsndfileMarshaller marshaller)
+        {
+            if (marshaller == null)
+                throw new ArgumentNullException("marshaller");
+
+            m_Marshaller = marshaller;
+        }
+
         /// <summary>
         /// Interface to Libsndfile command methods.
         /// </summary>
@@ -166,8 +186,8 @@ namespace NLibsndfile.Native
         /// <returns>Pointer to a string containing the description of the current error.</returns>
         public string ErrorString(IntPtr sndfile)
         {
-            var ptr = LibsndfileApiNative.sf_strerror(sndfile);
-            return Marshal.PtrToStringAnsi(ptr);
+            using (var memory = m_Marshaller.Attach(LibsndfileApiNative.sf_strerror(sndfile)))
+                return m_Marshaller.MemoryHandleToString(memory);
         }
 
         /// <summary>
@@ -177,8 +197,8 @@ namespace NLibsndfile.Native
         /// <returns>Description of the given error code.</returns>
         public string ErrorNumber(int error)
         {
-            var ptr = LibsndfileApiNative.sf_error_number(error);
-            return Marshal.PtrToStringAnsi(ptr);
+            using (var memory = m_Marshaller.Attach(LibsndfileApiNative.sf_error_number(error)))
+                return m_Marshaller.MemoryHandleToString(memory);
         }
 
         /// <summary>
@@ -457,8 +477,8 @@ namespace NLibsndfile.Native
         /// <returns>Returns the value of the <paramref name="type"/> tag.</returns>
         public string GetString(IntPtr sndfile, LibsndfileStringType type)
         {
-            var ptr = LibsndfileApiNative.sf_get_string(sndfile, type);
-            return Marshal.PtrToStringAnsi(ptr);
+            using (var memory = m_Marshaller.Attach(LibsndfileApiNative.sf_get_string(sndfile, type)))
+                return m_Marshaller.MemoryHandleToString(memory);
         }
 
         /// <summary>
