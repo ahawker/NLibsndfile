@@ -103,5 +103,14 @@ namespace NLibsndfile.Native
         /// <param name="enable">Flag to enable or disable int to float scaling.</param>
         /// <returns>Previous scaling state.</returns>
         bool SetScaleFloatIntRead(IntPtr sndfile, bool enable);
+
+        /// <summary>
+        /// Sets the scale factor for when integer data is written from the <paramref name="sndfile"/>
+        /// as floating point data.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set float to int scaling.</param>
+        /// <param name="enable">Flag to enable or disable float to int scaling.</param>
+        /// <returns>Previous scaling state.</returns>
+        bool SetScaleIntFloatWrite(IntPtr sndfile, bool enable);
     }
 }

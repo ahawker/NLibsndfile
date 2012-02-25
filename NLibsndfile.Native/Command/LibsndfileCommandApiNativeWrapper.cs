@@ -248,5 +248,21 @@ namespace NLibsndfile.Native
 
             return Convert.ToBoolean(retval);
         }
+
+        /// <summary>
+        /// Sets the scale factor for when integer data is written from the <paramref name="sndfile"/>
+        /// as floating point data.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set float to int scaling.</param>
+        /// <param name="enable">Flag to enable or disable float to int scaling.</param>
+        /// <returns>Previous scaling state.</returns>
+        public bool SetScaleIntFloatWrite(IntPtr sndfile, bool enable)
+        {
+            var retval = m_Api.Command(sndfile, LibsndfileCommand.SetScaleIntFloatWrite, IntPtr.Zero, Convert.ToInt32(enable));
+            if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.SetScaleIntFloatWrite, retval))
+                throw new LibsndfileException("Unable to set float to int scaling for the given file.");
+
+            return Convert.ToBoolean(retval);
+        }
     }
 }

@@ -74,6 +74,7 @@
     <Compile Include="Unit\Command\SetNormDoubleTests.cs" />
     <Compile Include="Unit\Command\SetNormFloatTests.cs" />
     <Compile Include="Unit\Command\SetScaleFloatIntReadTests.cs" />
+    <Compile Include="Unit\Command\SetScaleIntFloatWriteTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NLibsndfile.Native\NLibsndfile.Native.csproj">
