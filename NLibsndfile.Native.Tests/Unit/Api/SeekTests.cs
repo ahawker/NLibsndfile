@@ -44,7 +44,6 @@ namespace NLibsndfile.Native.Tests
         [ExpectedException(typeof(LibsndfileException))]
         public void Seek_ShouldThrowExceptionOnNegativeOffset()
         {
-
             var mock = new Mock<ILibsndfileApi>();
             mock.Setup(x => x.Seek(It.IsAny<IntPtr>(), It.IsAny<long>(), It.IsAny<int>())).Returns(-1);
 

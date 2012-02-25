@@ -49,6 +49,7 @@
     <Compile Include="Unit\Api\CloseTests.cs" />
     <Compile Include="Unit\Api\CommandTests.cs" />
     <Compile Include="Unit\Api\ErrorTests.cs" />
+    <Compile Include="Unit\Api\FormatCheckTests.cs" />
     <Compile Include="Unit\Api\OpenTests.cs" />
     <Compile Include="Unit\Api\ReadFramesTests.cs" />
     <Compile Include="Unit\Api\ReadItemsTests.cs" />
