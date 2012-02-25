@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NLibsndfile.Native</RootNamespace>
     <AssemblyName>NLibsndfile.Native</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -59,6 +60,7 @@
     <Compile Include="Types\LibsndfileCommand.cs" />
     <Compile Include="Types\LibsndfileError.cs" />
     <Compile Include="Types\LibsndfileFormat.cs" />
+    <Compile Include="Types\LibsndfileFormatInfo.cs" />
     <Compile Include="Types\LibsndfileInfo.cs" />
     <Compile Include="Types\LibsndfileMode.cs" />
     <Compile Include="Types\LibsndfileStringType.cs" />

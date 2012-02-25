@@ -118,5 +118,12 @@ namespace NLibsndfile.Native
         /// </summary>
         /// <returns>Number of simple formats supported.</returns>
         int GetSimpleFormatCount();
+
+        /// <summary>
+        /// Retrieves information about the given <paramref name="format"/>.
+        /// </summary>
+        /// <param name="format">Format to retrieve information about.</param>
+        /// <returns><see cref="LibsndfileFormatInfo"/> object containing format information.</returns>
+        LibsndfileFormatInfo GetSimpleFormat(LibsndfileFormat format);
     }
 }

@@ -242,5 +242,21 @@ namespace NLibsndfile.Native
         {
             return m_Api.GetSimpleFormatCount();
         }
+
+        /// <summary>
+        /// Retrieves information about the given <paramref name="format"/>.
+        /// </summary>
+        /// <param name="format">Format to retrieve information about.</param>
+        /// <returns><see cref="LibsndfileFormatInfo"/> object containing format information.</returns>
+        public LibsndfileFormatInfo GetSimpleFormat(LibsndfileFormat format)
+        {
+            if (format == 0 ||
+                format == LibsndfileFormat.Submask ||
+                format == LibsndfileFormat.Typemask ||
+                format == LibsndfileFormat.Endmask)
+                throw new ArgumentException("Format must be set.");
+
+            return m_Api.GetSimpleFormat(format);
+        }
     }
 }

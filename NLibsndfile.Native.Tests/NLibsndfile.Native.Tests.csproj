@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NLibsndfile.Native.Tests</RootNamespace>
     <AssemblyName>NLibsndfile.Native.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -72,6 +73,7 @@
     <Compile Include="Unit\Command\GetNormFloatTests.cs" />
     <Compile Include="Unit\Command\GetSignalMaxTests.cs" />
     <Compile Include="Unit\Command\GetSimpleFormatCountTests.cs" />
+    <Compile Include="Unit\Command\GetSimpleFormatTests.cs" />
     <Compile Include="Unit\Command\SetNormDoubleTests.cs" />
     <Compile Include="Unit\Command\SetNormFloatTests.cs" />
     <Compile Include="Unit\Command\SetScaleFloatIntReadTests.cs" />
