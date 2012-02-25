@@ -198,7 +198,7 @@ namespace NLibsndfile.Native
         /// <returns>Previous double normalization state.</returns>
         public bool SetNormDouble(IntPtr sndfile, bool normalize)
         {
-            var retval = m_Api.Command(sndfile, LibsndfileCommand.SetNormDouble, sndfile, Convert.ToInt32(normalize));
+            var retval = m_Api.Command(sndfile, LibsndfileCommand.SetNormDouble, IntPtr.Zero, Convert.ToInt32(normalize));
             if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.SetNormDouble, retval))
                 throw new LibsndfileException("Unable to set double normalization for the given file.");
 
