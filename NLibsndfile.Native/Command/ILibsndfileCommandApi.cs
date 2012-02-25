@@ -169,5 +169,11 @@ namespace NLibsndfile.Native
         /// This call must be made before any data is written to the file.
         /// </remarks>
         bool SetAddPeakChunk(IntPtr sndfile, bool enable);
+
+        /// <summary>
+        /// Updates file header to reflect updated file information.
+        /// </summary>
+        /// <param name="sndfile">Audio file to update file header of.</param>
+        void UpdateHeaderNow(IntPtr sndfile);
     }
 }

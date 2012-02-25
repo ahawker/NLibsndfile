@@ -402,5 +402,16 @@ namespace NLibsndfile.Native
 
             return Convert.ToBoolean(retval);
         }
+
+        /// <summary>
+        /// Updates file header to reflect updated file information.
+        /// </summary>
+        /// <param name="sndfile">Audio file to update file header of.</param>
+        public void UpdateHeaderNow(IntPtr sndfile)
+        {
+            var retval = m_Api.Command(sndfile, LibsndfileCommand.UpdateHeaderNow, IntPtr.Zero, 0);
+            if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.UpdateHeaderNow, retval))
+                throw new LibsndfileException("Unable to update header for the given file.");
+        }
     }
 }

@@ -337,5 +337,17 @@ namespace NLibsndfile.Native
 
             return m_Api.SetAddPeakChunk(sndfile, enable);
         }
+
+        /// <summary>
+        /// Updates file header to reflect updated file information.
+        /// </summary>
+        /// <param name="sndfile">Audio file to update file header of.</param>
+        public void UpdateHeaderNow(IntPtr sndfile)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            m_Api.UpdateHeaderNow(sndfile);
+        }
     }
 }
