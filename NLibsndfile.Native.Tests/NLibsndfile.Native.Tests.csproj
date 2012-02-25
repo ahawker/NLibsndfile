@@ -83,6 +83,7 @@
     <Compile Include="Unit\Command\SetAddPeakChunkTests.cs" />
     <Compile Include="Unit\Command\SetNormDoubleTests.cs" />
     <Compile Include="Unit\Command\SetNormFloatTests.cs" />
+    <Compile Include="Unit\Command\SetRawStartOffsetTests.cs" />
     <Compile Include="Unit\Command\SetScaleFloatIntReadTests.cs" />
     <Compile Include="Unit\Command\SetScaleIntFloatWriteTests.cs" />
     <Compile Include="Unit\Command\SetUpdateHeaderAutoTests.cs" />

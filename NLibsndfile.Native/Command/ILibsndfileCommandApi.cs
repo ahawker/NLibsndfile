@@ -191,5 +191,12 @@ namespace NLibsndfile.Native
         /// <param name="length">Number of frames remaining after truncation.</param>
         /// <returns>Success of file truncation.</returns>
         bool FileTruncate(IntPtr sndfile, long length);
+
+        /// <summary>
+        /// Change the data start offset for RAW files.
+        /// </summary>
+        /// <param name="sndfile">Audio file to change start offset for.</param>
+        /// <param name="offset">Number of bytes offset from the beginning of the file.</param>
+        void SetRawStartOffset(IntPtr sndfile, long offset);
     }
 }

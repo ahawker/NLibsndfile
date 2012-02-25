@@ -379,5 +379,20 @@ namespace NLibsndfile.Native
 
             return m_Api.FileTruncate(sndfile, length);
         }
+
+        /// <summary>
+        /// Change the data start offset for RAW files.
+        /// </summary>
+        /// <param name="sndfile">Audio file to change start offset for.</param>
+        /// <param name="offset">Number of bytes offset from the beginning of the file.</param>
+        public void SetRawStartOffset(IntPtr sndfile, long offset)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+            if (offset <= 0)
+                throw new ArgumentOutOfRangeException("offset", offset, "Offset must be positive.");
+
+            m_Api.SetRawStartOffset(sndfile, offset);
+        }
     }
 }

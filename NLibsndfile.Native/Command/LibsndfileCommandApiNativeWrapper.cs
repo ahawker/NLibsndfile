@@ -443,7 +443,22 @@ namespace NLibsndfile.Native
                 if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.FileTruncate, retval))
                     throw new LibsndfileException("Unable to truncate the given file.");
 
-                return Convert.ToBoolean(retval);
+                return !Convert.ToBoolean(retval);
+            }
+        }
+
+        /// <summary>
+        /// Change the data start offset for RAW files.
+        /// </summary>
+        /// <param name="sndfile">Audio file to change start offset for.</param>
+        /// <param name="offset">Number of bytes offset from the beginning of the file.</param>
+        public void SetRawStartOffset(IntPtr sndfile, long offset)
+        {
+            using (var memory = m_Marshaller.Allocate(offset))
+            {
+                var retval = m_Api.Command(sndfile, LibsndfileCommand.SetRawStartOffset, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.SetRawStartOffset, retval))
+                    throw new LibsndfileException("Unable to set offset for the given file.");
             }
         }
     }
