@@ -69,18 +69,16 @@ namespace NLibsndfile.Native.Tests
         [Test]
         public void FileTruncate_ShouldPassOnValidResult()
         {
-            const int Result = 0;
-
             var marshallerMock = new Mock<ILibsndfileMarshaller>();
             marshallerMock.Setup(x => x.Allocate(It.IsAny<long>())).Returns(It.IsAny<IntPtr>());
 
             var mock = new Mock<ILibsndfileApi>();
-            mock.Setup(x => x.Command(It.IsAny<IntPtr>(), It.IsAny<LibsndfileCommand>(), It.IsAny<IntPtr>(), It.IsAny<int>())).Returns(Result);
+            mock.Setup(x => x.Command(It.IsAny<IntPtr>(), It.IsAny<LibsndfileCommand>(), It.IsAny<IntPtr>(), It.IsAny<int>())).Returns(0);
 
             var api = new LibsndfileCommandApiNativeWrapper(mock.Object, marshallerMock.Object);
             var retval = api.FileTruncate(new IntPtr(1), 1);
 
-            Assert.AreEqual(Convert.ToBoolean(Result), retval);
+            Assert.AreEqual(true, retval);
         }
     }
 }
