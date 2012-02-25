@@ -52,7 +52,7 @@ namespace NLibsndfile.Native.Tests
         [ExpectedException(typeof(LibsndfileException))]
         public void GetLibVersion_ShouldThrowExceptionOnNegativeResult()
         {
-            var marshallerMock = new Mock<ILibsndfileCommandMarshaller>();
+            var marshallerMock = new Mock<ILibsndfileMarshaller>();
             marshallerMock.Setup(x => x.Allocate(It.IsAny<int>())).Returns(It.IsAny<IntPtr>());
 
             var mock = new Mock<ILibsndfileApi>();
@@ -66,7 +66,7 @@ namespace NLibsndfile.Native.Tests
         [ExpectedException(typeof(LibsndfileException))]
         public void GetLibVersion_ShouldThrowExceptionOnZeroResult()
         {
-            var marshallerMock = new Mock<ILibsndfileCommandMarshaller>();
+            var marshallerMock = new Mock<ILibsndfileMarshaller>();
             marshallerMock.Setup(x => x.Allocate(It.IsAny<int>())).Returns(It.IsAny<IntPtr>());
 
             var mock = new Mock<ILibsndfileApi>();
@@ -83,7 +83,7 @@ namespace NLibsndfile.Native.Tests
 
             var memoryMock = new Mock<UnmanagedMemoryHandle>();
 
-            var marshallerMock = new Mock<ILibsndfileCommandMarshaller>();
+            var marshallerMock = new Mock<ILibsndfileMarshaller>();
             marshallerMock.Setup(x => x.Allocate(It.IsAny<int>())).Returns(memoryMock.Object);
             marshallerMock.Setup(x => x.MemoryHandleToString(It.IsAny<UnmanagedMemoryHandle>())).Returns(Version);
 

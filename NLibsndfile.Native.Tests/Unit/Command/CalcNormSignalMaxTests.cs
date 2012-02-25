@@ -22,7 +22,7 @@ namespace NLibsndfile.Native.Tests
         [ExpectedException(typeof(LibsndfileException))]
         public void CalcNormSignalMax_ShouldThrowExceptionOnNegativeResult()
         {
-            var marshallerMock = new Mock<ILibsndfileCommandMarshaller>();
+            var marshallerMock = new Mock<ILibsndfileMarshaller>();
             marshallerMock.Setup(x => x.Allocate<double>()).Returns(It.IsAny<IntPtr>());
 
             var mock = new Mock<ILibsndfileApi>();
@@ -36,7 +36,7 @@ namespace NLibsndfile.Native.Tests
         [ExpectedException(typeof(LibsndfileException))]
         public void CalcNormSignalMax_ShouldThrowExceptionOnGreaterThanZeroResult()
         {
-            var marshallerMock = new Mock<ILibsndfileCommandMarshaller>();
+            var marshallerMock = new Mock<ILibsndfileMarshaller>();
             marshallerMock.Setup(x => x.Allocate<double>()).Returns(It.IsAny<IntPtr>());
 
             var mock = new Mock<ILibsndfileApi>();
@@ -53,7 +53,7 @@ namespace NLibsndfile.Native.Tests
 
             var memoryMock = new Mock<UnmanagedMemoryHandle>();
 
-            var marshallerMock = new Mock<ILibsndfileCommandMarshaller>();
+            var marshallerMock = new Mock<ILibsndfileMarshaller>();
             marshallerMock.Setup(x => x.Allocate<double>()).Returns(memoryMock.Object);
             marshallerMock.Setup(x => x.MemoryHandleTo<double>(It.IsAny<UnmanagedMemoryHandle>())).Returns(NormSignalMax);
 
