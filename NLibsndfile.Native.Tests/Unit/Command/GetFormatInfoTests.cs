@@ -10,16 +10,6 @@ namespace NLibsndfile.Native.Tests
     {
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void GetFormatInfo_ShouldThrowExceptionOnZeroFormat()
-        {
-            var mock = new Mock<ILibsndfileCommandApi>();
-
-            var api = new LibsndfileCommandApi(mock.Object);
-            api.GetFormatInfo(0);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void GetFormatInfo_ShouldThrowExceptionOnSubmaskFormat()
         {
             var mock = new Mock<ILibsndfileCommandApi>();

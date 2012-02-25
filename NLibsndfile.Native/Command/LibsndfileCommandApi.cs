@@ -250,8 +250,7 @@ namespace NLibsndfile.Native
         /// <returns><see cref="LibsndfileFormatInfo"/> object containing format information.</returns>
         public LibsndfileFormatInfo GetSimpleFormat(LibsndfileFormat format)
         {
-            if (format == 0 ||
-                format == LibsndfileFormat.Submask ||
+            if (format == LibsndfileFormat.Submask ||
                 format == LibsndfileFormat.Typemask ||
                 format == LibsndfileFormat.Endmask)
                 throw new ArgumentException("Format must be set.");
@@ -266,8 +265,7 @@ namespace NLibsndfile.Native
         /// <returns><see cref="LibsndfileFormatInfo"/> object containing format information.</returns>
         public LibsndfileFormatInfo GetFormatInfo(LibsndfileFormat format)
         {
-            if (format == 0 ||
-                format == LibsndfileFormat.Submask ||
+            if (format == LibsndfileFormat.Submask ||
                 format == LibsndfileFormat.Typemask ||
                 format == LibsndfileFormat.Endmask)
                 throw new ArgumentException("Format must be set.");
@@ -282,6 +280,21 @@ namespace NLibsndfile.Native
         public int GetFormatMajorCount()
         {
             return m_Api.GetFormatMajorCount();
+        }
+
+        /// <summary>
+        /// Retrieves information about the given <paramref name="format"/> major type.
+        /// </summary>
+        /// <param name="format">Major format to retrieve information about.</param>
+        /// <returns><see cref="LibsndfileFormatInfo"/> object containing format information.</returns>
+        public LibsndfileFormatInfo GetFormatMajor(LibsndfileFormat format)
+        {
+            if (format == LibsndfileFormat.Submask ||
+                format == LibsndfileFormat.Typemask ||
+                format == LibsndfileFormat.Endmask)
+                throw new ArgumentException("Format must be set.");
+
+            return m_Api.GetFormatMajor(format);
         }
     }
 }

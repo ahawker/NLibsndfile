@@ -6,41 +6,41 @@ namespace NLibsndfile.Native.Tests
 {
     [TestFixture]
     [Category("NLibsndfileApi.Native.UnitTests.CommandApi")]
-    public class GetSimpleFormatTests
+    public class GetFormatMajorTests
     {
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void GetSimpleFormat_ShouldThrowExceptionOnSubmaskFormat()
+        public void GetFormatMajor_ShouldThrowExceptionOnSubmaskFormat()
         {
             var mock = new Mock<ILibsndfileCommandApi>();
 
             var api = new LibsndfileCommandApi(mock.Object);
-            api.GetSimpleFormat(LibsndfileFormat.Submask);
+            api.GetFormatMajor(LibsndfileFormat.Submask);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void GetSimpleFormat_ShouldThrowExceptionOnTypemaskFormat()
+        public void GetFormatMajor_ShouldThrowExceptionOnTypemaskFormat()
         {
             var mock = new Mock<ILibsndfileCommandApi>();
 
             var api = new LibsndfileCommandApi(mock.Object);
-            api.GetSimpleFormat(LibsndfileFormat.Typemask);
+            api.GetFormatMajor(LibsndfileFormat.Typemask);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void GetSimpleFormat_ShouldThrowExceptionOnEndmaskFormat()
+        public void GetFormatMajor_ShouldThrowExceptionOnEndmaskFormat()
         {
             var mock = new Mock<ILibsndfileCommandApi>();
 
             var api = new LibsndfileCommandApi(mock.Object);
-            api.GetSimpleFormat(LibsndfileFormat.Endmask);
+            api.GetFormatMajor(LibsndfileFormat.Endmask);
         }
 
         [Test]
         [ExpectedException(typeof(LibsndfileException))]
-        public void GetSimpleFormat_ShouldThrowExceptionOnNegativeResult()
+        public void GetFormatMajor_ShouldThrowExceptionOnNegativeResult()
         {
             var marshallerMock = new Mock<ILibsndfileMarshaller>();
             marshallerMock.Setup(x => x.Allocate(It.IsAny<LibsndfileFormatInfo>())).Returns(It.IsAny<IntPtr>());
@@ -49,12 +49,12 @@ namespace NLibsndfile.Native.Tests
             mock.Setup(x => x.Command(It.IsAny<IntPtr>(), It.IsAny<LibsndfileCommand>(), It.IsAny<IntPtr>(), It.IsAny<int>())).Returns(-1);
 
             var api = new LibsndfileCommandApiNativeWrapper(mock.Object, marshallerMock.Object);
-            api.GetSimpleFormat(LibsndfileFormat.Wav);
+            api.GetFormatMajor(LibsndfileFormat.Wav);
         }
 
         [Test]
         [ExpectedException(typeof(LibsndfileException))]
-        public void GetSimpleFormat_ShouldThrowExceptionOnGreaterThanOneResult()
+        public void GetFormatMajor_ShouldThrowExceptionOnGreaterThanOneResult()
         {
             var marshallerMock = new Mock<ILibsndfileMarshaller>();
             marshallerMock.Setup(x => x.Allocate(It.IsAny<LibsndfileFormatInfo>())).Returns(It.IsAny<IntPtr>());
@@ -63,11 +63,11 @@ namespace NLibsndfile.Native.Tests
             mock.Setup(x => x.Command(It.IsAny<IntPtr>(), It.IsAny<LibsndfileCommand>(), It.IsAny<IntPtr>(), It.IsAny<int>())).Returns(2);
 
             var api = new LibsndfileCommandApiNativeWrapper(mock.Object, marshallerMock.Object);
-            api.GetSimpleFormat(LibsndfileFormat.Wav);
+            api.GetFormatMajor(LibsndfileFormat.Wav);
         }
 
         [Test]
-        public void GetSimpleFormat_ShouldPassOnZeroResult()
+        public void GetFormatMajor_ShouldPassOnZeroResult()
         {
             var formatInfo = new LibsndfileFormatInfo { Format = LibsndfileFormat.Wav, Name = "Wav", Extension = ".wav" };
 
@@ -83,7 +83,7 @@ namespace NLibsndfile.Native.Tests
             mock.Setup(x => x.Command(It.IsAny<IntPtr>(), It.IsAny<LibsndfileCommand>(), It.IsAny<IntPtr>(), It.IsAny<int>())).Returns(0);
 
             var api = new LibsndfileCommandApiNativeWrapper(mock.Object, marshallerMock.Object);
-            var retval = api.GetSimpleFormat(LibsndfileFormat.Wav);
+            var retval = api.GetFormatMajor(LibsndfileFormat.Wav);
 
             Assert.AreEqual(formatInfo, retval);
         }
