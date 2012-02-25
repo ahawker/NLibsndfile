@@ -121,7 +121,7 @@ namespace NLibsndfile.Native
         public bool FormatCheck(ref LibsndfileInfo info)
         {
             if (!info.IsSet)
-                throw new ArgumentException("LibsndfileInfo structure cannot be set to default value.");
+                throw new ArgumentException("LibsndfileInfo structure must be initialized.");
 
             return m_Api.FormatCheck(ref info);
         }
