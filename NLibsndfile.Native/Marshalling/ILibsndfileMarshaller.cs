@@ -26,6 +26,15 @@ namespace NLibsndfile.Native
         UnmanagedMemoryHandle Allocate<T>() where T : struct;
 
         /// <summary>
+        /// Create a new <see cref="UnmanagedMemoryHandle"/> allocated for the size of
+        /// a single <typeparamref name="T"/> structure and populate the memory with <paramref name="obj"/>.
+        /// </summary>
+        /// <typeparam name="T">Type of structure to calculate size of.</typeparam>
+        /// <param name="obj"><typeparamref name="T"/> object to populate newly allocated memory with.</param>
+        /// <returns><see cref="UnmanagedMemoryHandle"/> with a chunk of memory allocated and filled.</returns>
+        UnmanagedMemoryHandle Allocate<T>(T obj) where T : struct;
+
+        /// <summary>
         /// Creates a new <see cref="UnmanagedMemoryHandle"/> allocated for the size of
         ///  a single <typeparamref name="T"/> structure with the <paramref name="length"/> multiplier.
         /// </summary>
