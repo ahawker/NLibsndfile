@@ -71,6 +71,7 @@
     <Compile Include="Unit\Command\GetNormDoubleTests.cs" />
     <Compile Include="Unit\Command\GetNormFloatTests.cs" />
     <Compile Include="Unit\Command\GetSignalMaxTests.cs" />
+    <Compile Include="Unit\Command\GetSimpleFormatCountTests.cs" />
     <Compile Include="Unit\Command\SetNormDoubleTests.cs" />
     <Compile Include="Unit\Command\SetNormFloatTests.cs" />
     <Compile Include="Unit\Command\SetScaleFloatIntReadTests.cs" />

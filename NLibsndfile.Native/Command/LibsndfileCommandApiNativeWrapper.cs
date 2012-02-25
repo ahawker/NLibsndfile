@@ -264,5 +264,21 @@ namespace NLibsndfile.Native
 
             return Convert.ToBoolean(retval);
         }
+
+        /// <summary>
+        /// Returns the number of simple formats supported by Libsndfile.
+        /// </summary>
+        /// <returns>Number of simple formats supported.</returns>
+        public int GetSimpleFormatCount()
+        {
+            using (var memory = m_Marshaller.Allocate<int>())
+            {
+                var retval = m_Api.Command(IntPtr.Zero, LibsndfileCommand.GetSimpleFormatCount, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(IntPtr.Zero, LibsndfileCommand.GetSimpleFormatCount, retval))
+                    throw new LibsndfileException("Unable to retrieve number of support simple formats.");
+
+                return m_Marshaller.MemoryHandleTo<int>(memory);
+            }
+        }
     }
 }

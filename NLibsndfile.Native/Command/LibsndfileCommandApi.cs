@@ -233,5 +233,14 @@ namespace NLibsndfile.Native
 
             return m_Api.SetScaleIntFloatWrite(sndfile, enable);
         }
+
+        /// <summary>
+        /// Returns the number of simple formats supported by Libsndfile.
+        /// </summary>
+        /// <returns>Number of simple formats supported.</returns>
+        public int GetSimpleFormatCount()
+        {
+            return m_Api.GetSimpleFormatCount();
+        }
     }
 }

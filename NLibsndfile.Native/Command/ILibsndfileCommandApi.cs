@@ -112,5 +112,11 @@ namespace NLibsndfile.Native
         /// <param name="enable">Flag to enable or disable float to int scaling.</param>
         /// <returns>Previous scaling state.</returns>
         bool SetScaleIntFloatWrite(IntPtr sndfile, bool enable);
+
+        /// <summary>
+        /// Returns the number of simple formats supported by Libsndfile.
+        /// </summary>
+        /// <returns>Number of simple formats supported.</returns>
+        int GetSimpleFormatCount();
     }
 }
