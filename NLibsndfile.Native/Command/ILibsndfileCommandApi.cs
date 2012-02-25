@@ -49,5 +49,12 @@ namespace NLibsndfile.Native
         /// <param name="channels">Number of audio channels in the audio file.</param>
         /// <returns>Normalized Peak values for each channel.</returns>
         double[] CalcNormMaxAllChannels(IntPtr sndfile, int channels);
+
+        /// <summary>
+        /// Retrieve the peak value for the file as stored in the file header.
+        /// </summary>
+        /// <param name="sndfile">Audio file we want to examine.</param>
+        /// <returns>Peak value from file header.</returns>
+        double GetSignalMax(IntPtr sndfile);
     }
 }

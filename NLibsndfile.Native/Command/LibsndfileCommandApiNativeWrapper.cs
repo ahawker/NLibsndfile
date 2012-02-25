@@ -139,5 +139,22 @@ namespace NLibsndfile.Native
                 return m_Marshaller.MemoryHandleToArray<double>(memory);
             }
         }
+
+        /// <summary>
+        /// Retrieve the peak value for the file as stored in the file header.
+        /// </summary>
+        /// <param name="sndfile">Audio file we want to examine.</param>
+        /// <returns>Peak value from file header.</returns>
+        public double GetSignalMax(IntPtr sndfile)
+        {
+            using (var memory = m_Marshaller.Allocate<double>())
+            {
+                var retval = m_Api.Command(sndfile, LibsndfileCommand.GetSignalMax, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.CalcNormMaxAllChannels, retval))
+                    throw new LibsndfileException("Unable to retrieve peak value from file header.");
+
+                return m_Marshaller.MemoryHandleTo<double>(memory);
+            }
+        }
     }
 }

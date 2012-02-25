@@ -116,5 +116,18 @@ namespace NLibsndfile.Native
 
             return max;
         }
+
+        /// <summary>
+        /// Retrieve the peak value for the file as stored in the file header.
+        /// </summary>
+        /// <param name="sndfile">Audio file we want to examine.</param>
+        /// <returns>Peak value from file header.</returns>
+        public double GetSignalMax(IntPtr sndfile)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.GetSignalMax(sndfile);
+        }
     }
 }
