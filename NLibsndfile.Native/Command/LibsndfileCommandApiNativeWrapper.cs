@@ -316,5 +316,21 @@ namespace NLibsndfile.Native
                 return m_Marshaller.MemoryHandleTo<LibsndfileFormatInfo>(memory);
             }
         }
+
+        /// <summary>
+        /// Returns the number of major formats supported by Libsndfile.
+        /// </summary>
+        /// <returns>Number of major formats supported.</returns>
+        public int GetFormatMajorCount()
+        {
+            using (var memory = m_Marshaller.Allocate<int>())
+            {
+                var retval = m_Api.Command(IntPtr.Zero, LibsndfileCommand.GetFormatMajorCount, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(IntPtr.Zero, LibsndfileCommand.GetFormatMajorCount, retval))
+                    throw new LibsndfileException("Unable to retrieve number of supported major formats.");
+
+                return m_Marshaller.MemoryHandleTo<int>(memory);
+            }
+        }
     }
 }

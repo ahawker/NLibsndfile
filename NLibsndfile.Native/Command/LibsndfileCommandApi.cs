@@ -274,5 +274,14 @@ namespace NLibsndfile.Native
 
             return m_Api.GetFormatInfo(format);
         }
+
+        /// <summary>
+        /// Returns the number of major formats supported by Libsndfile.
+        /// </summary>
+        /// <returns>Number of major formats supported.</returns>
+        public int GetFormatMajorCount()
+        {
+            return m_Api.GetFormatMajorCount();
+        }
     }
 }
