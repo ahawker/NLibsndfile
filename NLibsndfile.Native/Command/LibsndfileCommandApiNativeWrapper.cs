@@ -121,5 +121,23 @@ namespace NLibsndfile.Native
                 return m_Marshaller.MemoryHandleToArray<double>(memory);
             }
         }
+
+        /// <summary>
+        /// Scan <paramref name="sndfile"/> file and return normalized peak value for each channel. 
+        /// </summary>
+        /// <param name="sndfile">Audio file we want to scan.</param>
+        /// <param name="channels">Number of audio channels in the audio file.</param>
+        /// <returns>Normalized Peak values for each channel.</returns>
+        public double[] CalcNormMaxAllChannels(IntPtr sndfile, int channels)
+        {
+            using (var memory = m_Marshaller.AllocateArray<double>(channels))
+            {
+                var retval = m_Api.Command(sndfile, LibsndfileCommand.CalcNormMaxAllChannels, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.CalcNormMaxAllChannels, retval))
+                    throw new LibsndfileException("Unable to calculate normalized signal max for all channels in the given file.");
+
+                return m_Marshaller.MemoryHandleToArray<double>(memory);
+            }
+        }
     }
 }

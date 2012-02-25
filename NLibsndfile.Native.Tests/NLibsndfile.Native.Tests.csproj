@@ -59,6 +59,7 @@
     <Compile Include="Unit\Api\WriteFramesTests.cs" />
     <Compile Include="Unit\Api\WriteItemsTests.cs" />
     <Compile Include="Unit\Api\WriteRawTests.cs" />
+    <Compile Include="Unit\Command\CalcNormMaxAllChannels.cs" />
     <Compile Include="Unit\Command\CalcNormSignalMaxTests.cs" />
     <Compile Include="Unit\Command\CalcSignalMaxTests.cs" />
     <Compile Include="Unit\Command\GetLibVersionTests.cs" />
