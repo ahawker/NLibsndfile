@@ -129,5 +129,25 @@ namespace NLibsndfile.Native
 
             return m_Api.GetSignalMax(sndfile);
         }
+
+        /// <summary>
+        /// Retrieve the peak value for each channel for the file as stored in the file header.
+        /// </summary>
+        /// <param name="sndfile">Audio file we want to examine.</param>
+        /// <param name="channels">Number of audio channels in the audio file.</param>
+        /// <returns>Peak values for each channel from file header.</returns>
+        public double[] GetMaxAllChannels(IntPtr sndfile, int channels)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+            if (channels <= 0)
+                throw new ArgumentOutOfRangeException("channels", channels, "Channels must be greater than zero.");
+
+            var max = m_Api.GetMaxAllChannels(sndfile, channels);
+            if (max == null || max.Length == 0)
+                throw new LibsndfileException("Unable to retrieve signal max for all channels from file header.");
+
+            return max;
+        }
     }
 }
