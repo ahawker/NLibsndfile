@@ -508,5 +508,20 @@ namespace NLibsndfile.Native
                 return m_Marshaller.MemoryHandleTo<LibsndfileEmbedFileInfo>(memory);
             }
         }
+
+        /// <summary>
+        /// Test if the <paramref name="sndfile"/> has the GUID of a WAVEX file
+        /// for any of the ambisonic formats.
+        /// </summary>
+        /// <param name="sndfile">Audio file to examine.</param>
+        /// <returns>Returns true or false based on whether the file is ambisonic format.</returns>
+        public bool GetAmbisonic(IntPtr sndfile)
+        {
+            var retval = m_Api.Command(sndfile, LibsndfileCommand.WavexGetAmbisonic, IntPtr.Zero, 0);
+            if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.WavexGetAmbisonic, retval))
+                throw new LibsndfileException("Unable to retrieve ambisonic format for the given file.");
+
+            return ((LibsndfileMode)retval == LibsndfileMode.AmbisonicBFormat);
+        }
     }
 }

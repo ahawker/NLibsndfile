@@ -434,5 +434,19 @@ namespace NLibsndfile.Native
 
             return m_Api.GetEmbedFileInfo(sndfile);
         }
+
+        /// <summary>
+        /// Test if the <paramref name="sndfile"/> has the GUID of a WAVEX file
+        /// for any of the ambisonic formats.
+        /// </summary>
+        /// <param name="sndfile">Audio file to examine.</param>
+        /// <returns>Returns true or false based on whether the file is ambisonic format.</returns>
+        public bool GetAmbisonic(IntPtr sndfile)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.GetAmbisonic(sndfile);
+        }
     }
 }

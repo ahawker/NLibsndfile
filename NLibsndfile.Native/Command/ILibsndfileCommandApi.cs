@@ -220,5 +220,13 @@ namespace NLibsndfile.Native
         /// <param name="sndfile">Audio file to scan for embedded files.</param>
         /// <returns></returns>
         LibsndfileEmbedFileInfo GetEmbedFileInfo(IntPtr sndfile);
+
+        /// <summary>
+        /// Test if the <paramref name="sndfile"/> has the GUID of a WAVEX file
+        /// for any of the ambisonic formats.
+        /// </summary>
+        /// <param name="sndfile">Audio file to examine.</param>
+        /// <returns>Returns true or false based on whether the file is ambisonic format.</returns>
+        bool GetAmbisonic(IntPtr sndfile);
     }
 }
