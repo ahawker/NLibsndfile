@@ -91,6 +91,7 @@
     <Compile Include="Unit\Command\SetAmbisonicTests.cs" />
     <Compile Include="Unit\Command\SetBroadcastInfoTests.cs" />
     <Compile Include="Unit\Command\SetClippingTests.cs" />
+    <Compile Include="Unit\Command\SetInstrumentTests.cs" />
     <Compile Include="Unit\Command\SetNormDoubleTests.cs" />
     <Compile Include="Unit\Command\SetNormFloatTests.cs" />
     <Compile Include="Unit\Command\SetRawStartOffsetTests.cs" />

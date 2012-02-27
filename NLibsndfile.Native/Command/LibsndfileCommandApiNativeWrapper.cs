@@ -645,5 +645,23 @@ namespace NLibsndfile.Native
                 return m_Marshaller.MemoryHandleTo<LibsndfileInstrumentInfo>(memory);
             }
         }
+
+        /// <summary>
+        /// Sets the instrument info for the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set instrument info on.</param>
+        /// <param name="instrumentInfo">Instrument info to set.</param>
+        /// <returns>True if instrument info was set, false otherwise.</returns>
+        public bool SetInstrument(IntPtr sndfile, LibsndfileInstrumentInfo instrumentInfo)
+        {
+            using (var memory = m_Marshaller.Allocate(instrumentInfo))
+            {
+                var retval = m_Api.Command(sndfile, LibsndfileCommand.SetInstrument, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.SetInstrument, retval))
+                    throw new LibsndfileException("Unable to set instrument info for the given file.");
+
+                return Convert.ToBoolean(retval);
+            }
+        }
     }
 }

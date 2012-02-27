@@ -282,5 +282,13 @@ namespace NLibsndfile.Native
         /// <param name="sndfile">Audio file to example for instrument information.</param>
         /// <returns><see cref="LibsndfileInstrumentInfo"/> structure containing info about the given file.</returns>
         LibsndfileInstrumentInfo? GetInstrument(IntPtr sndfile);
+
+        /// <summary>
+        /// Sets the instrument info for the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set instrument info on.</param>
+        /// <param name="instrumentInfo">Instrument info to set.</param>
+        /// <returns>True if instrument info was set, false otherwise.</returns>
+        bool SetInstrument(IntPtr sndfile, LibsndfileInstrumentInfo instrumentInfo);
     }
 }

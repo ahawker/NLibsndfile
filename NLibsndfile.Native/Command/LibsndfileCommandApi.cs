@@ -548,5 +548,19 @@ namespace NLibsndfile.Native
 
             return m_Api.GetInstrument(sndfile);
         }
+
+        /// <summary>
+        /// Sets the instrument info for the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set instrument info on.</param>
+        /// <param name="instrumentInfo">Instrument info to set.</param>
+        /// <returns>True if instrument info was set, false otherwise.</returns>
+        public bool SetInstrument(IntPtr sndfile, LibsndfileInstrumentInfo instrumentInfo)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.SetInstrument(sndfile, instrumentInfo);
+        }
     }
 }
