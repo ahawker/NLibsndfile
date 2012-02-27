@@ -535,5 +535,18 @@ namespace NLibsndfile.Native
 
             return m_Api.GetLoopInfo(sndfile);
         }
+
+        /// <summary>
+        /// Retrieves instrument information for the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to example for instrument information.</param>
+        /// <returns><see cref="LibsndfileInstrumentInfo"/> structure containing info about the given file.</returns>
+        public LibsndfileInstrumentInfo? GetInstrument(IntPtr sndfile)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.GetInstrument(sndfile);
+        }
     }
 }

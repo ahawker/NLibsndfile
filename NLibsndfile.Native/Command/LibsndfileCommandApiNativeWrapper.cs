@@ -626,5 +626,24 @@ namespace NLibsndfile.Native
                 return m_Marshaller.MemoryHandleTo<LibsndfileLoopInfo>(memory);
             }
         }
+
+        /// <summary>
+        /// Retrieves instrument information for the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to example for instrument information.</param>
+        /// <returns><see cref="LibsndfileInstrumentInfo"/> structure containing info about the given file.</returns>
+        public LibsndfileInstrumentInfo? GetInstrument(IntPtr sndfile)
+        {
+            using (var memory = m_Marshaller.Allocate<LibsndfileInstrumentInfo>())
+            {
+                var retval = m_Api.Command(sndfile, LibsndfileCommand.GetInstrument, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.GetInstrument, retval))
+                    throw new LibsndfileException("Unable to get instrument info for the given file.");
+
+                if (retval == 0)
+                    return null;
+                return m_Marshaller.MemoryHandleTo<LibsndfileInstrumentInfo>(memory);
+            }
+        }
     }
 }

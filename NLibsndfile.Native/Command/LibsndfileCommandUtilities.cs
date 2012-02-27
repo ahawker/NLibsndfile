@@ -80,6 +80,7 @@ namespace NLibsndfile.Native
                 case LibsndfileCommand.GetBroadcastInfo:
                 case LibsndfileCommand.SetBroadcastInfo:
                 case LibsndfileCommand.GetLoopInfo:
+                case LibsndfileCommand.GetInstrument:
                     return result == 0 || result == 1;
 
                 case LibsndfileCommand.WavexGetAmbisonic:

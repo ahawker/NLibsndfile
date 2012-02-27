@@ -275,5 +275,12 @@ namespace NLibsndfile.Native
         /// <param name="sndfile">Audio file to examine for loop information.</param>
         /// <returns><see cref="LibsndfileLoopInfo"/> structure containing info about the given file.</returns>
         LibsndfileLoopInfo? GetLoopInfo(IntPtr sndfile);
+
+        /// <summary>
+        /// Retrieves instrument information for the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to example for instrument information.</param>
+        /// <returns><see cref="LibsndfileInstrumentInfo"/> structure containing info about the given file.</returns>
+        LibsndfileInstrumentInfo? GetInstrument(IntPtr sndfile);
     }
 }
