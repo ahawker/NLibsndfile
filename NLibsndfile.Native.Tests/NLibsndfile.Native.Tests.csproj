@@ -83,6 +83,7 @@
     <Compile Include="Unit\Command\GetSignalMaxTests.cs" />
     <Compile Include="Unit\Command\GetSimpleFormatCountTests.cs" />
     <Compile Include="Unit\Command\GetSimpleFormatTests.cs" />
+    <Compile Include="Unit\Command\RawNeedsEndianSwapTests.cs" />
     <Compile Include="Unit\Command\SetAddPeakChunkTests.cs" />
     <Compile Include="Unit\Command\SetAmbisonicTests.cs" />
     <Compile Include="Unit\Command\SetClippingTests.cs" />

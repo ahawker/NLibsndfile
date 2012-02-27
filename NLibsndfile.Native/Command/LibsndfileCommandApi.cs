@@ -482,5 +482,18 @@ namespace NLibsndfile.Native
 
             m_Api.SetVbrEncodingQuality(sndfile, value);
         }
+
+        /// <summary>
+        /// Determine if RAW data read from the given <paramref name="sndfile"/> file needs to be endian swapped.
+        /// </summary>
+        /// <param name="sndfile">Audio file to check for endian swapping.</param>
+        /// <returns>True if bytes should be endian swapped.</returns>
+        public bool RawNeedsEndianSwap(IntPtr sndfile)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.RawNeedsEndianSwap(sndfile);
+        }
     }
 }
