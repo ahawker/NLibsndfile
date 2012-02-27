@@ -78,6 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unit\Command\GetLogInfoTests.cs" />
     <Compile Include="Unit\Command\CalcMaxAllChannelsTests.cs" />
+    <Compile Include="Unit\Command\GetLoopInfoTests.cs" />
     <Compile Include="Unit\Command\GetMaxAllChannelsTests.cs" />
     <Compile Include="Unit\Command\GetNormDoubleTests.cs" />
     <Compile Include="Unit\Command\GetNormFloatTests.cs" />

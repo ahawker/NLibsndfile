@@ -64,6 +64,8 @@
     <Compile Include="Types\LibsndfileFormat.cs" />
     <Compile Include="Types\LibsndfileFormatInfo.cs" />
     <Compile Include="Types\LibsndfileInfo.cs" />
+    <Compile Include="Types\LibsndfileLoopInfo.cs" />
+    <Compile Include="Types\LibsndfileLoopMode.cs" />
     <Compile Include="Types\LibsndfileMode.cs" />
     <Compile Include="Types\LibsndfileStringType.cs" />
   </ItemGroup>

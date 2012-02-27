@@ -268,5 +268,12 @@ namespace NLibsndfile.Native
         /// <param name="broadcastInfo">Broadcast info chunk.</param>
         /// <returns>True if broadcast info was successfully set.</returns>
         bool SetBroadcastInfo(IntPtr sndfile, LibsndfileBroadcastInfo broadcastInfo);
+
+        /// <summary>
+        /// Retrieves loop information for the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to examine for loop information.</param>
+        /// <returns><see cref="LibsndfileLoopInfo"/> structure containing info about the given file.</returns>
+        LibsndfileLoopInfo? GetLoopInfo(IntPtr sndfile);
     }
 }

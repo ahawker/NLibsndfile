@@ -522,5 +522,18 @@ namespace NLibsndfile.Native
 
             return m_Api.SetBroadcastInfo(sndfile, broadcastInfo);
         }
+
+        /// <summary>
+        /// Retrieves loop information for the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to examine for loop information.</param>
+        /// <returns><see cref="LibsndfileLoopInfo"/> structure containing info about the given file.</returns>
+        public LibsndfileLoopInfo? GetLoopInfo(IntPtr sndfile)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.GetLoopInfo(sndfile);
+        }
     }
 }

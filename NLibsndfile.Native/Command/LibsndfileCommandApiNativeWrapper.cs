@@ -606,5 +606,24 @@ namespace NLibsndfile.Native
                 return Convert.ToBoolean(retval);
             }
         }
+
+        /// <summary>
+        /// Retrieves loop information for the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to examine for loop information.</param>
+        /// <returns><see cref="LibsndfileLoopInfo"/> structure containing info about the given file.</returns>
+        public LibsndfileLoopInfo? GetLoopInfo(IntPtr sndfile)
+        {
+            using (var memory = m_Marshaller.Allocate<LibsndfileLoopInfo>())
+            {
+                var retval = m_Api.Command(sndfile, LibsndfileCommand.GetLoopInfo, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.GetLoopInfo, retval))
+                    throw new LibsndfileException("Unable to get loop info for the given file.");
+
+                if (retval == 0)
+                    return null;
+                return m_Marshaller.MemoryHandleTo<LibsndfileLoopInfo>(memory);
+            }
+        }
     }
 }
