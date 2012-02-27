@@ -87,6 +87,7 @@
     <Compile Include="Unit\Command\RawNeedsEndianSwapTests.cs" />
     <Compile Include="Unit\Command\SetAddPeakChunkTests.cs" />
     <Compile Include="Unit\Command\SetAmbisonicTests.cs" />
+    <Compile Include="Unit\Command\SetBroadcastInfoTests.cs" />
     <Compile Include="Unit\Command\SetClippingTests.cs" />
     <Compile Include="Unit\Command\SetNormDoubleTests.cs" />
     <Compile Include="Unit\Command\SetNormFloatTests.cs" />

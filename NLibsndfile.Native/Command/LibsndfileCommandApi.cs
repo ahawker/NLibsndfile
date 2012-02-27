@@ -508,5 +508,19 @@ namespace NLibsndfile.Native
 
             return m_Api.GetBroadcastInfo(sndfile);
         }
+
+        /// <summary>
+        /// Set the Broadcast Extension chuck on the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set broadcast info chunk for.</param>
+        /// <param name="broadcastInfo">Broadcast info chunk.</param>
+        /// <returns>True if broadcast info was successfully set.</returns>
+        public bool SetBroadcastInfo(IntPtr sndfile, LibsndfileBroadcastInfo broadcastInfo)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+
+            return m_Api.SetBroadcastInfo(sndfile, broadcastInfo);
+        }
     }
 }

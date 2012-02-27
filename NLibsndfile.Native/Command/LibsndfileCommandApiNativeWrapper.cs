@@ -588,5 +588,23 @@ namespace NLibsndfile.Native
                 return m_Marshaller.MemoryHandleTo<LibsndfileBroadcastInfo>(memory);
             }
         }
+
+        /// <summary>
+        /// Set the Broadcast Extension chuck on the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set broadcast info chunk for.</param>
+        /// <param name="broadcastInfo">Broadcast info chunk.</param>
+        /// <returns>True if broadcast info was successfully set.</returns>
+        public bool SetBroadcastInfo(IntPtr sndfile, LibsndfileBroadcastInfo broadcastInfo)
+        {
+            using (var memory = m_Marshaller.Allocate(broadcastInfo))
+            {
+                var retval = m_Api.Command(sndfile, LibsndfileCommand.SetBroadcastInfo, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.SetBroadcastInfo, retval))
+                    throw new LibsndfileException("Unable to set broadcast info for the given file.");
+
+                return Convert.ToBoolean(retval);
+            }
+        }
     }
 }
