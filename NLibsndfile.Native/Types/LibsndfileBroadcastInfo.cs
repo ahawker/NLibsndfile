@@ -7,33 +7,33 @@ namespace NLibsndfile.Native
     public struct LibsndfileBroadcastInfo
     {
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
-        internal string Description;
+        public string Description;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
-        internal string Originator;
+        public string Originator;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
-        internal string OriginatorReference;
+        public string OriginatorReference;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
-        internal string OriginationDate;
+        public string OriginationDate;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 8)]
-        internal string OriginationTime;
+        public string OriginationTime;
 
-        internal uint TimeReferenceLow;
-        internal uint TimeReferenceHigh;
-        internal short Version;
+        public uint TimeReferenceLow;
+        public uint TimeReferenceHigh;
+        public short Version;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
-        internal string Umid;
+        public string Umid;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 190)]
-        internal string Reserved;
+        public string Reserved;
 
-        internal uint CodingHistorySize;
+        public uint CodingHistorySize;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
-        internal string CodingHistory;
+        public string CodingHistory;
     }
 }
