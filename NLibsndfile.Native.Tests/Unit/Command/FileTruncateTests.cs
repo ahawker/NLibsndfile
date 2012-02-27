@@ -6,64 +6,79 @@ namespace NLibsndfile.Native.Tests
 {
     [TestFixture]
     [Category("NLibsndfileApi.Native.UnitTests.CommandApi")]
-    public class CalcSignalMaxTests
+    public class FileTruncateTests
     {
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void CalcSignalMax_ShouldThrowExceptionOnZeroHandle()
+        public void FileTruncate_ShouldThrowExceptionOnZeroHandle()
         {
             var mock = new Mock<ILibsndfileCommandApi>();
 
             var api = new LibsndfileCommandApi(mock.Object);
-            api.CalcSignalMax(IntPtr.Zero);
+            api.FileTruncate(IntPtr.Zero, 0);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void FileTruncate_ShouldThrowExceptionOnNegativeLength()
+        {
+            var mock = new Mock<ILibsndfileCommandApi>();
+
+            var api = new LibsndfileCommandApi(mock.Object);
+            api.FileTruncate(new IntPtr(1), -1);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void FileTruncate_ShouldThrowExceptionOnZeroLength()
+        {
+            var mock = new Mock<ILibsndfileCommandApi>();
+
+            var api = new LibsndfileCommandApi(mock.Object);
+            api.FileTruncate(new IntPtr(1), 0);
         }
 
         [Test]
         [ExpectedException(typeof(LibsndfileException))]
-        public void CalcSignalMax_ShouldThrowExceptionOnNegativeResult()
+        public void FileTruncate_ShouldThrowExceptionOnNegativeResult()
         {
             var marshallerMock = new Mock<ILibsndfileMarshaller>();
-            marshallerMock.Setup(x => x.Allocate<double>()).Returns(It.IsAny<IntPtr>());
+            marshallerMock.Setup(x => x.Allocate(It.IsAny<long>())).Returns(It.IsAny<IntPtr>());
 
             var mock = new Mock<ILibsndfileApi>();
             mock.Setup(x => x.Command(It.IsAny<IntPtr>(), It.IsAny<LibsndfileCommand>(), It.IsAny<IntPtr>(), It.IsAny<int>())).Returns(-1);
 
             var api = new LibsndfileCommandApiNativeWrapper(mock.Object, marshallerMock.Object);
-            api.CalcSignalMax(new IntPtr(1));
+            api.FileTruncate(new IntPtr(1), It.IsAny<long>());
         }
 
         [Test]
         [ExpectedException(typeof(LibsndfileException))]
-        public void CalcSignalMax_ShouldThrowExceptionOnGreaterThanZeroResult()
+        public void FileTruncate_ShouldThrowExceptionOnGreaterThanZeroResult()
         {
             var marshallerMock = new Mock<ILibsndfileMarshaller>();
-            marshallerMock.Setup(x => x.Allocate<double>()).Returns(It.IsAny<IntPtr>());
+            marshallerMock.Setup(x => x.Allocate(It.IsAny<long>())).Returns(It.IsAny<IntPtr>());
 
             var mock = new Mock<ILibsndfileApi>();
             mock.Setup(x => x.Command(It.IsAny<IntPtr>(), It.IsAny<LibsndfileCommand>(), It.IsAny<IntPtr>(), It.IsAny<int>())).Returns(1);
 
             var api = new LibsndfileCommandApiNativeWrapper(mock.Object, marshallerMock.Object);
-            api.CalcSignalMax(new IntPtr(1));
+            api.FileTruncate(new IntPtr(1), It.IsAny<long>());
         }
 
         [Test]
-        public void CalcSignalMax_ShouldPassOnZeroResult()
+        public void FileTruncate_ShouldPassOnValidResult()
         {
-            const double SignalMax = 1.0;
-
-            var memoryMock = new Mock<UnmanagedMemoryHandle>();
-
             var marshallerMock = new Mock<ILibsndfileMarshaller>();
-            marshallerMock.Setup(x => x.Allocate<double>()).Returns(memoryMock.Object);
-            marshallerMock.Setup(x => x.MemoryHandleTo<double>(It.IsAny<UnmanagedMemoryHandle>())).Returns(SignalMax);
+            marshallerMock.Setup(x => x.Allocate(It.IsAny<long>())).Returns(It.IsAny<IntPtr>());
 
             var mock = new Mock<ILibsndfileApi>();
             mock.Setup(x => x.Command(It.IsAny<IntPtr>(), It.IsAny<LibsndfileCommand>(), It.IsAny<IntPtr>(), It.IsAny<int>())).Returns(0);
 
             var api = new LibsndfileCommandApiNativeWrapper(mock.Object, marshallerMock.Object);
-            var retval = api.CalcSignalMax(new IntPtr(1));
+            var retval = api.FileTruncate(new IntPtr(1), 1);
 
-            Assert.AreEqual(SignalMax, retval);
+            Assert.AreEqual(true, retval);
         }
     }
 }

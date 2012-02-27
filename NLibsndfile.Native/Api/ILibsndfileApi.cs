@@ -39,7 +39,7 @@ namespace NLibsndfile.Native
         /// </summary>
         /// <param name="info"><see cref="LibsndfileInfo"/> struct contains information about a target file.</param>
         /// <returns>Returns TRUE if the parameters are valid, FALSE otherwise.</returns>
-        int FormatCheck(ref LibsndfileInfo info);
+        bool FormatCheck(ref LibsndfileInfo info);
 
         /// <summary>
         /// Attempts to move the read/write data pointers to a specific location

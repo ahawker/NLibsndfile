@@ -79,6 +79,9 @@ namespace NLibsndfile.Native
                 case LibsndfileCommand.RawDataNeedsEndswap:
                 case LibsndfileCommand.GetBroadcastInfo:
                 case LibsndfileCommand.SetBroadcastInfo:
+                case LibsndfileCommand.GetLoopInfo:
+                case LibsndfileCommand.GetInstrument:
+                case LibsndfileCommand.SetInstrument:
                     return result == 0 || result == 1;
 
                 case LibsndfileCommand.WavexGetAmbisonic:
