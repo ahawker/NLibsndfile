@@ -464,5 +464,23 @@ namespace NLibsndfile.Native
 
             return m_Api.SetAmbisonic(sndfile, mode);
         }
+
+        /// <summary>
+        /// Set the Variable Bit Rate encoding quality for the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set vbr quality for.</param>
+        /// <param name="value">Vbr encoding quality.</param>
+        /// <remarks>
+        /// The command must be sent before any audio data is written to the file.
+        /// </remarks>
+        public void SetVbrEncodingQuality(IntPtr sndfile, double value)
+        {
+            if (sndfile == IntPtr.Zero)
+                throw new ArgumentException("File handle is invalid/closed.");
+            if (value < 0.0 || value > 1.0)
+                throw new ArgumentOutOfRangeException("value", value, "Value must be between 0.0 and 1.0.");
+
+            m_Api.SetVbrEncodingQuality(sndfile, value);
+        }
     }
 }

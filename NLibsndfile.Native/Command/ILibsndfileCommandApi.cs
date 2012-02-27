@@ -236,5 +236,15 @@ namespace NLibsndfile.Native
         /// <param name="mode">Ambisonic format to use.</param>
         /// <returns>Success of setting ambisonic format for the given file.</returns>
         bool SetAmbisonic(IntPtr sndfile, LibsndfileMode mode);
+
+        /// <summary>
+        /// Set the Variable Bit Rate encoding quality for the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set vbr quality for.</param>
+        /// <param name="value">Vbr encoding quality.</param>
+        /// <remarks>
+        /// The command must be sent before any audio data is written to the file.
+        /// </remarks>
+        void SetVbrEncodingQuality(IntPtr sndfile, double value);
     }
 }

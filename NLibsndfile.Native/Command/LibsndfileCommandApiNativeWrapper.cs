@@ -538,5 +538,23 @@ namespace NLibsndfile.Native
 
             return ((LibsndfileMode)retval == mode);
         }
+
+        /// <summary>
+        /// Set the Variable Bit Rate encoding quality for the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set vbr quality for.</param>
+        /// <param name="value">Vbr encoding quality.</param>
+        /// <remarks>
+        /// The command must be sent before any audio data is written to the file.
+        /// </remarks>
+        public void SetVbrEncodingQuality(IntPtr sndfile, double value)
+        {
+            using (var memory = m_Marshaller.Allocate(value))
+            {
+                var retval = m_Api.Command(sndfile, LibsndfileCommand.SetVbrEncodingQuality, memory, memory.Size);
+                if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.SetVbrEncodingQuality, retval))
+                    throw new LibsndfileException("Unable to set vbr encoding quality for the given file.");
+            }
+        }
     }
 }
