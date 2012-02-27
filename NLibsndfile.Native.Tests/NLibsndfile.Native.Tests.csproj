@@ -66,6 +66,7 @@
     <Compile Include="Unit\Command\CalcSignalMaxTests.cs" />
     <Compile Include="Unit\Command\FileTruncateTests.cs" />
     <Compile Include="Unit\Command\GetAmbisonicTests.cs" />
+    <Compile Include="Unit\Command\GetBroadcastInfoTests.cs" />
     <Compile Include="Unit\Command\GetClippingTests.cs" />
     <Compile Include="Unit\Command\GetEmbedFileInfoTests.cs" />
     <Compile Include="Unit\Command\GetFormatInfoTests.cs" />

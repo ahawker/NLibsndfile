@@ -253,5 +253,12 @@ namespace NLibsndfile.Native
         /// <param name="sndfile">Audio file to check for endian swapping.</param>
         /// <returns>True if bytes should be endian swapped.</returns>
         bool RawNeedsEndianSwap(IntPtr sndfile);
+
+        /// <summary>
+        /// Retrieve the Broadcast Extension chunk from the given <paramref name="sndfile"/> file.
+        /// </summary>
+        /// <param name="sndfile">Audio file to examine for broadcast info chunk.</param>
+        /// <returns><see cref="LibsndfileBroadcastInfo"/> structure containing broadcast info.</returns>
+        LibsndfileBroadcastInfo GetBroadcastInfo(IntPtr sndfile);
     }
 }
