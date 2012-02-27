@@ -35,8 +35,7 @@ namespace NLibsndfile.Native.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(LibsndfileException))]
-        public void GetBroadcastInfo_ShouldThrowExceptionOnZeroResult()
+        public void GetBroadcastInfo_ShouldReturnNullOnZeroResult()
         {
             var unmanagedMemoryMock = new Mock<UnmanagedMemoryHandle>();
 
@@ -47,7 +46,9 @@ namespace NLibsndfile.Native.Tests
             mock.Setup(x => x.Command(It.IsAny<IntPtr>(), It.IsAny<LibsndfileCommand>(), It.IsAny<IntPtr>(), It.IsAny<int>())).Returns(0);
 
             var api = new LibsndfileCommandApiNativeWrapper(mock.Object, marshallerMock.Object);
-            api.GetBroadcastInfo(new IntPtr(1));
+            var retval = api.GetBroadcastInfo(new IntPtr(1));
+
+            Assert.IsFalse(retval.HasValue);
         }
 
         [Test]
