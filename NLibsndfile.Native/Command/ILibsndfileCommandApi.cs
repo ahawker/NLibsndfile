@@ -259,7 +259,7 @@ namespace NLibsndfile.Native
         /// </summary>
         /// <param name="sndfile">Audio file to examine for broadcast info chunk.</param>
         /// <returns><see cref="LibsndfileBroadcastInfo"/> structure containing broadcast info.</returns>
-        LibsndfileBroadcastInfo GetBroadcastInfo(IntPtr sndfile);
+        LibsndfileBroadcastInfo? GetBroadcastInfo(IntPtr sndfile);
 
         /// <summary>
         /// Set the Broadcast Extension chuck on the given <paramref name="sndfile"/> file.

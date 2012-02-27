@@ -576,15 +576,16 @@ namespace NLibsndfile.Native
         /// </summary>
         /// <param name="sndfile">Audio file to examine for broadcast info chunk.</param>
         /// <returns><see cref="LibsndfileBroadcastInfo"/> structure containing broadcast info.</returns>
-        public LibsndfileBroadcastInfo GetBroadcastInfo(IntPtr sndfile)
+        public LibsndfileBroadcastInfo? GetBroadcastInfo(IntPtr sndfile)
         {
             using (var memory = m_Marshaller.Allocate<LibsndfileBroadcastInfo>())
             {
                 var retval = m_Api.Command(sndfile, LibsndfileCommand.GetBroadcastInfo, memory, memory.Size);
-                if (!Convert.ToBoolean(retval) ||
-                    !LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.GetBroadcastInfo, retval))
+                if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.GetBroadcastInfo, retval))
                     throw new LibsndfileException("Unable to retrieve broadcast info from the given file.");
 
+                if (retval == 0)
+                    return null;
                 return m_Marshaller.MemoryHandleTo<LibsndfileBroadcastInfo>(memory);
             }
         }

@@ -501,7 +501,7 @@ namespace NLibsndfile.Native
         /// </summary>
         /// <param name="sndfile">Audio file to examine for broadcast info chunk.</param>
         /// <returns><see cref="LibsndfileBroadcastInfo"/> structure containing broadcast info.</returns>
-        public LibsndfileBroadcastInfo GetBroadcastInfo(IntPtr sndfile)
+        public LibsndfileBroadcastInfo? GetBroadcastInfo(IntPtr sndfile)
         {
             if (sndfile == IntPtr.Zero)
                 throw new ArgumentException("File handle is invalid/closed.");
