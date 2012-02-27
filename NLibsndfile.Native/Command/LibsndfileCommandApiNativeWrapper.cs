@@ -523,5 +523,20 @@ namespace NLibsndfile.Native
 
             return ((LibsndfileMode)retval == LibsndfileMode.AmbisonicBFormat);
         }
+
+        /// <summary>
+        /// Set the GUID of a the <paramref name="sndfile"/> WAVEX file to indicate an Ambisonic format.
+        /// </summary>
+        /// <param name="sndfile">Audio file to set ambisonic format of.</param>
+        /// <param name="mode">Ambisonic format to use.</param>
+        /// <returns>Success of setting ambisonic format for the given file.</returns>
+        public bool SetAmbisonic(IntPtr sndfile, LibsndfileMode mode)
+        {
+            var retval = m_Api.Command(sndfile, LibsndfileCommand.WavexSetAmbisonic, IntPtr.Zero, (int)mode);
+            if (!LibsndfileCommandUtilities.IsValidResult(sndfile, LibsndfileCommand.WavexSetAmbisonic, retval))
+                throw new LibsndfileException("Unable to set ambisonic format for the given file.");
+
+            return ((LibsndfileMode)retval == mode);
+        }
     }
 }
