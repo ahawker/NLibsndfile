@@ -133,9 +133,10 @@ namespace NLibsndfile.Native
         /// <typeparam name="T">Type of array to marshal from unmanaged memory.</typeparam>
         /// <param name="memory">Reference to <see cref="UnmanagedMemoryHandle"/>.</param>
         /// <returns>Copy of marshalled array now in managed memory.</returns>
-        public T[] MemoryHandleToArray<T>(UnmanagedMemoryHandle memory) where T : struct
+        public T[] MemoryHandleToArray<T>(UnmanagedMemoryHandle memory) 
+            where T : struct
         {
-            return m_ArrayMarshaller.GetMarshallerForType<T>()(memory);
+            return m_ArrayMarshaller.ToArray<T>(memory);
         }
     }
 }

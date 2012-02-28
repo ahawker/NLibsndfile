@@ -9,27 +9,44 @@ namespace NLibsndfile.Native
     internal class LibsndfileArrayMarshaller : ILibsndfileArrayMarshaller
     {
         /// <summary>
-        /// Returns delegate to correct conversion method based on <typeparamref name="T"/>.
+        /// Returns a <typeparamref name="T"/> array marshalled from the given <paramref name="memory"/>
+        /// <see cref="UnmanagedMemoryHandle"/> handle.
         /// </summary>
         /// <typeparam name="T">Type of managed array you wish to convert to.</typeparam>
-        /// <returns>Method to convert unmanaged memory to managed array of <typeparamref name="T"/>.</returns>
-        public LibsndfileArrayMarshallerDelegate<T> GetMarshallerForType<T>()
-            where T : struct
+        /// <param name="memory"><see cref="UnmanagedMemoryHandle"/> memory that contains array to marshal.</param>
+        /// <returns>Marshalled array.</returns>
+        public T[] ToArray<T>(UnmanagedMemoryHandle memory)
+            where T : struct 
         {
             Type type = typeof(T);
 
+            if (type == typeof(byte))
+                return ToByteArray(memory) as T[];
             if (type == typeof(short))
-                return x => ToShortArray(x) as T[];
+                return ToShortArray(memory) as T[];
             if (type == typeof(int))
-                return x => ToIntArray(x) as T[];
+                return ToIntArray(memory) as T[];
             if (type == typeof(float))
-                return x => ToFloatArray(x) as T[];
+                return ToFloatArray(memory) as T[];
             if (type == typeof(double))
-                return x => ToDoubleArray(x) as T[];
+                return ToDoubleArray(memory) as T[];
             if (type == typeof(long))
-                return x => ToLongArray(x) as T[];
+                return ToLongArray(memory) as T[];
 
             throw new NotSupportedException(string.Format("No marshalling support for array of type {0}.", type));
+        }
+
+        /// <summary>
+        /// Marshal a <see cref="UnmanagedMemoryHandle"/> to managed <see cref="System.Byte"/> array.
+        /// </summary>
+        /// <param name="memory"><see cref="UnmanagedMemoryHandle"/> containing pointer to native array.</param>
+        /// <returns>Managed <see cref="System.Byte"/> array.</returns>
+        private static byte[] ToByteArray(UnmanagedMemoryHandle memory)
+        {
+            int length = CalculateArrayLength<byte>(memory);
+            var array = new byte[length];
+            Marshal.Copy(memory, array, 0, length);
+            return array;
         }
 
         /// <summary>
