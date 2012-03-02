@@ -190,8 +190,8 @@ namespace NLibsndfile.Native
         /// <returns>Pointer to a string containing the description of the current error.</returns>
         public string ErrorString(IntPtr sndfile)
         {
-            using (var memory = m_Marshaller.Attach(LibsndfileApiNative.sf_strerror(sndfile)))
-                return m_Marshaller.MemoryHandleToString(memory);
+            var retval = LibsndfileApiNative.sf_strerror(sndfile);
+            return m_Marshaller.MemoryHandleToString(retval);
         }
 
         /// <summary>
@@ -201,8 +201,8 @@ namespace NLibsndfile.Native
         /// <returns>Description of the given error code.</returns>
         public string ErrorNumber(int error)
         {
-            using (var memory = m_Marshaller.Attach(LibsndfileApiNative.sf_error_number(error)))
-                return m_Marshaller.MemoryHandleToString(memory);
+            var retval = LibsndfileApiNative.sf_error_number(error);
+            return m_Marshaller.MemoryHandleToString(retval);
         }
 
         /// <summary>
@@ -481,8 +481,8 @@ namespace NLibsndfile.Native
         /// <returns>Returns the value of the <paramref name="type"/> tag.</returns>
         public string GetString(IntPtr sndfile, LibsndfileStringType type)
         {
-            using (var memory = m_Marshaller.Attach(LibsndfileApiNative.sf_get_string(sndfile, type)))
-                return m_Marshaller.MemoryHandleToString(memory);
+            var retval = LibsndfileApiNative.sf_get_string(sndfile, type);
+            return m_Marshaller.MemoryHandleToString(retval);
         }
 
         /// <summary>
