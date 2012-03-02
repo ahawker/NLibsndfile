@@ -82,12 +82,7 @@ namespace NLibsndfile.Native
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException("path", "Path cannot be null/empty.");
 
-            var sndfile = m_Api.Open(path, mode, ref info);
-
-            if (sndfile == IntPtr.Zero)
-                throw new LibsndfileException(string.Format("Unable to open file {0} in mode {1}.", path, mode));
-
-            return sndfile;
+            return m_Api.Open(path, mode, ref info);
         }
 
         /// <summary>
@@ -104,12 +99,7 @@ namespace NLibsndfile.Native
             if (handle <= 0)
                 throw new ArgumentOutOfRangeException("handle", "File handle cannot be zero/non-negative.");
 
-            var sndfile = m_Api.OpenFileDescriptor(handle, mode, ref info, closeHandle);
-
-            if (sndfile == IntPtr.Zero)
-                throw new LibsndfileException(string.Format("Unable to open file descriptor {0} in mode {1}.", handle, mode));
-
-            return sndfile;
+            return m_Api.OpenFileDescriptor(handle, mode, ref info, closeHandle);
         }
 
         /// <summary>
