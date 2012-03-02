@@ -5,7 +5,7 @@ namespace NLibsndfile.Native
     /// <summary>
     /// Provides native command API access and handles all native struct marshalling.
     /// </summary>
-    public class LibsndfileCommandApiNativeWrapper : ILibsndfileCommandApi
+    internal sealed class LibsndfileCommandApiNativeWrapper : ILibsndfileCommandApi
     {
         private readonly ILibsndfileApi m_Api;
         private readonly ILibsndfileMarshaller m_Marshaller;

@@ -6,10 +6,14 @@ namespace NLibsndfile.Native
     /// <summary>
     /// Provides native API access and marshalling by forwarding calls to P/Invoke LibsndfileApiNative static class.
     /// </summary>
-    public class LibsndfileApiNativeWrapper : ILibsndfileApi
+    internal sealed class LibsndfileApiNativeWrapper : ILibsndfileApi
     {
-        private ILibsndfileMarshaller m_Marshaller;
+        private readonly ILibsndfileMarshaller m_Marshaller;
 
+        /// <summary>
+        /// Initializez a new <see cref="LibsndfileApiNativeWrapper"/> with 
+        /// the default <see cref="ILibsndfileMarshaller"/> implementation.
+        /// </summary>
         internal LibsndfileApiNativeWrapper()
             : this(new LibsndfileMarshaller())
         {
