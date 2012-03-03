@@ -48,7 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Integration\Api\OpenTests.cs" />
-    <Compile Include="Integration\IntegrationTest.cs" />
+    <Compile Include="Integration\Api\ReadItemsTests.cs" />
+    <Compile Include="Integration\TestConfiguration.cs" />
     <Compile Include="Unit\Api\CloseTests.cs" />
     <Compile Include="Unit\Api\CommandTests.cs" />
     <Compile Include="Unit\Api\ErrorTests.cs" />
