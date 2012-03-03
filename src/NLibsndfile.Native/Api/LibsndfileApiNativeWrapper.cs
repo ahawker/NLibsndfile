@@ -11,7 +11,7 @@ namespace NLibsndfile.Native
         private readonly ILibsndfileMarshaller m_Marshaller;
 
         /// <summary>
-        /// Initializez a new <see cref="LibsndfileApiNativeWrapper"/> with 
+        /// Initializes a new <see cref="LibsndfileApiNativeWrapper"/> with 
         /// the default <see cref="ILibsndfileMarshaller"/> implementation.
         /// </summary>
         internal LibsndfileApiNativeWrapper()
