@@ -1,5 +1,8 @@
-﻿namespace NLibsndfile.Native
+﻿using System;
+
+namespace NLibsndfile.Native
 {
+    [Flags]
     public enum LibsndfileFormat : uint
     {
         /* Major formats. */
