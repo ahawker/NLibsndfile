@@ -2,7 +2,7 @@
 using Moq;
 using NUnit.Framework;
 
-namespace NLibsndfile.Native.Tests
+namespace NLibsndfile.Native.Tests.Unit.Api
 {
     [TestFixture]
     [Category("NLibsndfileApi.Native.UnitTests.Api")]

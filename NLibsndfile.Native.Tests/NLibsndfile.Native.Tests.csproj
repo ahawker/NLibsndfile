@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Integration\Api\OpenTests.cs" />
     <Compile Include="Unit\Api\CloseTests.cs" />
     <Compile Include="Unit\Api\CommandTests.cs" />
     <Compile Include="Unit\Api\ErrorTests.cs" />
@@ -108,7 +109,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Integration\" />
+    <Folder Include="Integration\Command\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
