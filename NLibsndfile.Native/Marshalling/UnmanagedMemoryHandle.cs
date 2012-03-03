@@ -86,7 +86,8 @@ namespace NLibsndfile.Native
             if (m_IsDisposed)
                 return;
 
-            Marshal.FreeHGlobal(Handle);
+            if(disposing)
+                Marshal.FreeHGlobal(Handle);
 
             m_IsDisposed = true;
         }
