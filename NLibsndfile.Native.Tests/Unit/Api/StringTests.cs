@@ -88,7 +88,7 @@ namespace NLibsndfile.Native.Tests
             var api = new LibsndfileApi(mock.Object);
             var retval = api.GetString(new IntPtr(1), It.IsAny<LibsndfileStringType>());
 
-            Assert.AreEqual(Tag, string.Empty);
+            Assert.AreEqual(Tag, retval);
 
         }
 
