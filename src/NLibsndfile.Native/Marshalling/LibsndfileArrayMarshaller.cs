@@ -122,7 +122,7 @@ namespace NLibsndfile.Native
         /// <returns>Length of marshalled array.</returns>
         private static int CalculateArrayLength<T>(UnmanagedMemoryHandle memory)
         {
-            return Marshal.SizeOf(typeof(T)) * memory.Size;
+            return memory.Size / Marshal.SizeOf(typeof(T));
         }
     }
 }
