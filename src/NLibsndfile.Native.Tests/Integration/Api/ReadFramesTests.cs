@@ -5,10 +5,10 @@ namespace NLibsndfile.Native.Tests.Integration.Api
 {
     [TestFixture]
     [Category("NLibsndfileApi.Native.IntegrationTests.Api")]
-    public class ReadItemsTests
+    public class ReadFramesTests
     {
         [Test]
-        public void ReadItemsShort_ReturnsValidData()
+        public void ReadFramesShort_ReturnsValidData()
         {
             const long Items = 50;
 
@@ -19,7 +19,7 @@ namespace NLibsndfile.Native.Tests.Integration.Api
             Assert.That(open != IntPtr.Zero);
 
             var buffer = new short[Items];
-            var read = api.ReadItems(open, buffer, Items);
+            var read = api.ReadFrames(open, buffer, Items);
             Assert.That(Items == read);
             Assert.That(buffer != null);
             Assert.That(buffer.Length == Items);
@@ -29,7 +29,7 @@ namespace NLibsndfile.Native.Tests.Integration.Api
         }
 
         [Test]
-        public void ReadItemsInt_ReturnsValidData()
+        public void ReadFramesInt_ReturnsValidData()
         {
             const long Items = 50;
 
@@ -40,7 +40,7 @@ namespace NLibsndfile.Native.Tests.Integration.Api
             Assert.That(open != IntPtr.Zero);
 
             var buffer = new int[Items];
-            var read = api.ReadItems(open, buffer, Items);
+            var read = api.ReadFrames(open, buffer, Items);
             Assert.That(Items == read);
             Assert.That(buffer != null);
             Assert.That(buffer.Length == Items);
@@ -50,7 +50,7 @@ namespace NLibsndfile.Native.Tests.Integration.Api
         }
 
         [Test]
-        public void ReadItemsFloat_ReturnsValidData()
+        public void ReadFramesFloat_ReturnsValidData()
         {
             const long Items = 50;
 
@@ -61,7 +61,7 @@ namespace NLibsndfile.Native.Tests.Integration.Api
             Assert.That(open != IntPtr.Zero);
 
             var buffer = new float[Items];
-            var read = api.ReadItems(open, buffer, Items);
+            var read = api.ReadFrames(open, buffer, Items);
             Assert.That(Items == read);
             Assert.That(buffer != null);
             Assert.That(buffer.Length == Items);
@@ -71,7 +71,7 @@ namespace NLibsndfile.Native.Tests.Integration.Api
         }
 
         [Test]
-        public void ReadItemsDouble_ReturnsValidData()
+        public void ReadFramesDouble_ReturnsValidData()
         {
             const long Items = 50;
 
@@ -82,7 +82,7 @@ namespace NLibsndfile.Native.Tests.Integration.Api
             Assert.That(open != IntPtr.Zero);
 
             var buffer = new double[Items];
-            var read = api.ReadItems(open, buffer, Items);
+            var read = api.ReadFrames(open, buffer, Items);
             Assert.That(Items == read);
             Assert.That(buffer != null);
             Assert.That(buffer.Length == Items);
