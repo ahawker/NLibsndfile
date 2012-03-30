@@ -48,7 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Integration\Api\OpenTests.cs" />
+    <Compile Include="Integration\Api\ReadFramesTests.cs" />
     <Compile Include="Integration\Api\ReadItemsTests.cs" />
+    <Compile Include="Integration\Command\CalcMaxAllChannelsTests.cs" />
+    <Compile Include="Integration\Command\CalcNormMaxAllChannelsTests.cs" />
+    <Compile Include="Integration\Command\GetLibVersionTests.cs" />
     <Compile Include="Integration\TestConfiguration.cs" />
     <Compile Include="Unit\Api\CloseTests.cs" />
     <Compile Include="Unit\Api\CommandTests.cs" />
@@ -110,9 +114,7 @@
       <Name>NLibsndfile.Native</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Integration\Command\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
